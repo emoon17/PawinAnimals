@@ -25,68 +25,13 @@
 <body>
 	<div id="wrap">
 		<header class="intro-bg">
-			<div class=" d-flex align-items-center pt-3">
-				<div class="display-4 font-weight-bold pl-4">
-					<a href="/main/main_view">Pawin Animals</a>
-				</div>
-				<div class="login-menu-icon d-flex align-items-center justify-content-end pr-5">
-					<ui class="nav font-weight-bold">
-						<li><a href="#">로그인</a></li>
-						<li><a href="#">회원가입</a></li>
-						<li><a href="#">메뉴</a></li>
-					</ui>
-				</div>
-			</div>
-			<div class=" d-flex align-items-center justify-content-center ">
-				<img src="/static/image/dog.jpg" width="200" height="200">
-				<img src="/static/image/cat1.jpg" width="200" height="200">
-			</div>
+			 <jsp:include page="../include/header.jsp"/>
 		</header>
 		<section class="contents d-flex">
-		
-			<div class="left-content col-6 d-flex align-items-center justify-content-center">
-				<div class="content-box text-center">
-					<div class="content-subject font-weight-bold mt-4">아이들의 꽃길을 보러오세요!</div>
-					<div class="nav-box d-flex align-items-center justify-content-center mb-5">
-						<ui class="nav">
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 제목 10개만</a></li>
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 한둘셋넷다여일여아열한둘셋넷다</a></li>
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 반복문 제목 </a></li>
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 반복문 제목 </a></li>
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 반복문 제목 </a></li>
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 반복문 제목 </a></li>
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 반복문 제목 </a></li>
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 반복문 제목 </a></li>
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 반복문 제목 </a></li>
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 반복문 제목 </a></li>
-						</ui>
-					</div>	
-				</div>
-			</div>
-			
-			<div class="right-content col-6 d-flex align-items-center justify-content-center">
-				<div class="content-box text-center">
-					<div class="content-subject font-weight-bold mt-4">반려용품 무료 나눔합니다!</div>
-					<div class="nav-box d-flex align-items-center justify-content-center mb-5">
-						<ui class="nav">
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 제목 10개만</a></li>
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 한둘셋넷다여일여아열한둘셋넷다</a></li>
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 반복문 제목 </a></li>
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 반복문 제목 </a></li>
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 반복문 제목 </a></li>
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 반복문 제목 </a></li>
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 반복문 제목 </a></li>
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 반복문 제목 </a></li>
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 반복문 제목 </a></li>
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 반복문 제목 </a></li>
-						</ui>
-					</div>	
-				</div>
-			</div>
-		
+			 <jsp:include page="../${veiwName}.jsp"/>
 		</section>
 		<footer class="d-flex align-items-end justify-content-center">
-			<div class="copy-font mb-5">Copyright © Pawin Animals 2023</div>
+			<jsp:include page="../include/footer.jsp"/>
 		</footer>
 	</div>
 </body>
