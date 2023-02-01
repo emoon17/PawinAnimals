@@ -13,6 +13,7 @@ public class Post {
 	private String area;
 	private Date createdAt;
 	private Date updatedAt;
+	
 	public int getId() {
 		return id;
 	}
