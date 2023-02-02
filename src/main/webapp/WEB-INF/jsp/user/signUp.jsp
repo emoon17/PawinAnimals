@@ -3,11 +3,11 @@
 
 
 <div class="container">
-
+	<form id="signUpForm" method="post" action="/user/sign_up">
 		<div class="input-boxs col-12">
 			<div class="d-flex">
 			<!-- 아이디 -->
-				<input type="text" id="loginId" placeholder="아이디"
+				<input type="text" id="loginId" name="loginId" placeholder="아이디"
 					style="height: 85px; width: 417px;"
 					class="login-info form-control pl-3">
 				<button type="button" class="check-btn btn ml-3 font-weight-bold"
@@ -24,14 +24,14 @@
 				가능한 ID 입니다.</div>
 			
 			<!-- 이름 -->
-			<input type="text" id="name"
+			<input type="text" id="name" name="name"
 				placeholder="이름" style="height: 85px; width: 500px;"
 				class="login-info form-control pl-3 mt-4">
 			<div id="nameCheckLength" class="login-info text-danger d-none">이름이
 				비었습니다.</div>
 
 			<!-- 비밀번호 -->
-			<input type="password" id="password" 
+			<input type="password" id="password" name="password"
 				placeholder="비밀번호" style="height: 85px; width: 500px;"
 				class="login-info form-control pl-3 mt-4">
 			<div id="passwordVal" class="login-info text-danger d-none">소문자,
@@ -44,21 +44,21 @@
 				비밀번호와 일치하지 않습니다.</div>
 			
 			<!-- 전화번호 -->
-			<input type="text" id="phoneNumber" 
-				placeholder="전화번호 ex) 010-1111-2222"
+			<input type="text" id="phoneNumber"  name="phoneNumber"
+				placeholder="전화번호 ex) 010-1111-2222" 
 				style="height: 85px; width: 500px;"
 				class="login-info form-control pl-3 mt-4">
 			<div id="phoneCheckLength" class="login-info text-danger d-none">전화번호를
 				입력해주세요.</div>
 
 			<div class="login_btn">
-				<button type="button" class="user-btn btn mt-5 font-weight-bold"
+				<button type="submit" class="user-btn btn mt-5 font-weight-bold"
 					style="width: 500px; height: 85px;">회원가입</button>
 			</div>
 		</div>
-	
+	 </form>
 	<div class="login-info text-center mt-5">
-		계정이 있으신가요? <a href="/user/sign_in_view"
+		계정이 있으신가요? <a href="/user/signIn_view"
 			class="logInOut_click font-weight-bold ml-4">로그인</a>
 	</div>
 </div>
@@ -113,8 +113,8 @@
 			});
 		});  // -- 아이디 중복확인
 		
-		$('.user-btn').on('click', function(){
-			
+		$('#signUpForm').on('submit', function(e){
+			e.preventDefault();
 			//validation
 			let name = $('#name').val().trim();
 			let password = $('#password').val();
@@ -131,52 +131,41 @@
 			
 			if ($('#idCheckOk').hasClass('d-none')) {
 				alert("아이디 중복확인을 다시 해주세요.");
-				return;
+				return false;
 			}
 			
 			if (name == ''){
 				$('#nameCheckLength').removeClass('d-none');
-				return;
+				return false;
 			}
 			
 			let regPw = /(?=.*\d)(?=.*[a-zA-ZS]).{8,}/; 
 			if (!regPw.test(password)){
 				$('#passwordVal').removeClass('d-none');
-				return;
+				return false;
 			}
 			
 			if (password != passwordCheck) {
 				$('#passwordCheckVal').removeClass('d-none');
-				return;
+				return false;
 			}
 			
 			if (phoneNumber == ''){
 				$('#phoneCheckLength').removeClass('d-none');
-				return;
+				return false;
 			}
 			
-			// ajax
-			$.ajax({
-   					//request
-   					type:"post"
-   					, url:"/user/sign_up"
-   					, data:{
-   						"name":name,
-   						"loginId":loginId,
-   						"password":password,
-   						"phoneNumber":phoneNumber}
-   				
-				//response
-				, success:function(data){
-					if (data.code == 1){
-						alert("가입을 환영합니다. 로그인 해주세요.");
-						location.href="/user/signIn_view";
-					} else {
-						alert(data.errorMessage);
-					}
-				}
-				, error:function(e){
-					alert("가입에 실패하였습니다.")
+			let url = $(this).attr('action');
+			let params = $(this).serialize(); // form 태그에 있는 name으로 파라미터 구성
+			
+			$.post(url, params) // request
+			.done(function(data) { //response
+				if (data.code == 1 ){
+					alert("가입을 환영합니다. 로그인 해주세요.");
+					location.href="/user/signIn_view";
+				} else {
+					//실패
+					alert(data.errorMessage);
 				}
 			});
 		

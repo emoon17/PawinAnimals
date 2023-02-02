@@ -10,9 +10,8 @@
  		WHERE 
  			`loginId` = #{loginId}
  	</select>
- 	
  	<insert id="insertUser" parameterType="map">
- 	INSERT INTO `user`
+		INSERT INTO `user`
 		(
 			`name`
 			, `loginId`
@@ -30,5 +29,6 @@
 			, NOW()
 			, NOW()
 		)
- 	</insert>
+	</insert>
+ 
  </mapper>

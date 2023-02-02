@@ -21,6 +21,10 @@
 			</div>
 		</div>
 	</form>
+	<div class="login-info text-center mt-5">
+		계정이 없으신가요? <a href="/user/signUp_view"
+			class="logInOut_click font-weight-bold ml-4">회원가입</a>
+	</div>
 </div>
 
 <script>	

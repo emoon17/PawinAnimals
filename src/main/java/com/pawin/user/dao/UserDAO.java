@@ -1,7 +1,7 @@
 package com.pawin.user.dao;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Repository
 public interface UserDAO {
@@ -9,8 +9,8 @@ public interface UserDAO {
 	public boolean existLoginId(String loginId);
 	
 	public void insertUser(
-			@RequestParam("name") String name, 
-			@RequestParam("loginId") String loginId,
-			@RequestParam("password") String password, 
-			@RequestParam("phoneNumber") String phoneNumber);
+			@Param("name") String name, 
+			@Param("loginId") String loginId,
+			@Param("password") String password, 
+			@Param("phoneNumber") String phoneNumber);
 }
