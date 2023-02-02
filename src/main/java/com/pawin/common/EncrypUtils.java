@@ -1,5 +1,5 @@
 package com.pawin.common;
-
+// 비밀번호 해싱하기
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
