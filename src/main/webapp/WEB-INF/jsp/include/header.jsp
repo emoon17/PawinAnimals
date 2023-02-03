@@ -1,13 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+
 <div class=" d-flex align-items-center pt-3">
 				<div class="display-4 font-weight-bold pl-4">
 					<a href="/main/main_view">Pawin Animals</a>
 				</div>
 				<div class="login-menu-icon d-flex align-items-center justify-content-end pr-5">
 					<ui class="nav font-weight-bold">
+					
+					<c:if test="${empty userId}">
 						<li><a href="/user/signIn_view">로그인</a></li>
 						<li><a href="/user/signUp_view">회원가입</a></li>
+					</c:if>
+					
+					<c:if test="${not empty userId}">
+						<li>${loginId} 님 환영합니다!</li>
+						<li><a href="">로그아웃</a></li>
+					</c:if>
+					
 						<li>
 						<input type="checkbox" id="menuicon">
 							<label for="menuicon">

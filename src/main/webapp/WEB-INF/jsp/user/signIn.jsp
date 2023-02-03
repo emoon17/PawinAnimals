@@ -4,6 +4,7 @@
 <div class="container">
 	<form id="signInForm" action="/user/sign_in" method="post">
 		<div class="input-boxs justify-content-center col-12">
+		
 			<input type="text" id="loginId" name="loginId" placeholder="아이디"
 				style="height: 85px; width: 500px;"
 				class="login-info form-control pl-3">
@@ -58,7 +59,7 @@
 			let params = $(this).serialize(); // form태그 name 값들 가져오기
 			
 			$.post(url, params) //request
-			.done(function(data) {
+			.done(function(data) { // response
 				if(data.code == 1){
 					location.href = "/main/main_view";
 				} else {
