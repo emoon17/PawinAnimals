@@ -1,218 +1,234 @@
 @charset "UTF-8";
+
 #wrap {
-	width:1280px;
-	height:auto;
-	margin:auto;
+	width: 1280px;
+	height: auto;
+	margin: auto;
 	font-family: 'Noto Sans KR', sans-serif;
 	list-style: none;
-	text-decoration:none;	
+	text-decoration: none;
 	border-collapse: collapse;
-	color:black;
+	color: black;
 	/* border: 0.1px solid lightgray; */
-	
-	
-}	
+}
 
 a {
-	color:black;
-	text-decoration:none;
+	color: black;
+	text-decoration: none;
 }
 
 a:hover {
-	color:black;
-	text-decoration:none;	
-}
-.intro-bg{
-	
-	width:1280px;
-	height:350px;
-	margin:auto;
+	color: black;
+	text-decoration: none;
 }
 
+.intro-bg {
+	width: 1280px;
+	height: 350px;
+	margin: auto;
+}
+
+.line {
+	width: 100%;
+	border: 0.5px solid lightgray;
+	display:block;
+}
+
+textarea {
+    width: 800px;
+    height: 600px;
+    border: none;
+    resize: none;
+}
+
+.create-box {
+	border: 0.5px solid lightgray;
+}
 
 header {
-	width:1280px;
-	margin:400px;
+	width: 1280px;
+	margin: 400px;
 }
 
 .contents {
-	height:auto;
-	
+	height: auto;
 }
 
-.content-font{
-	font-size:14px !important; 
-	
-}
-.content-subject {
-	font-size:25px;
+.content-font {
+	font-size: 14px !important;
 }
 
-.content-box{
+.content-box {
 	border: 0.2px solid lightgray;
-	width:550px;
-	height:auto;
-	margin:30px;
+	width: 550px;
+	height: auto;
+	margin: 30px;
 	border-radius: 40px;
-	background-color:white;
-	box-shadow:2px 2px 20px #c0c0c0;	
+	background-color: white;
+	box-shadow: 2px 2px 20px #c0c0c0;
 }
 
 .login {
-	height:600px;
+	height: 600px;
 }
 
 footer {
-	height:300px;	background-image:url("/static/image/footer2.jpg");
+	height: 300px;
+	background-image: url("/static/image/footer2.jpg");
 }
 
 .copy-font {
-	font-size:18px;
+	font-size: 18px;
 }
-
 
 .login-menu-icon {
-	margin:auto;
-	height:86px;
-	width:calc(1280px - 400px);
-	
-	
+	margin: auto;
+	height: 86px;
+	width: calc(1280px - 400px);
 }
 
-.nav > li{
-	margin-left:84px;
-	font-size:23px;
-	margin-top:40px;
-	
-	
+.nav>li {
+	margin-left: 84px;
+	font-size: 23px;
+	margin-top: 40px;
 }
 
 .nav-box {
-	width:300px;
-	
+	width: 300px;
 }
 
-.input-boxs{ 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-   
+.input-boxs {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
-.login-info{
+.login-info {
 	border-radius: 20px;
-	font-size:21px;
+	font-size: 21px;
 }
 
 .logInOut_click {
-	font-size:21px;
-	color:#837b18;
+	font-size: 21px;
+	color: #837b18;
 }
 
-.user-btn{
+.user-btn {
 	border-radius: 20px;
-	font-size:25px;
-	background-color:#ebd38d;
-	
+	font-size: 25px;
+	background-color: #ebd38d;
 }
 
 .check-btn {
-	color:black;
-	text-decoration:none;
-	border-color:white;
-	background-color:#ebd38d;
+	color: black;
+	text-decoration: none;
+	border-color: white;
+	background-color: #ebd38d;
 	border-radius: 20px;
-	font-size:20px;
+	font-size: 20px;
+}
+
+.create-box input:focus {
+	border-color: none;
+	outline: none;
+}
+
+.write-box {
+	border: 0px;
+}
+
+.write-area {
+	font-size: 25px;
 }
 
 #signInForm {
-	height:auto;
-	display:flex;
-	
-	
+	height: auto;
+	display: flex;
 }
 /* 메뉴 로고 css */
 input[id="menuicon"] {
-	display:none;
+	display: none;
 }
 
-input[id="menuicon"] + label {
-	display:block;
-	width:55px;
-	height:30px;
-	position:relative;
+input[id="menuicon"]+label {
+	display: block;
+	width: 55px;
+	height: 30px;
+	position: relative;
 	/* position:fixed;
 	right: 0px;
 	top:calc(50% - 25px);
 	transition:all .35s; */
-	cursor:pointer;
+	cursor: pointer;
 }
 
-input[id="menuicon"] + label span {
-	display:block;
-	position:absolute;
-	width:100%;
-	height:5px;
-	border-radius:30px;
-	background:#6d6d6d;
-	transition:all .35s; /* 모션 */
+input[id="menuicon"]+label span {
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 5px;
+	border-radius: 30px;
+	background: #6d6d6d;
+	transition: all .35s; /* 모션 */
 }
 
 /* 메뉴 로고 만들기 */
-input[id="menuicon"] + label span:nth-child(1) {
-	top:0;
+input[id="menuicon"]+label span:nth-child(1) {
+	top: 0;
 }
 
-input[id="menuicon"] + label span:nth-child(2) {
-	top:50%;
-	transform:translateY(-50%);
+input[id="menuicon"]+label span:nth-child(2) {
+	top: 50%;
+	transform: translateY(-50%);
 }
 
-input[id="menuicon"] + label span:nth-child(3) {
-	bottom:0;
+input[id="menuicon"]+label span:nth-child(3) {
+	bottom: 0;
 }
 
-input[id="menuicon"]:checked + label span:nth-child(1) { /* rotate(45deg): 45도로 회전한다  */
-	top:50%;
-	transform:translatey(-50%) rotate(45deg);
+input[id="menuicon"]:checked+label span:nth-child(1) {
+	/* rotate(45deg): 45도로 회전한다  */
+	top: 50%;
+	transform: translatey(-50%) rotate(45deg);
 }
 
-input[id="menuicon"]:checked + label span:nth-child(2) {
-	opacity:0%
+input[id="menuicon"]:checked+label span:nth-child(2) {
+	opacity: 0%
 }
 
-input[id="menuicon"]:checked + label span:nth-child(3) {
-	bottom:50%;
-	transform:translatey(50%) rotate(-45deg);
+input[id="menuicon"]:checked+label span:nth-child(3) {
+	bottom: 50%;
+	transform: translatey(50%) rotate(-45deg);
 }
 
 .sidebar {
-	width:800px;
-	height:100%;
-	background:#dedede;
-	position:fixed; /* 스크롤 해도 고정 */
-	top:0%;
-	right:-800px;
-	z-index:1; /* 우선순위 메뉴가 먼저 나오게 */
-	transition:all .35s;
+	width: 800px;
+	height: 100%;
+	background: #dedede;
+	position: fixed; /* 스크롤 해도 고정 */
+	top: 0%;
+	right: -800px;
+	z-index: 1; /* 우선순위 메뉴가 먼저 나오게 */
+	transition: all .35s;
 	opacity: 0.8;
 }
-input[id="menuicon"]:checked + label {
-	z-index:2;
 
+input[id="menuicon"]:checked+label {
+	z-index: 2;
 }
 
-input[id="menuicon"]:checked + label + div {
-	right:0;
+input[id="menuicon"]:checked+label+div {
+	right: 0;
 }
 
 .menu_subject {
-	font-size:80px;
+	font-size: 80px;
 }
 
 .menu_content {
-	font-size:60px;
+	font-size: 60px;
 }
+
 .menu_login_info {
-	font-size:30px;
+	font-size: 30px;
 }

@@ -16,7 +16,7 @@
 					
 					<c:if test="${not empty userId}">
 						<li>${loginId} 님 환영합니다!</li>
-						<li><a href="">로그아웃</a></li>
+						<li><a href="/user/signOut">로그아웃</a></li>
 					</c:if>
 					
 						<li>
@@ -39,7 +39,7 @@
 										
 										<tbody>
 											<tr>
-												<td colspan='3' class="menu_content font-weight-bold pt-5"><a href="#">가족을 찾고 있습니다 </a></td>
+												<td colspan='3' class="menu_content font-weight-bold pt-5"><a href="/post/look_for_family_create_view">가족을 찾고 있습니다 </a></td>
 											</tr>
 											<tr>
 												<td colspan='3' class="menu_content font-weight-bold pt-5"><a href="#">입양 후기 리스트</a></td>
