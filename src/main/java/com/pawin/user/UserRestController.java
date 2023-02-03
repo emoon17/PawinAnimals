@@ -64,9 +64,12 @@ public class UserRestController {
 		return result;
 	}
 	
-	/*
-	 * @PostMapping("/sign_in") public Map<String, Object>
-	 */
+	
+	  @PostMapping("/sign_in") 
+	  public Map<String, Object> signIn(){
+		  
+	  }
+	 
 	
 	
 	
