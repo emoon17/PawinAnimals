@@ -3,6 +3,8 @@ package com.pawin.user;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +19,9 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("/user")
 @RestController
 public class UserRestController {
-
+	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Autowired
 	private UserBO userBO;
 	
@@ -39,6 +43,7 @@ public class UserRestController {
 			result.put("code", 1);
 			result.put("result", true);
 		} else { // 중복이 아닐 떄
+			logger.warn("[아이디 중복확인] post is null. loginId:{}", loginId);
 			result.put("result", false);
 		}
 		
@@ -104,6 +109,8 @@ public class UserRestController {
 			  session.setAttribute("loginId", user.getLoginId());
 			  session.setAttribute("phoneNumber", user.getPhoneNumber());
 		  } else {
+				logger.warn("[회원가입] post is null. loginId:{}", loginId);
+
 			  result.put("errorMessage", "관리자에게 문의하세요");
 		  }
 		  
