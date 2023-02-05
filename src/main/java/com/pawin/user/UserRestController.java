@@ -82,7 +82,7 @@ public class UserRestController {
 	
 
 	/**
-	 *  회원가입 API
+	 *  로그인 API
 	 * @param loginId
 	 * @param password
 	 * @param session
@@ -109,7 +109,7 @@ public class UserRestController {
 			  session.setAttribute("loginId", user.getLoginId());
 			  session.setAttribute("phoneNumber", user.getPhoneNumber());
 		  } else {
-				logger.warn("[회원가입] post is null. loginId:{}", loginId);
+				logger.warn("[로그인] post is null. loginId:{}", loginId);
 
 			  result.put("errorMessage", "관리자에게 문의하세요");
 		  }

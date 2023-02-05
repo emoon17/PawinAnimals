@@ -226,7 +226,7 @@ input[id="menuicon"]:checked+label span:nth-child(3) {
 }
 
 .sidebar {
-	width: 800px;
+	width: 700px;
 	height: 100%;
 	background: #dedede;
 	position: fixed; /* 스크롤 해도 고정 */
@@ -246,11 +246,11 @@ input[id="menuicon"]:checked+label+div {
 }
 
 .menu_subject {
-	font-size: 80px;
+	font-size: 50px;
 }
 
 .menu_content {
-	font-size: 60px;
+	font-size: 30px;
 }
 
 .menu_login_info {
