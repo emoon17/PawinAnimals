@@ -20,10 +20,16 @@ public class ImagePathRestCotroller {
 	
 	@PostMapping("/imagePath/upload_image")
 	public String imagePath(
-			@RequestPart(value="file",required = false) List<MultipartFile> files,
-			HttpSession session){
-		Imagepath imagepath = new Imagepath();
+			@RequestPart("file") List<MultipartFile> files
+			){
 		
+		/*
+		 * int userId = (int)session.getAttribute("userId"); int postId =
+		 * (int)session.getAttribute("postId"); String loginId =
+		 * (String)session.getAttribute("loginId");
+		 * 
+		 * imagePathBO.addPost(files, userId, postId, loginId);
+		 */
 		// 응답
 		return "uploaded";
 		

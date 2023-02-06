@@ -19,19 +19,19 @@
 				<div class="file-upload d-flex">
 					<%-- file 태그는 숨겨두고 이미지를 클릭하면 file 태그를 클릭한 것처럼 이벤트를 줄 것이다. --%>
 
-					<form id="fileUploadForm" action="/imagePath/upload_image" method="post">
+
 					<input type="file" id="file" name="file1" class="d-none"
 						accept=".gif, .jpg, .png, .jpeg" multiple="multiple">
 
 
-						<div class="d-flex justify-content-between align-items-center">
-							<%-- 업로드 된 임시 파일 이름 저장될 곳 --%>
-							<div id="fileName1" style="height: 10px;"
-								class="copy-font text-center ml-2"></div>
-							<input type="button" id="fileUpLoadBtn" value="사진 첨부"
-								class="write-area btn btn-lg mr-3 ml-2">
-						</div>
-					</form>
+					<div class="d-flex justify-content-between align-items-center">
+						<%-- 업로드 된 임시 파일 이름 저장될 곳 --%>
+						<div id="fileName1" style="height: 10px;"
+							class="copy-font text-center ml-2"></div>
+						<input type="button" id="fileUpLoadBtn" value="사진 첨부" name="images"
+							class="write-area btn btn-lg mr-3 ml-2">
+					</div>
+
 				</div>
 			</div>
 			<div class="line mt-3"></div>
@@ -90,15 +90,20 @@
 	</div>
 
 	<div class="post-div d-flex justify-content-end ">
-		<button id="postBtn"
-			class="post-btn btn btn-lg write-area font-weight-bold ">작성
-			완료</button>
+		<form id="fileUploadForm" action="/post/post_create"
+			method="post" enctype="multipart/form-data">
+			<button id="postBtn"
+				class="post-btn btn btn-lg write-area font-weight-bold ">작성
+				완료</button>
+		</form>
 	</div>
 
 </div>
 
 <script>
 	$(document).ready(function() {
+		
+		  
 		// 파일선택 업로드 버튼 누르기 뒤에 있는 file 인풋 누르기
 		$('#fileUpLoadBtn').on('click', function() {
 			$('#file').click();
@@ -138,45 +143,24 @@
 				textFileList.length = 0;
 				return;
 			}	
-			
 		});
 		
 		let inputFileList = new Array();     // 이미지 파일을 담아놓을 배열 (업로드 버튼 누를 때 서버에 전송할 데이터)
+		// 파일 선택 이벤트
+		$('#fileUpLoadBtn').on('change', function(e) {
+		　　let files = e.target.files;
+		　　let filesArr = Array.prototype.slice.call(files);
+ 	     
 
-
-		// 사진 버튼 눌렀을 때 업로드 수행
-		$('#fileUpLoadBtn').on('click', function() {
-		　console.log("inputFileList: " + inputFileList);
-		
-		　　let formData = new FormData($('#fileUploadForm')[0]);  // 폼 객체
-
-		　　for (let i = 0; i < inputFileList.length; i++) {
-		　　　　formData.append("files", inputFileList[i]);// 배열에서 이미지들을 꺼내 폼 객체에 담는다.
-		　}
-		 $.ajax({
-		　　　　type:"post"
-		　　　　, url:"/imagePath/upload_image"
-		　　　　, data:formData
-		　　　//　, enctype:"multipart/form-data"  // 업로드를 위한 필수 파라미터
-		　　　　, processData: false   // 업로드를 위한 필수 파라미터
-		　　　　, contentType: false   // 업로드를 위한 필수 파라미터
-		　　　　
-		　　　　//response
-			 , success:function(data) {
-				if (data.code == 1) {
-					// 성공
-					alert("사진 등록");
-				}	
-			}
-			, error:function(e){
-				alert("error" + e);
-			} 
+		　　filesArr.forEach(function(f) { 
+		　　　　inputFileList.push(f);    // 이미지 파일을 배열에 담는다.
 		　　});
-				
+			 console.log("inputFileList: " + inputFileList);
 		});
 		
 		// 작성완료 눌렀을 때
 		$('#postBtn').on('click', function(){
+		  
 			
 		   let WriteTitle = $('#WriteTitle').val();
 		   let WriteArea =  $('#WriteArea').val();
@@ -184,6 +168,20 @@
 		   let status = $("select[name=status] option:selected").text();
 		   let animals = $("select[name=animals] option:selected").text();
 		   let area = $("select[name=area] option:selected").text();
+		   
+			
+		   let formData = new FormData($('#fileUploadForm')[0]);  // 폼 객체
+
+		   for (let i = 0; i < inputFileList.length; i++) {
+			　　　　formData.append("files", inputFileList[i]);// 배열에서 이미지들을 꺼내 폼 객체에 담는다.
+				console.log(inputFileList[i])
+		   }
+		   
+		   formData.append("title", WriteTitle);
+		   formData.append("content", WriteArea);
+		   formData.append("status", status);
+		   formData.append("animals", animals);
+		   formData.append("area", area);
 		 
 		  
 		   if (WriteTitle == ''){
@@ -204,15 +202,36 @@
 				return;
 		   }
 		   if (animals == ''){
-				alert("상황을 선택하여주세요.");
+				alert("동물을 선택하여주세요.");
 				return;
 		   }
 		   if (area == ''){
-				alert("상황을 선택하여주세요.");
+				alert("지역을 선택하여주세요.");
 				return;
 	  	   }
 		   //post
-		   
+		   $.ajax({
+			  //request
+			  type:"post"
+			  ,url:"/post/post_create"
+			  , data: formData
+			  , enctype:"multipart/form-data"
+ 			  , processData:false
+ 			  , contentType:false
+			  //response
+			  ,success:function(data){
+				  if (data.code == 1){
+					  alert("게시글 작성을 완료하였습니다.");
+					  location.href="/post/look_for_family_list_view";
+				  } else {
+					  alert(data.errorMessage);
+				  }
+			  }
+			  ,error:function(e){
+					alert("게시글 작성에 실패하였습니다.")
+			  }
+			  
+		   });
 		　 　 
 		});
 		

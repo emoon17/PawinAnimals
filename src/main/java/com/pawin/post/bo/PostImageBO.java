@@ -1,4 +1,4 @@
-package com.pawin.imagepath.bo;
+package com.pawin.post.bo;
 
 import java.util.List;
 
@@ -7,13 +7,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.pawin.common.FileManagerService;
-import com.pawin.imagepath.dao.ImagePathDAO;
-
+import com.pawin.post.dao.PostImageDAO;
 @Service
-public class ImagePathBO {
+public class PostImageBO {
 
 	@Autowired
-	private ImagePathDAO imagePathDAO;
+	private PostImageDAO postImageDAO;
 	
 	@Autowired
 	private FileManagerService fileManagerService;
@@ -27,7 +26,6 @@ public class ImagePathBO {
 			imagePath = fileManagerService.saveFile(loginId, files);
 		}
 		
-		imagePathDAO.insertPost(imagePath, userId, postId);
-	
+		postImageDAO.insertPost(imagePath, userId, postId);
 	}
 }
