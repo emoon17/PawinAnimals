@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,16 +27,17 @@ public class PostRestController {
 
 	@Autowired
 	private PostImageBO postImageBO;
-
+	
 	@PostMapping("/post_create")
 	public Map<String, Object> create(
-			@RequestParam("title") String title,
+			@RequestParam("writeTitle") String writeTitle,
 			@RequestParam("content") String content,
-			@RequestPart(value = "files", required=false) List<MultipartFile> files, 
+			@RequestParam("files") List<MultipartFile> files, 
 			@RequestParam("animals") String animals,
 			@RequestParam("status") String status,
-			@RequestParam("area") String area,
-			HttpSession session) {
+		    @RequestParam("area") String area,
+			HttpSession session
+			) {
 
 		/*
 		 * // 세션으로 필요한 정보 가져오기 userId, loginId, postId int userId = (int)
