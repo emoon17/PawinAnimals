@@ -1,4 +1,4 @@
-package com.pawin;
+package com.pawin.post;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,5 +14,13 @@ public class PostController {
 		model.addAttribute("veiwName", "post/LookfamilyCreate");
 		return "template/layout";
 	}
+	
+	@GetMapping("/look_for_family_list_view")
+	public String lookFamilyListView(Model model) {
+		
+		model.addAttribute("veiwName", "post/LookfamilyList");
+		return "template/layout";
+	}
+	
 	
 }

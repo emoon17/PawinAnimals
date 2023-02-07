@@ -39,7 +39,7 @@
 										
 										<tbody>
 											<tr>
-												<td colspan='3' class="menu_content font-weight-bold pt-5"><a href="#">가족을 찾고 있습니다 </a></td>
+												<td colspan='3' class="menu_content font-weight-bold pt-5"><a href="/post/look_for_family_list_view">가족을 찾고 있습니다 </a></td>
 											</tr>
 											<tr>
 												<td colspan='3' class="menu_content font-weight-bold pt-5"><a href="#">입양 후기 리스트</a></td>
