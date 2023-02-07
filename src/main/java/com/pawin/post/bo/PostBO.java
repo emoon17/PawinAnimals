@@ -15,12 +15,15 @@ public class PostBO {
 	@Autowired
 	private PostDAO postDAO;
 	
-	@Autowired
-	private PostImageBO postImageBO;
+	 @Autowired
+	private PostImageDAO postImageDAO;
 	
 	
-	public int addPost(String title, String content,List<MultipartFile> files, String animals, 
-			String status, String area, int userId, String loginId, int postId  ) {
+	public int addPost(String title, String content, String animals, 
+			String status, String area, int userId, String loginId) {
+		
+		postImageDAO.insertImagePost(loginId, userId);
+			
 		
 		return postDAO.insertPost(title, content, animals, status, area, userId);
 	}

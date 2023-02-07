@@ -111,7 +111,7 @@ public class UserRestController {
 		  } else {
 				logger.warn("[로그인] post is null. loginId:{}", loginId);
 
-			  result.put("errorMessage", "관리자에게 문의하세요");
+			  result.put("errorMessage", "아이디 비밀번호를 확인하세요.");
 		  }
 		  
 		  // 응답내리기

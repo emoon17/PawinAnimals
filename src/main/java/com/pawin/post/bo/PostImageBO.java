@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.pawin.common.FileManagerService;
 import com.pawin.post.dao.PostImageDAO;
+import com.pawin.post.model.ImagePath;
 @Service
 public class PostImageBO {
 
@@ -17,7 +18,7 @@ public class PostImageBO {
 	@Autowired
 	private FileManagerService fileManagerService;
 	
-	public void addPost(List<MultipartFile> files, int userId, int postId, String loginId) {
+	public int addPost(List<MultipartFile> files, int userId, String loginId) {
 		
 		// 파일 업로드 => 내 컴퓨터 서버에만 올린다. 경로로 보여지기.
 		String imagePath = null;
@@ -26,6 +27,6 @@ public class PostImageBO {
 			imagePath = fileManagerService.saveFile(loginId, files);
 		}
 		
-		postImageDAO.insertPost(imagePath, userId, postId);
+		return postImageDAO.insertImagePost(imagePath, userId);
 	}
 }
