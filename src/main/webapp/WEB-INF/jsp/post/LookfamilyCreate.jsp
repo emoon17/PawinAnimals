@@ -94,7 +94,7 @@
 
 		<div class="post-div d-flex justify-content-end ">
 
-			<button id="postBtn"
+			<button type="button" id="postBtn"
 				class="post-btn btn btn-lg write-area font-weight-bold ">작성
 				완료</button>
 
@@ -164,38 +164,40 @@
 		
 		
 		// 작성완료 눌렀을 때
-		$('#postBtn').on('click', function(){
-			
+		$('#postBtn').on('click', function(e){
+		   e.preventDefault();
 		   let writeTitle = $('#writeTitle').val();
-		  // alert(writeTitle);
+		   //alert(writeTitle);
 		   let writeArea =  $('#writeArea').val();
 		   let file = $('#file').val();
 		   let status = $("select[name=status] option:selected").text();
 		   let animals = $("select[name=animals] option:selected").text();
 		   let area = $("select[name=area] option:selected").text();
-		   
+		   alert(writeTitle);
+		   alert(writeArea);
+		   alert(file);
+		   alert(status);
+		   alert(animals);
+		   alert(area);
 		  
 		   let formData = new FormData($('#fileUploadForm')[0]);  // 폼 객체
-
+		   
+		   //console.log(formData.has('writeTitle')); 
 		   for (let i = 0; i < inputFileList.length; i++) {
 			　　　　formData.append("files", inputFileList[i]);// 배열에서 이미지들을 꺼내 폼 객체에 담는다.
 				 console.log(inputFileList[i])
 		   }
+		   formData.append("writeTitle", writeTitle);		 
+		   formData.append("writeArea", writeArea);		 
+		   formData.append("status", status);		 
+		   formData.append("animals", animals);		 
+		   formData.append("area", area);		
 		  
-			
-		   
-		   formData.append("writeTitle", writeTitle);
-		   formData.append("content", writeArea);
-		   formData.append("status", status);
-		   formData.append("animals", animals);
-		   formData.append("area", area);
-		 
-		  
-		   if (WriteTitle == ''){
+		   if (writeTitle == ''){
 				alert("제목을 입력하여주세요.");
 				return;
 		   }
-		   if (WriteArea == ''){
+		   if (writeArea == ''){
 				alert("내용을 입력하여주세요.");
 				return;
 		   }
@@ -209,10 +211,11 @@
 			  //request
 			  type:"post"
 			  ,url:"/post/post_create"
-			  , data: formData
+			  , data: JSON.stringify(formData)
 			  , enctype:"multipart/form-data"
  			  , processData:false
  			  , contentType:false
+ 			  
 			  //response
 			  ,success:function(data){
 				  if (data.code == 1){

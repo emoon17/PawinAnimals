@@ -6,10 +6,10 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,14 +28,15 @@ public class PostRestController {
 	@Autowired
 	private PostImageBO postImageBO;
 	
+	
 	@PostMapping("/post_create")
 	public Map<String, Object> create(
-			@RequestParam("writeTitle") String writeTitle,
-			@RequestParam("content") String content,
-			@RequestParam("files") List<MultipartFile> files, 
-			@RequestParam("animals") String animals,
-			@RequestParam("status") String status,
-		    @RequestParam("area") String area,
+			@RequestParam(value="writeTitle", required=false) String writeTitle,
+			@RequestParam(value="writeArea", required=false) String content,
+			@RequestPart(value="files", required=false) List<MultipartFile> files, 
+			@RequestParam(value="animals", required=false) String animals,
+			@RequestParam(value="status", required=false) String status,
+		    @RequestParam(value="area", required=false) String area,
 			HttpSession session
 			) {
 
