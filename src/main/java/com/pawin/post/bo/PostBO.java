@@ -8,6 +8,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.pawin.post.dao.PostDAO;
 import com.pawin.post.model.Post;
+import com.pawin.user.bo.UserBO;
+import com.pawin.user.model.User;
 
 @Service
 public class PostBO {
@@ -17,15 +19,18 @@ public class PostBO {
 	
 	 @Autowired
 	private PostImageBO postImageBO;
+	 
+	 
 	
 	
-	public void addPost(Post post, List<MultipartFile> files, String loginId) {
+	public void addPost(Post post, List<MultipartFile> files, int userId) {
 		
 		// 1. 글 등록
 		postDAO.insertPost(post);
 		
 		//2 . 이미지 업로들을 내 컴퓨터에 업로드
-		postImageBO.addPost(files, post.getUserId(), post.getStatus(), post.getId());
+		postImageBO.addPost(files, userId, post.getStatus(), post.getId());
+		
 		
 		//3. 이미지 패스들을 글 등록했던 아이디를 가져와서 이미지패스에 넣기 (반복문 돌려서)
 		

@@ -31,17 +31,13 @@ public class PostRestController {
 	@PostMapping("/post_create")
 	public Map<String, Object> create(
 			@ModelAttribute Post post, // name 태그 값과 일치하는 필드에 값이 들어간다.
-			@RequestPart("files") List<MultipartFile> files, 
+			@RequestPart("files") List<MultipartFile> files,
 			HttpSession session) {
 
-		
-		  // 세션으로 필요한 정보 가져오기 userId, loginId, postId 
-		Integer userId = (Integer)session.getAttribute("userId"); 
-		String loginId = (String)session.getAttribute("loginId"); 
-		
+		int userId = (int)session.getAttribute("userId");
 		  
 	     // db insert
-		 postBO.addPost(post, files, loginId);
+		 postBO.addPost(post, files, userId);
 		 
 		  
 		 

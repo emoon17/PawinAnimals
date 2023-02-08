@@ -6,6 +6,7 @@ public class ImagePath {
 	
 	private int id;
 	private int userId;
+	private int postId;
 	private String imagePath;
 	private Date createdAt;
 	
@@ -21,6 +22,12 @@ public class ImagePath {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+	public int getPostId() {
+		return postId;
+	}
+	public void setPostId(int postId) {
+		this.postId = postId;
+	}
 	public String getImagePath() {
 		return imagePath;
 	}
@@ -33,5 +40,6 @@ public class ImagePath {
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
+	
 	
 }
