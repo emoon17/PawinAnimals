@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.pawin.post.dao.PostDAO;
-import com.pawin.post.dao.PostImageDAO;
+import com.pawin.post.model.Post;
 
 @Service
 public class PostBO {
@@ -16,17 +16,19 @@ public class PostBO {
 	private PostDAO postDAO;
 	
 	 @Autowired
-	private PostImageDAO postImageDAO;
+	private PostImageBO postImageBO;
 	
 	
-	public int addPost(String title, String content, String animals, 
-			String status, String area, int userId, String loginId) {
+	public void addPost(Post post, List<MultipartFile> files, String loginId) {
 		
-		postImageDAO.insertImagePost(loginId, userId);
-			
+		// 1. 글 등록
+		postDAO.insertPost(post);
 		
-		return postDAO.insertPost(title, content, animals, status, area, userId);
+		//2 . 이미지 업로들을 내 컴퓨터에 업로드
+		postImageBO.addPost(files, post.getUserId(), post.getStatus(), post.getId());
+		
+		//3. 이미지 패스들을 글 등록했던 아이디를 가져와서 이미지패스에 넣기 (반복문 돌려서)
+		
 	}
-	
 	
 }

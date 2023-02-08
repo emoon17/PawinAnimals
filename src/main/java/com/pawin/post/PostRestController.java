@@ -5,15 +5,16 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.pawin.post.bo.PostBO;
 import com.pawin.post.bo.PostImageBO;
+import com.pawin.post.model.Post;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -29,12 +30,8 @@ public class PostRestController {
 	
 	@PostMapping("/post_create")
 	public Map<String, Object> create(
-			@RequestParam("writeTitle") String title,
-			@RequestParam("writeArea") String content,
+			@ModelAttribute Post post, // name 태그 값과 일치하는 필드에 값이 들어간다.
 			@RequestPart("files") List<MultipartFile> files, 
-			@RequestParam("animals") String animals,
-			@RequestParam("status") String status,
-		    @RequestParam("area") String area,
 			HttpSession session) {
 
 		
@@ -44,20 +41,21 @@ public class PostRestController {
 		
 		  
 	     // db insert
-		  int rowCount = postBO.addPost(title, content, animals, status, area, userId, loginId);
-		  int rowImageCount = postImageBO.addPost(files, userId, loginId);
+		 postBO.addPost(post, files, loginId);
+		 
 		  
 		 
 		// code 구분
 		Map<String, Object> result = new HashMap<>();
 		
-		  if (rowCount > 0 && rowImageCount > 0) { 
+		  if (post != null) { 
 		      result.put("code", 1); 
-			  session.setAttribute("title",title); 
-			  session.setAttribute("animals", animals);
-			  session.setAttribute("status", status); 
-			  session.setAttribute("area", area);
-
+		      session.setAttribute("title", post.getTitle());
+		      session.setAttribute("content", post.getContent());
+		      session.setAttribute("status", post.getStatus());
+		      session.setAttribute("animals", post.getAnimals());
+		      session.setAttribute("postId", post.getId());
+		      session.setAttribute("area", post.getArea());
           } 
 		  else {
 			  result.put("errorMessage","관리자에게 문의하여 주세요."); 

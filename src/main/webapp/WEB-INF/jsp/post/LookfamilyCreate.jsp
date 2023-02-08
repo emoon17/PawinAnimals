@@ -9,10 +9,10 @@
 
 		<div class="create-box">
 			<input id="writeTitle" type="text" class="write-box write-area p-2"
-				style="height: 70px; width: 800px;" placeholder="  제목을 입력하세요">
+				style="height: 70px; width: 800px;" name="title" placeholder="  제목을 입력하세요">
 			<div class="line"></div>
 			<textarea id="writeArea" class="wirte-box write-area border-0 p-2"
-				style="height: 500px; width: 800px;" placeholder="  내용을 입력하세요"></textarea>
+				style="height: 500px; width: 800px;" name="content" placeholder="  내용을 입력하세요"></textarea>
 
 			<%-- 이미지 업로드를 위한 버튼--%>
 			<div class="d-flex justify-content-end">
@@ -185,8 +185,8 @@
 			　　　　formData.append("files", inputFileList[i]);// 배열에서 이미지들을 꺼내 폼 객체에 담는다.
 				 console.log(inputFileList[i])
 		   }
-		   formData.append("writeTitle", writeTitle);		 
-		   formData.append("writeArea", writeArea);		 
+		   formData.append("title", writeTitle);		 
+		   formData.append("content", writeArea);		 
 		   formData.append("status", status);		 
 		   formData.append("animals", animals);		 
 		   formData.append("area", area);		

@@ -6,12 +6,14 @@
  		INSERT INTO `imagepath`
  		(
 	 		`userId`
+	 		,`postId`
 			,`imagePath`
 			,`createdAt`
  		)
  		VALUES
  		(
  			#{userId}
+ 			, #{postId}
  			, #{imagePath}
  			, NOW()
  		)

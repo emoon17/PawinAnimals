@@ -33,6 +33,11 @@ public class UserController {
 		return "template/layout";
 	}
 	
+	/**
+	 *  로그아웃
+	 * @param session
+	 * @return
+	 */
 	@GetMapping("/signOut")
 	public String signOut(HttpSession session) {
 		

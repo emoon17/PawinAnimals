@@ -9,7 +9,7 @@
  			`post`
  	</select>
  	
- 	<insert id="insertPost" parameterType="map">
+ 	<insert id="insertPost" parameterType="map" useGeneratedKeys="true" keyProperty="id">
  		INSERT INTO `post`
  		(
  			`userId`
