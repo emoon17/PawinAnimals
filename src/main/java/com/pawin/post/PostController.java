@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class PostController {
 
+	/**
+	 *  글쓰기 view
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/look_for_family_create_view")
 	public String lookFamilyDetailView(Model model) {
 		

@@ -24,7 +24,8 @@ public class PostImageBO {
 		if (files != null) {
 			// 파일이 있을 때만 업로드 -> 이미지 경로를 얻어냄
 			
-			// 파일메니저 파일 갯수만큼 반복
+			// 파일메니저 파일 갯수만큼 반복 
+			
 			for (MultipartFile file : files) {
 				imagePath = fileManagerService.saveFile(loginId, file);
 				// 파일 갯수만큼 다오에 넣게 (n개)

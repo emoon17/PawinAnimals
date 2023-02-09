@@ -7,7 +7,7 @@
 	<div class="d-flex justify-content-center align-items-center ">
 
 
-		<div class="create-box">
+		<div class="create-box"  > <!-- data-user-id="${userId}" name="userId" -->
 			<input id="writeTitle" type="text" class="write-box write-area p-2"
 				style="height: 70px; width: 800px;" name="title" placeholder="  제목을 입력하세요">
 			<div class="line"></div>
@@ -92,7 +92,7 @@
 		<form id="fileUploadForm" action="/post/post_create" method="post"
 			enctype="multipart/form-data">
 			<button type="button" id="postBtn"
-				class="post-btn btn btn-lg write-area font-weight-bold ">작성
+				class="post-btn btn btn-lg write-area font-weight-bold " >작성
 				완료
 			</button>
 		</form>
@@ -158,6 +158,15 @@
 			 }	
 		});
 		
+		$('#writeTitle').keyup(function() {
+			
+			let writeTitle = $('#writeTitle').val();
+			if (writeTitle.length > 15) {
+				alert("제목은 15글자를 초과할 수 없습니다.");
+				$('#writeTitle').val('');
+			} 
+			
+		});
 		
 		
 		// 작성완료 눌렀을 때
@@ -167,12 +176,12 @@
 		   //alert(writeTitle);
 		   let writeArea =  $('#writeArea').val();
 		   let file = $('#file').val();
-		   
+		   let userId = $('.create-box').data('user-id');
 		   let status = $("#status option:selected").val();
 		   let animals = $("#animals option:selected").val();
 		   let area = $("#area option:selected").val();
-		  /*  alert(writeTitle);
-		   alert(writeArea);
+		  // alert(userId);
+		   /*  alert(writeArea);
 		   alert(file);
 		   alert(status);
 		   alert(animals);
@@ -190,11 +199,13 @@
 		   formData.append("status", status);		 
 		   formData.append("animals", animals);		 
 		   formData.append("area", area);		
+		   //formData.append("userId", userId);		
 		  
 		   if (writeTitle == ''){
 				alert("제목을 입력하여주세요.");
 				return;
 		   }
+		  
 		   if (writeArea == ''){
 				alert("내용을 입력하여주세요.");
 				return;

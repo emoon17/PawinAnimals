@@ -26,13 +26,14 @@ public class PostBO {
 	public void addPost(Post post, List<MultipartFile> files, int userId) {
 		
 		// 1. 글 등록
+		post.setUserId(userId);
 		postDAO.insertPost(post);
+		
 		
 		//2 . 이미지 업로들을 내 컴퓨터에 업로드
 		postImageBO.addPost(files, userId, post.getStatus(), post.getId());
 		
 		
-		//3. 이미지 패스들을 글 등록했던 아이디를 가져와서 이미지패스에 넣기 (반복문 돌려서)
 		
 	}
 	

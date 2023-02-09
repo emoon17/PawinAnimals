@@ -28,6 +28,14 @@ public class PostRestController {
 	@Autowired
 	private PostImageBO postImageBO;
 	
+	
+	/**
+	 *  글쓰기 API
+	 * @param post
+	 * @param files
+	 * @param session
+	 * @return
+	 */
 	@PostMapping("/post_create")
 	public Map<String, Object> create(
 			@ModelAttribute Post post, // name 태그 값과 일치하는 필드에 값이 들어간다.

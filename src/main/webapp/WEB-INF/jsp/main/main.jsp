@@ -6,16 +6,8 @@
 					<div class="content-subject font-weight-bold mt-4">아이들의 꽃길을 보러오세요!</div>
 					<div class="nav-box d-flex align-items-center justify-content-center mb-5">
 						<ui class="nav">
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 제목 10개만</a></li>
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 한둘셋넷다여일여아열한둘셋넷다</a></li>
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 반복문 제목 </a></li>
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 반복문 제목 </a></li>
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 반복문 제목 </a></li>
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 반복문 제목 </a></li>
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 반복문 제목 </a></li>
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 반복문 제목 </a></li>
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 반복문 제목 </a></li>
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 반복문 제목 </a></li>
+							<li class="content-font"><a href="#"></a></li> <%-- ${status.count}.${post.title} 반복문 --%>
+						
 						</ui>
 					</div>	
 				</div>
@@ -26,16 +18,7 @@
 					<div class="content-subject font-weight-bold mt-4">반려용품 무료 나눔합니다!</div>
 					<div class="nav-box d-flex align-items-center justify-content-center mb-5">
 						<ui class="nav">
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 제목 10개만</a></li>
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 한둘셋넷다여일여아열한둘셋넷다</a></li>
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 반복문 제목 </a></li>
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 반복문 제목 </a></li>
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 반복문 제목 </a></li>
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 반복문 제목 </a></li>
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 반복문 제목 </a></li>
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 반복문 제목 </a></li>
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 반복문 제목 </a></li>
-							<li class="content-font"><a href="#">${status.count}. ${post.title} 반복문 제목 </a></li>
+							<li class="content-font"><a href="#"></a></li> <%-- ${status.count}.${post.title} 반복문 --%>
 						</ui>
 					</div>	
 				</div>
