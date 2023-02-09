@@ -9,6 +9,22 @@
  			`post`
  	</select>
  	
+ 	<select id="selectPostList"  resultType="com.pawin.post.model.Post">
+ 		SELECT
+ 			`id`
+			,`userId`
+			,`title`
+			,`content`
+			,`animals`
+			,`status`
+			,`area`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`post`
+		ORDER BY `id` DESC 
+ 	</select>
+ 	
  	<insert id="insertPost" parameterType="map" useGeneratedKeys="true" keyProperty="id">
  		INSERT INTO `post`
  		(

@@ -32,7 +32,7 @@ public class PostImageBO {
 				postImageDAO.insertImagePost(imagePath, userId, postId);
 			}
 		}
-		
-		
 	}
+	
+	//public List<ImagePath> getImagePathById
 }

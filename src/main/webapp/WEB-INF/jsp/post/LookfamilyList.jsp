@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="container list-box">
 	<div class="search-box d-flex align-items-center">
 	<!-- 글 서치 -->
@@ -45,39 +46,24 @@
 		
 		<button type="button" class="header-btn btn ml-3 copy-font" id="serachBtn" style="height: 50px; width: 70px;">검색</button>
 		<!-- 글 등록을 눌렀을 때 userId가 널인지 아닌지 확인 후 로그인 창으로 넘기거나, 로그인 되어있으면 글쓰기 화면으로 이동  -->
-		<a href="/post/look_for_family_create_view"><button type="button" class="header-btn btn ml-3 copy-font" style="height: 50px; width: 70px;">글 등록</button></a> 
+		<a href="/post/look_for_family_create_view"><button type="button" class="header-btn btn ml-3 copy-font" style="height: 50px; width: 80px;" data-user-id="${user.id}">글 등록</button></a> 
 	</div>
 	<div class="line"></div>
 	
 	<!-- 글 목록 -->
-	<div class="contents-box bg-info">
+	<div class="contents-box ">
 		<div class="contents-parent-box d-flex flex-wrap justify-content-between">
+		<c:forEach var="postView" items="${postList}">
 			<article class="post-box">
-                <img src="/static/image/footer2.jpg" alt="이미지" width="300" height="300"> 
-                	<div class="copy-font ml-3">상황 : </div>
-                    <div class="copy-font ml-3">지역 : </div>
-                    <div class="copy-font ml-3">제목 :</div>
-                    <div class="copy-font ml-3">동물 종 :</div>
+                <img src="/static/image/footer2.jpg" alt="이미지" width="300" height="300" class="list-box"> 
+                    <div class="copy-font ml-3 font-weight-bold">제목 : <span class="ml-3"> ${postView.post.title}</span> </div>
                    
+                	<div class="copy-font ml-3 font-weight-bold">상황 : <span class="ml-3">${postView.post.status}</span></div>
+                    <div class="copy-font ml-3 font-weight-bold">동물 종: <span class="ml-3">${postView.post.animals}</span></div>
+                    <div class="copy-font ml-3 font-weight-bold">상황 : <span class="ml-3">${postView.post.area}</span></div>
             </article>
-            <article class="list-box">
-                <img src="/static/image/footer2.jpg" alt="이미지" width="300" height="300"> 
-                	<div class="font-weight-bold"></div>
-                    <div class="media-info-text"></div>
-                    <div class="media-info-text"></div>
-            </article>
-            <article class="list-box">
-                <img src="/static/image/footer2.jpg" alt="이미지" width="300" height="300"> 
-                	<div class="font-weight-bold"></div>
-                    <div class="media-info-text"></div>
-                    <div class="media-info-text"></div>
-            </article>
-            <article class="list-box">
-                <img src="/static/image/footer2.jpg" alt="이미지" width="300" height="300"> 
-                	<div class="font-weight-bold"></div>
-                    <div class="media-info-text"></div>
-                    <div class="media-info-text"></div>
-            </article>
+        </c:forEach>
+           
 		</div>
 		
 	</div>

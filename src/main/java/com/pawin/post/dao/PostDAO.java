@@ -14,5 +14,7 @@ public interface PostDAO {
 	
 	public void insertPost(Post post);
 	
+	public List<Post> selectPostList();
+	
 
 }

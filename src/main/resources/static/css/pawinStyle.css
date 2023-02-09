@@ -85,8 +85,8 @@ header {
 }
 
 .contents-parent-box {
-	gap:50px 10px; padding:10px;
-} /* 상자 사이 간격   상하 5px/좌우 10px */
+	gap:50px 10px; padding:20px;
+} /* 상자 사이 간격   상하 50px/좌우 10px */
 
 .titleSearch{
 	 margin-left:80px;
