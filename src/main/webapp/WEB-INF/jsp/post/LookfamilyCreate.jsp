@@ -2,10 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<c:if test="${not empty userId}">
 <div class="container">
-
+	
 	<div class="d-flex justify-content-center align-items-center ">
-
 
 		<div class="create-box"  > <!-- data-user-id="${userId}" name="userId" -->
 			<input id="writeTitle" type="text" class="write-box write-area p-2"
@@ -40,7 +40,8 @@
 			<%-- select 박스 만들기 --%>
 			<div class="mt-2 d-flex align-items-center">
 				<div class="copy-font w-100">
-					<span class="ml-2">상황: </span> <select id="status" name="status"
+					<span class="ml-2">상황: </span>
+					 <select id="status" name="status"
 						class="content-foot-box ml-4 text-center">
 						<option value="목격" >목격</option>
 						<option value="실종">실종</option>
@@ -50,7 +51,8 @@
 					</select>
 				</div>
 				<div class="w-100 copy-font">
-					<span class="ml-2">동물 종: </span> <select id="animals"
+					<span class="ml-2">동물 종: </span> 
+					<select id="animals"
 						name="animals" class="content-foot-box ml-4 text-center">
 						<option value="고양이">고양이</option>
 						<option value="강아지">강아지</option>
@@ -58,7 +60,8 @@
 					</select>
 				</div>
 				<div class="copy-font w-100">
-					<span class="ml-2">지역 선택: </span> <select id="area" name="area"
+					<span class="ml-2">지역 선택: </span>
+					 <select id="area" name="area"
 						class="content-foot-box ml-4 text-center">
 						<option value="강원도" >강원도</option>
 						<option value="광주광역시">광주광역시</option>
@@ -98,9 +101,10 @@
 		</form>
 	</div>
 
-
 </div>
-
+</c:if>
+ 
+ 
 <script>
 	$(document).ready(function() {
 		

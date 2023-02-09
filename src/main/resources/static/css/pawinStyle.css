@@ -47,6 +47,11 @@ textarea {
 	border-left: 0.5px solid lightgray;
 }
 
+.list-box {
+	border: 0.5px solid lightgray;
+}
+
+
 header {
 	width: 1280px;
 	margin: 400px;
@@ -75,11 +80,28 @@ header {
 	
 }
 
+.contents-box {
+	height:auto;
+}
+
+.contents-parent-box {
+	gap:50px 10px; padding:10px;
+} /* 상자 사이 간격   상하 5px/좌우 10px */
+
+.titleSearch{
+	 margin-left:80px;
+	 border-radius: 10px;
+}
+
 .content-foot-box {
 	border: 0.2px solid lightgray;
 	border-radius: 10px;
 	width: 150px;
 	height: 50px;
+}
+
+.header-btn {
+	border-radius: 10px;
 }
 
 .login {
