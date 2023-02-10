@@ -11,6 +11,8 @@ import com.pawin.common.FileManagerService;
 import com.pawin.post.dao.PostImageDAO;
 import com.pawin.post.model.ImagePath;
 import com.pawin.post.model.ImagePathView;
+import com.pawin.user.bo.UserBO;
+import com.pawin.user.model.User;
 @Service
 public class PostImageBO {
 
@@ -20,13 +22,16 @@ public class PostImageBO {
 	@Autowired
 	private FileManagerService fileManagerService;
 	
+	@Autowired
+	private UserBO userBO;
+	
 	
 	public List<ImagePath> getImagePathListByPostId(int postId) {
 		// 글번호에 해당 되는 id만 가져온다.
 		return postImageDAO.selectImagePathListByPostId(postId);
 	}
 	
-	public List<ImagePath> getIamgePath(){
+	public List<ImagePath> getIamgePathList(){
 		return postImageDAO.selectIamgePath();
 	}
 	
@@ -55,11 +60,15 @@ public class PostImageBO {
 		List<ImagePathView> imagePathViewList = new ArrayList<>();
 		
 		// 글 목록 가져오기
-		List<ImagePath> imagePathList = getIamgePath();
+		List<ImagePath> imagePathList = getImagePathListByPostId(postId);
 		// imagePathView 넣기
-		for (int i = 0; i < imagePathList.size(); i++) {
+		for (ImagePath imagepath : imagePathList) {
 			ImagePathView imagePathView = new ImagePathView();
-			imagePathView.setImagePath(imagePathList.get(i));
+			
+			imagePathView.setImagePaths(imagepath);
+			
+			User user = userBO.getUserById(imagepath.getUserId());
+			imagePathView.setUser(user);
 			
 			// 결과물에 넣기
 			imagePathViewList.add(imagePathView);
