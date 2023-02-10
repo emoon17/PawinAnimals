@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import com.pawin.post.model.ImagePath;
 import com.pawin.post.model.Post;
 @Repository
 public interface PostDAO {
@@ -15,6 +16,8 @@ public interface PostDAO {
 	public void insertPost(Post post);
 	
 	public List<Post> selectPostList();
+	
+	
 	
 
 }

@@ -1,5 +1,6 @@
 package com.pawin.post.bo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.pawin.common.FileManagerService;
 import com.pawin.post.dao.PostImageDAO;
+import com.pawin.post.model.ImagePath;
+import com.pawin.post.model.ImagePathView;
 @Service
 public class PostImageBO {
 
@@ -16,6 +19,17 @@ public class PostImageBO {
 	
 	@Autowired
 	private FileManagerService fileManagerService;
+	
+	
+	public List<ImagePath> getImagePathListByPostId(int postId) {
+		// 글번호에 해당 되는 id만 가져온다.
+		return postImageDAO.selectImagePathListByPostId(postId);
+	}
+	
+	public List<ImagePath> getIamgePath(){
+		return postImageDAO.selectIamgePath();
+	}
+	
 	
 	public void addPost(List<MultipartFile> files, int userId, String loginId, int postId) {
 		
@@ -34,5 +48,30 @@ public class PostImageBO {
 		}
 	}
 	
-	//public List<ImagePath> getImagePathById
+
+	public List<ImagePathView> generateImagePathViewLsitByPostId(int postId){
+		
+		// 결과물을 담을 객체
+		List<ImagePathView> imagePathViewList = new ArrayList<>();
+		
+		// 글 목록 가져오기
+		List<ImagePath> imagePathList = getIamgePath();
+		// imagePathView 넣기
+		for (int i = 0; i < imagePathList.size(); i++) {
+			ImagePathView imagePathView = new ImagePathView();
+			imagePathView.setImagePath(imagePathList.get(i));
+			
+			// 결과물에 넣기
+			imagePathViewList.add(imagePathView);
+			
+		}
+		
+		// 결과물 리턴
+		return imagePathViewList;
+	}
+	
+	
+		
+		
+		
 }

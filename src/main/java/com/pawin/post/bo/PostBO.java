@@ -8,10 +8,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.pawin.post.dao.PostDAO;
+import com.pawin.post.model.ImagePath;
+import com.pawin.post.model.ImagePathView;
 import com.pawin.post.model.Post;
 import com.pawin.post.model.PostView;
 import com.pawin.user.bo.UserBO;
-import com.pawin.user.model.User;
 
 @Service
 public class PostBO {
@@ -25,6 +26,7 @@ public class PostBO {
 	 @Autowired
 	 private UserBO userBO;
 	 
+	 @Autowired
 	 
 	 
 	 
@@ -44,7 +46,7 @@ public class PostBO {
 		postImageBO.addPost(files, userId, post.getStatus(), post.getId());
 	}
 	
-	public List<PostView> generatePostList(Integer userId){
+	public List<PostView> generatePostList(Integer userId ){
 		
 		List<PostView> postViewList = new ArrayList<>();
 		
@@ -59,21 +61,8 @@ public class PostBO {
 			// 글
 			postView.setPost(postsList.get(i));
 			// 이미지 파일들 첫장만 꺼내기
-			//ImagePath imagPath = 
-			//글쓴이
-			User user = userBO.getUserById(postsList.get(i).getUserId());
-			postView.setUser(user);
-			// 글 하나에 해당하는 댓글들
-			
-			// 내가 좋아요를 눌렀는지
-			
-			// 글에 눌린 좋아요 갯수
-			
-			// 좋아요를 누른 사람들 
-			
-			// 어답 누른 갯수
-			
-			// 어답 누른 사람들
+			List<ImagePathView> imagePathList = postImageBO.generateImagePathViewLsitByPostId(postsList.get(i).getId());
+			postView.setImagePathList(imagePathList);
 			
 			//3) postviewList에 넣기
 			postViewList.add(postView);
@@ -81,4 +70,6 @@ public class PostBO {
 		
 		return postViewList;
 	}
+
+	
 }

@@ -18,5 +18,28 @@
  			, NOW()
  		)
  	</insert>
+ 	<select	id="selectImagePathListByPostId" resultType="com.pawin.post.model.ImagePath">
+ 		SELECT
+	 		`id`
+			,`userId`
+			,`postId`
+			,`imagePath`
+			,`createdAt`
+		FROM
+			`imagepath`
+		WHERE
+			`postId` = #{postId}
+ 	</select>
+ 	
+ 	<select id="selectIamgePath" resultType="com.pawin.post.model.ImagePath">
+ 		SELECT
+	 		`id`
+			,`userId`
+			,`postId`
+			,`imagePath`
+			,`createdAt`
+		FROM
+			`imagepath`
+ 	</select>
  
  </mapper>
