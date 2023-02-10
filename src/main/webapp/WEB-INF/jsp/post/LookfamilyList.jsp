@@ -51,21 +51,21 @@
 	<div class="line"></div>
 	
 	<!-- 글 목록 -->
+		<c:forEach var='posts' items='${postList}' varStatus="status" > <!--  var="imagePathView" items="${postView.imagePathList}"  imagePathView.imagePath.imagePath-->
 	<div class="contents-box ">
 		<div class="contents-parent-box d-flex flex-wrap justify-content-between">
-		<c:forEach var="postView" items="${postList}" varStatus="status" > <!--  var="imagePathView" items="${postView.imagePathList}"  imagePathView.imagePath.imagePath-->
-			
 			<article class="post-box">
-                <img src="${postView.imagePathList.imagePath}" alt="이미지" width="300" height="300" class="list-box"> 
-                	<div>${status.count}</div>
-                    <div class="copy-font ml-3 font-weight-bold">제목 : <span class="ml-3"> ${postView.post.title}</span> </div>
-                	<div class="copy-font ml-3 font-weight-bold">상황 : <span class="ml-3">${postView.post.status}</span></div>
-                    <div class="copy-font ml-3 font-weight-bold">동물 종: <span class="ml-3">${postView.post.animals}</span></div>
-                    <div class="copy-font ml-3 font-weight-bold">상황 : <span class="ml-3">${postView.post.area}</span></div>
-            </article>
-           
-       	</c:forEach>
-		</div>
 		
+                <img src="${posts.imagePathList.imagePaths.imagePath}" alt="이미지" width="300" height="300" class="list-box"> 
+                	
+                	<div>${posts.post.id}</div>
+                    <div class="copy-font ml-3 font-weight-bold">제목 : <span class="ml-3"> ${posts.post.title}</span> </div>
+                	<div class="copy-font ml-3 font-weight-bold">상황 : <span class="ml-3">${posts.post.status}</span></div>
+                    <div class="copy-font ml-3 font-weight-bold">동물 종: <span class="ml-3">${posts.post.animals}</span></div>
+                    <div class="copy-font ml-3 font-weight-bold">상황 : <span class="ml-3">${posts.post.area}</span></div>
+           
+            </article>
+		</div>
 	</div>
+           </c:forEach>
 </div>
