@@ -6,7 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-import com.pawin.post.model.ImagePath;
+import com.pawin.post.model.Keyword;
 import com.pawin.post.model.Post;
 @Repository
 public interface PostDAO {
@@ -17,6 +17,11 @@ public interface PostDAO {
 	
 	public List<Post> selectPostList();
 	
+	public List<Keyword> selectKeywordListByTitleStatusAnimalsArea(
+			@Param("searchTitle") String searchTitle,
+			@Param("searchStatus") String searchStatus, 
+			@Param("searchAnimals") String searchAnimals,
+			@Param("searchArea") String searchArea);
 	
 	
 

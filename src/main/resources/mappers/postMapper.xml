@@ -25,6 +25,28 @@
 		ORDER BY `id` DESC 
  	</select>
  	
+ 	<select id="selectKeywordListByTitleStatusAnimalsArea" resultType="com.pawin.post.model.Post">
+ 		SELECT
+ 			`id`
+			,`userId`
+			,`title`
+			,`content`
+			,`animals`
+			,`status`
+			,`area`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`post`
+		WHERE
+			'title' like %#{searchTitle}%
+			AND
+			`status` = #{searchStatus}
+			AND
+			`animals` = #{searchAnimals}
+			AND
+			`area` = #{searchArea}
+ 	</select>
  
  	
  	<insert id="insertPost" parameterType="map" useGeneratedKeys="true" keyProperty="id">

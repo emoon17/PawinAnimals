@@ -43,29 +43,98 @@
 		</select>
 		
 		<input type="text" class="titleSearch form-control copy-font" id="title" placeholder="  제목을 입력하여주세요" style="height: 50px; width: 320px;">
-		
 		<button type="button" class="header-btn btn ml-3 copy-font" id="serachBtn" style="height: 50px; width: 70px;">검색</button>
 		<!-- 글 등록을 눌렀을 때 userId가 널인지 아닌지 확인 후 로그인 창으로 넘기거나, 로그인 되어있으면 글쓰기 화면으로 이동  -->
-		<a href="/post/look_for_family_create_view"><button type="button" class="header-btn btn ml-3 copy-font" style="height: 50px; width: 80px;" data-user-id="${user.id}">글 등록</button></a> 
+		
+		<c:if test="${not empty userId}">
+		<a href="/post/look_for_family_create_view"><button type="button"  class="header-btn btn ml-3 copy-font" style="height: 50px; width: 80px;" data-user-id="${userId}">글 등록</button></a>
+		</c:if>
+		<c:if test="${empty userId}">
+		<a href="/user/signIn_view"><button type="button" id="createBtn" class="header-btn btn ml-3 copy-font" style="height: 50px; width: 80px;" data-user-id="${userId}">글 등록</button></a>
+		</c:if>
+	
 	</div>
 	<div class="line"></div>
 	
 	<!-- 글 목록 -->
-		<c:forEach var='posts' items='${postList}' varStatus="status" > <!--  var="imagePathView" items="${postView.imagePathList}"  imagePathView.imagePath.imagePath-->
 	<div class="contents-box ">
 		<div class="contents-parent-box d-flex flex-wrap justify-content-between">
-			<article class="post-box">
-		
-                <img src="${posts.imagePathList.imagePaths.imagePath}" alt="이미지" width="300" height="300" class="list-box"> 
-                	
+		<c:forEach var='posts' items='${postList}' varStatus="status" > <!--  var="imagePathView" items="${postView.imagePathList}"  imagePathView.imagePath.imagePath-->
+			<article id="postBox" class="post-box">
+                <img src="${posts.imagePathList[0].imagePaths.imagePath}" alt="이미지" width="300" height="300" class="list-box"> 
                 	<div>${posts.post.id}</div>
                     <div class="copy-font ml-3 font-weight-bold">제목 : <span class="ml-3"> ${posts.post.title}</span> </div>
                 	<div class="copy-font ml-3 font-weight-bold">상황 : <span class="ml-3">${posts.post.status}</span></div>
                     <div class="copy-font ml-3 font-weight-bold">동물 종: <span class="ml-3">${posts.post.animals}</span></div>
-                    <div class="copy-font ml-3 font-weight-bold">상황 : <span class="ml-3">${posts.post.area}</span></div>
-           
+                    <div class="copy-font ml-3 font-weight-bold">지역 : <span class="ml-3">${posts.post.area}</span></div>
             </article>
+           </c:forEach>
 		</div>
 	</div>
-           </c:forEach>
 </div>
+
+<script>
+	$(document).ready(function() {
+		 // 글등록 버튼을 눌렀을 때
+		$('#createBtn').on('click', function(){
+			// 비로그인 시 로그인창으로 이동할 때
+			let userId = $(this).data('user-id');
+			//alert(userId);
+			if (userId == ''){
+				alert("로그인 후 사용 가능합니다.");
+				
+			} 
+		});
+		 
+		 // 검색 버튼을 눌렀을 때
+		 $('#serachBtn').on('click', function(){
+			   let searchTitle = $('#title').val();
+			   let searchStatus = $("#status option:selected").val();
+			   let searchAnimals = $("#animals option:selected").val();
+			   let searchArea = $("#area option:selected").val();
+			   //alert(searchTitle);
+			 //  alert(searchStatus);
+			   //alert(searchAnimals);
+			  // alert(searchArea);
+			
+			   
+			   // ajax
+			   $.ajax({
+				   //request
+				   type:'get'
+				   , url:'/post/search_list'
+				   , data:{
+					   "searchTitle":searchTitle,
+					   "searchStatus":searchStatus,
+					   "searchAnimals":searchAnimals,
+					   "searchArea":searchArea
+					   }
+				   
+				   //response
+				   , success:function(data){
+					   console.log(data);
+					  /*  if (data.code == 1){
+						   
+						   let res ="";
+						  for (let i = 0; i < data.length; i++){
+							  rew += 
+							  	"<article>" +
+				                + "<div>" + 제목  +"<span>" +  data[i].searchTitle + "</span> </div>"
+				                + "<div>" + 상황 + "<span>" + data[i].searchStatus + "</span></div>"
+				                + "<div>" + 동물종 +" <span>" + data[i].searchAnimals + "</span></div>"
+				                + "<div>" + 지역  + "<span>" +  data[i].searchArea + "</span></div>"
+				                + "</article>";
+			            $('#postBox').html(res);
+						  }
+					   } else {
+						   alsert(data.errorMessage);
+					   } */
+				   }
+				   ,error:function(e){
+					   alert("관리자에게 문의하여주세요")
+				   }
+				   
+			   });
+		 });
+	});
+</script>

@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.pawin.post.dao.PostDAO;
-import com.pawin.post.model.ImagePath;
 import com.pawin.post.model.ImagePathView;
+import com.pawin.post.model.Keyword;
 import com.pawin.post.model.Post;
 import com.pawin.post.model.PostView;
 import com.pawin.user.bo.UserBO;
@@ -46,6 +46,7 @@ public class PostBO {
 		postImageBO.addPost(files, userId, post.getStatus(), post.getId());
 	}
 	
+	// 글 목록 보여주기
 	public List<PostView> generatePostList(Integer userId ){
 		
 		List<PostView> postViewList = new ArrayList<>();
@@ -70,6 +71,38 @@ public class PostBO {
 		
 		return postViewList;
 	}
-
+	
+	// 글 검색하기
+	public List<Keyword> getKeywordListByTitleStatusAnimalsArea(String searchTitle, String searchStatus, String searchAnimals, String searchArea){
+		List<Keyword> keywordList = new ArrayList<>();
+		
+		List<Post> postList = getPostList();
+		
+		for (int i = 0; i < postList.size(); i++) {
+			Keyword keyword = new Keyword();
+			
+		
+			
+			String getTitle = postList.get(i).getTitle();
+			String getStatus = postList.get(i).getStatus();
+			String getAnimals = postList.get(i).getAnimals();
+			String getArea = postList.get(i).getArea();
+			if (getTitle == searchTitle) {
+				keyword.setSearchTitle(searchTitle);
+			}
+			if (getStatus == searchStatus){
+				keyword.setSearchStatus(searchStatus);
+			}
+			if (getAnimals == searchAnimals) {
+				keyword.setSearchAnimals(searchAnimals);
+			}
+			if (getAnimals == searchArea) {
+				keyword.setSearchAnimals(searchArea);
+			}
+			keywordList.add(keyword);
+		}
+		
+		return keywordList;
+	}
 	
 }
