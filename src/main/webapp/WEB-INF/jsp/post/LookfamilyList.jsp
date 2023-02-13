@@ -7,6 +7,7 @@
 		<select id="status" name="status"
 			class="content-foot-box ml-4 text-center copy-font"
 			style="height: 50px; width: 150px;">
+			<option value="">--</option>
 			<option value="목격">목격</option>
 			<option value="실종">실종</option>
 			<option value="찾음">찾음</option>
@@ -17,6 +18,7 @@
 		<select id="animals" name="animals"
 			class="content-foot-box ml-4 text-center copy-font"
 			style="height: 50px; width: 150px;">
+			<option value="">--</option>
 			<option value="고양이">고양이</option>
 			<option value="강아지">강아지</option>
 			<option value="기타">기타</option>
@@ -25,6 +27,7 @@
 		<select id="area" name="area"
 			class="content-foot-box ml-4 text-center copy-font"
 			style="height: 50px; width: 150px;">
+			<option value="">--</option>
 			<option value="강원도">강원도</option>
 			<option value="광주광역시">광주광역시</option>
 			<option value="경기도">경기도</option>
@@ -113,16 +116,28 @@
 				   //response
 				   , success:function(data){
 					   console.log(data);
-					   if (data.code == 1){
-			            $('#contentsBox').html(
-			            		
-			            );
-						  
-					   } else {
-						   alert(data.errorMessage);
+					   let html ="";
+					   for (let i = 0; i < data.length; i++){
+						   if (data[i] != null) {
+							   $('#contentsBox').html(""); 
+				            html += "<div>"
+			            		  "<div class='contents-parent-box d-flex flex-wrap justify-content-between'>"
+	            			"<article  class='post-box'>"
+	                            "<img src='${posts.imagePathList[0].imagePaths.imagePath}' alt='이미지' width='300' height='300' class='list-box'> "
+	                               "<div class='copy-font ml-3 font-weight-bold'>제목 : <span class='ml-3'> ${data[i].serachTitle}</span> </div>"
+	                            	"<div class='copy-font ml-3 font-weight-bold'>상황 : <span class='ml-3'>${data[i].serachStatus}</span></div>"
+	                              " <div class='copy-font ml-3 font-weight-bold'>동물 종: <span class='ml-3'>${data[i].serachAnimals}</span></div>"
+	                               " <div class='copy-font ml-3 font-weight-bold'>지역 : <span class='ml-3'>${data[i].serachArea}</span></div>"
+	                       " </article>"
+	            		"</div>"
+	            		"<div>"
+				            		 
+				            		$('#contentsBox').html(html);
+							   
+						   }
 					   }
-			        }
-				   
+			          
+				   }
 				   , error:function(e){
   					 alert(e);
   					}

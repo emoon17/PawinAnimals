@@ -39,14 +39,18 @@
 		FROM
 			`post`
 		WHERE
-			<if test="searchTitle != null">
-			'title' like CONCAT '%'||#{searchTitle}||'%'
+			`title` like '%'||#{searchTitle}||'%'
+			<if test="searchStatus != null">
+			AND`status` = #{searchStatus}
 			</if>
-			AND `status` = #{searchStatus}
+			<if test="searchAnimals != null">
 			AND `animals` = #{searchAnimals}
+			</if>
+			<if test="searchArea != null">
 			AND `area` = #{searchArea}
-			order by `id` 
-			limit 10;
+			</if>
+		ORDER BY `id` DESC
+			
  	</select>
  
  	
