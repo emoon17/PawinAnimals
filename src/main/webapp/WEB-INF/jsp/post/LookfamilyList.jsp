@@ -57,7 +57,7 @@
 	<div class="line"></div>
 	
 	<!-- 글 목록 -->
-	<div class="contents-box ">
+	<div id="contentsBox" class="contents-box ">
 		<div class="contents-parent-box d-flex flex-wrap justify-content-between">
 		<c:forEach var='posts' items='${postList}' varStatus="status" > <!--  var="imagePathView" items="${postView.imagePathList}"  imagePathView.imagePath.imagePath-->
 			<article id="postBox" class="post-box">
@@ -113,26 +113,19 @@
 				   //response
 				   , success:function(data){
 					   console.log(data);
-					  /*  if (data.code == 1){
-						   
-						   let res ="";
-						  for (let i = 0; i < data.length; i++){
-							  rew += 
-							  	"<article>" +
-				                + "<div>" + 제목  +"<span>" +  data[i].searchTitle + "</span> </div>"
-				                + "<div>" + 상황 + "<span>" + data[i].searchStatus + "</span></div>"
-				                + "<div>" + 동물종 +" <span>" + data[i].searchAnimals + "</span></div>"
-				                + "<div>" + 지역  + "<span>" +  data[i].searchArea + "</span></div>"
-				                + "</article>";
-			            $('#postBox').html(res);
-						  }
+					   if (data.code == 1){
+			            $('#contentsBox').html(
+			            		
+			            );
+						  
 					   } else {
-						   alsert(data.errorMessage);
-					   } */
-				   }
-				   ,error:function(e){
-					   alert("관리자에게 문의하여주세요")
-				   }
+						   alert(data.errorMessage);
+					   }
+			        }
+				   
+				   , error:function(e){
+  					 alert(e);
+  					}
 				   
 			   });
 		 });

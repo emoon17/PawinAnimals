@@ -39,13 +39,14 @@
 		FROM
 			`post`
 		WHERE
-			'title' like %#{searchTitle}%
-			AND
-			`status` = #{searchStatus}
-			AND
-			`animals` = #{searchAnimals}
-			AND
-			`area` = #{searchArea}
+			<if test="searchTitle != null">
+			'title' like CONCAT '%'||#{searchTitle}||'%'
+			</if>
+			AND `status` = #{searchStatus}
+			AND `animals` = #{searchAnimals}
+			AND `area` = #{searchArea}
+			order by `id` 
+			limit 10;
  	</select>
  
  	

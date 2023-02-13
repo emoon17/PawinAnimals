@@ -74,33 +74,37 @@ public class PostBO {
 	
 	// 글 검색하기
 	public List<Keyword> getKeywordListByTitleStatusAnimalsArea(String searchTitle, String searchStatus, String searchAnimals, String searchArea){
-		List<Keyword> keywordList = new ArrayList<>();
 		
+		List<Keyword> keywordList = new ArrayList<>();
+
 		List<Post> postList = getPostList();
 		
-		for (int i = 0; i < postList.size(); i++) {
+		for (Post post : postList) {
+			
 			Keyword keyword = new Keyword();
 			
-		
+			keyword.setPost(post);
 			
-			String getTitle = postList.get(i).getTitle();
-			String getStatus = postList.get(i).getStatus();
-			String getAnimals = postList.get(i).getAnimals();
-			String getArea = postList.get(i).getArea();
-			if (getTitle == searchTitle) {
+			if (keyword.getPost().getTitle() == post.getTitle()) {
 				keyword.setSearchTitle(searchTitle);
 			}
-			if (getStatus == searchStatus){
+			
+			if (keyword.getPost().getStatus() == post.getStatus()) {
 				keyword.setSearchStatus(searchStatus);
 			}
-			if (getAnimals == searchAnimals) {
+
+			if (keyword.getPost().getAnimals() == post.getAnimals()) {
 				keyword.setSearchAnimals(searchAnimals);
 			}
-			if (getAnimals == searchArea) {
-				keyword.setSearchAnimals(searchArea);
+
+			if (keyword.getPost().getArea() == post.getArea()) {
+				keyword.setSearchArea(searchArea);
 			}
+			
 			keywordList.add(keyword);
 		}
+		
+		
 		
 		return keywordList;
 	}

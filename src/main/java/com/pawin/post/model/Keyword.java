@@ -3,11 +3,11 @@ package com.pawin.post.model;
 public class Keyword {
 	
 	private Post post;
-	
 	private String searchTitle;
 	private String searchStatus;
 	private String searchAnimals;
 	private String searchArea;
+	
 	
 	public Post getPost() {
 		return post;
@@ -15,7 +15,6 @@ public class Keyword {
 	public void setPost(Post post) {
 		this.post = post;
 	}
-	
 	public String getSearchTitle() {
 		return searchTitle;
 	}
