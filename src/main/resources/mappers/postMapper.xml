@@ -39,7 +39,7 @@
 		FROM
 			`post`
 		WHERE
-			`title` like '%'||#{searchTitle}||'%'
+			`title` LIKE CONCAT('%', #{searchTitle}, '%')
 			<if test="searchStatus != null">
 			AND`status` = #{searchStatus}
 			</if>

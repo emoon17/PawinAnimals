@@ -84,7 +84,7 @@ public class PostRestController {
 		
 		
 		//select
-		List<Keyword> keywordList = postBO.getKeywordListByTitleStatusAnimalsArea(searchTitle, searchStatus, searchAnimals, searchArea); 
+		List<Keyword> keywordList = postBO.getKeywordListByTitleStatusAnimalsArea(searchTitle, searchStatus, searchAnimals, searchArea);
 		
 		
 		//map code 구분

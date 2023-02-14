@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.pawin.post.dao.PostDAO;
+import com.pawin.post.model.ImagePath;
 import com.pawin.post.model.ImagePathView;
 import com.pawin.post.model.Keyword;
 import com.pawin.post.model.Post;
@@ -75,36 +76,38 @@ public class PostBO {
 
 		List<Keyword> keywordList = new ArrayList<>();
 
+		// 글 목록 가져오기(post)
 		List<Post> postList = getPostList();
 
 		for (Post post : postList) {
-
 			Keyword keyword = new Keyword();
+			// 서치 내용 가져오기
 
 			keyword.setPost(post);
-
-			if (post.getTitle().contains(searchTitle) && post.getStatus().contains(searchStatus) 
-					&& post.getAnimals().contains(searchAnimals) && post.getArea().contains(searchArea)) {
+			if (post.getTitle().contains(searchTitle) ) {
+				
 				keyword.setSearchTitle(post.getTitle());
-				keyword.setSearchStatus(post.getStatus());
+			
+				keywordList.add(keyword);
+				
+			} 
+			if (post.getStatus() == searchTitle || post.getAnimals() == searchAnimals || post.getArea() == searchArea
+					|| post.getArea() == searchArea) {
+				keyword.setSearchAnimals(post.getStatus());
 				keyword.setSearchAnimals(post.getAnimals());
 				keyword.setSearchArea(post.getArea());
+				
+				/*
+				 * List<ImagePathView> imagePathList =
+				 * postImageBO.generateImagePathViewLsitByPostId(post.getId());
+				 * keyword.setImagePathView(imagePathList);
+				 */
+				keywordList.add(keyword);
+				
 			}
 
-		/*	if (post.getStatus().contains(searchStatus) ) {
-				keyword.setSearchStatus(post.getStatus());
-			}
-			
-			if (post.getAnimals().contains(searchAnimals)) {
-				keyword.setSearchAnimals(post.getAnimals());
-			}
-			
-			if (post.getArea().contains(searchArea)) {
-				keyword.setSearchArea(post.getArea());
-			}*/
-			 
-			keywordList.add(keyword);
-			
+
+
 		}
 
 		return keywordList;
