@@ -75,29 +75,6 @@ public class PostRestController {
 		return result;
 	}
 	
-	@GetMapping("/search_list")
-	public Map<String, Object> searchList(
-			@RequestParam(value="searchTitle", required=false) String searchTitle,
-			@RequestParam("searchStatus") String searchStatus,
-			@RequestParam("searchAnimals") String searchAnimals,
-			@RequestParam("searchArea") String searchArea) throws JsonProcessingException{
-		
-		
-		//select
-		List<Keyword> keywordList = postBO.getKeywordListByTitleStatusAnimalsArea(searchTitle, searchStatus, searchAnimals, searchArea);
-		
-		
-		//map code 구분
-		Map<String, Object> result = new HashMap<>();
-		if (keywordList != null) {
-			result.put("keywordList", keywordList);
-		} else {
-			result.put("errorMessage", "검색중 오류가 발생했습니다.");
-		}
-		
-		// 응답
-		return result;
-		
-	}
+	
 
 }

@@ -7,7 +7,7 @@
 		<select id="status" name="status"
 			class="content-foot-box ml-4 text-center copy-font"
 			style="height: 50px; width: 150px;">
-			<option value="">--</option>
+			<option value="">상태</option>
 			<option value="목격">목격</option>
 			<option value="실종">실종</option>
 			<option value="찾음">찾음</option>
@@ -16,14 +16,14 @@
 		</select> <select id="animals" name="animals"
 			class="content-foot-box ml-4 text-center copy-font"
 			style="height: 50px; width: 150px;">
-			<option value="">--</option>
+			<option value="">동물 종</option>
 			<option value="고양이">고양이</option>
 			<option value="강아지">강아지</option>
 			<option value="기타">기타</option>
 		</select> <select id="area" name="area"
 			class="content-foot-box ml-4 text-center copy-font"
 			style="height: 50px; width: 150px;">
-			<option value="">--</option>
+			<option value="">지역</option>
 			<option value="강원도">강원도</option>
 			<option value="광주광역시">광주광역시</option>
 			<option value="경기도">경기도</option>
@@ -113,12 +113,13 @@
 			//  alert(searchStatus);
 			//alert(searchAnimals);
 			// alert(searchArea);
+		
 
 			// ajax
 			$.ajax({
 				//request
 				type : 'get',
-				url : '/post/search_list',
+				url : '/post/search_list_view',
 				data : {
 					"searchTitle" : searchTitle,
 					"searchStatus" : searchStatus,
@@ -131,7 +132,7 @@
 				success : function(data) {
 					console.log(data);
 					
-					//$('div').html(data);
+					$('body').html(data);
 
 				},
 				error : function(e) {

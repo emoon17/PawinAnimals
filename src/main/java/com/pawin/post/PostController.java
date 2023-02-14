@@ -1,14 +1,19 @@
 package com.pawin.post;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.pawin.post.bo.PostBO;
+import com.pawin.post.model.Keyword;
 import com.pawin.post.model.PostView;
 
 import jakarta.servlet.http.HttpSession;
@@ -50,7 +55,24 @@ public class PostController {
 		return "template/layout";
 	}
 	
-	
+	@GetMapping("/search_list_view")
+	public String searchList(
+			@RequestParam(value="searchTitle", required=false) String searchTitle,
+			@RequestParam("searchStatus") String searchStatus,
+			@RequestParam("searchAnimals") String searchAnimals,
+			@RequestParam("searchArea") String searchArea,
+			Model model){
+		
+		
+		//select
+		List<Keyword> keywordList = postBO.getKeywordListByTitleStatusAnimalsArea(searchTitle, searchStatus, searchAnimals, searchArea);
+		
+		// 응답
+		model.addAttribute("keywordList", keywordList);
+		model.addAttribute("veiwName", "post/LookfamilyListSearch");
+		return "template/layout";
+		
+	}
 	
 	
 }

@@ -84,29 +84,23 @@ public class PostBO {
 			// 서치 내용 가져오기
 
 			keyword.setPost(post);
-			if (post.getTitle().contains(searchTitle) ) {
-				
+			if (post.getTitle().contains(searchTitle) || post.getStatus().equals(searchStatus)
+					&& post.getAnimals().equals(searchAnimals) && post.getArea().equals(searchArea)) {
+
 				keyword.setSearchTitle(post.getTitle());
-			
-				keywordList.add(keyword);
-				
-			} 
-			if (post.getStatus() == searchTitle || post.getAnimals() == searchAnimals || post.getArea() == searchArea
-					|| post.getArea() == searchArea) {
-				keyword.setSearchAnimals(post.getStatus());
+				keyword.setSearchStatus(post.getStatus());
 				keyword.setSearchAnimals(post.getAnimals());
 				keyword.setSearchArea(post.getArea());
-				
-				/*
-				 * List<ImagePathView> imagePathList =
-				 * postImageBO.generateImagePathViewLsitByPostId(post.getId());
-				 * keyword.setImagePathView(imagePathList);
-				 */
 				keywordList.add(keyword);
-				
+				List<ImagePathView> imagePathList = postImageBO.generateImagePathViewLsitByPostId(post.getId());
+				keyword.setImagePathView(imagePathList);
+
 			}
 
-
+			/*
+			 * 
+			 * L
+			 */
 
 		}
 
