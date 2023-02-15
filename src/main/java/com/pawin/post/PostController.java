@@ -66,8 +66,7 @@ public class PostController {
 		
 		// 응답
 		model.addAttribute("keywordList", keywordList);
-		model.addAttribute("veiwName", "post/LookfamilyListSearch");
-		return "template/layout";
+		return "post/LookfamilyListSearch";
 		
 	}
 	

@@ -34,31 +34,28 @@ public class PostBO {
 	}
 
 	public List<PostView> getPostByPostIdUserId(int postId, Integer userId) {
-		
+
 		List<PostView> postViewList = new ArrayList<>();
 		// 글 목록 가져오기(post)
 		List<Post> postList = getPostList();
 
 		// 1)postview 리스트를 글 하나하나 뽑는 반복문 만들기
 		for (int i = 0; i < postList.size(); i++) {
-			
+
 			PostView postView = new PostView();
 			// 2) postview세팅
-			if (postList.get(i).getId() == postId ) {
+			if (postList.get(i).getId() == postId) {
 				postView.setPost(postList.get(i));
-				//이미지
-				List<ImagePathView> imagePathList = postImageBO.generateImagePathViewLsitByPostId(postList.get(i).getId());
+				// 이미지
+				List<ImagePathView> imagePathList = postImageBO
+						.generateImagePathViewLsitByPostId(postList.get(i).getId());
 				postView.setImagePathList(imagePathList);
-				
-			
+
 				User user = userBO.getUserById(postList.get(i).getUserId());
 				postView.setUser(user);
-				
-				postViewList.add(postView);
-				
-				
-			}
 
+				postViewList.add(postView);
+			}
 		}
 		return postViewList;
 
@@ -107,29 +104,45 @@ public class PostBO {
 
 		List<Keyword> keywordList = new ArrayList<>();
 
+		postDAO.selectKeywordListByTitleStatusAnimalsArea(searchTitle, searchStatus, searchAnimals, searchArea);
 		// 글 목록 가져오기(post)
 		List<Post> postList = getPostList();
-
 		for (Post post : postList) {
 			Keyword keyword = new Keyword();
 			// 서치 내용 가져오기
 
 			keyword.setPost(post);
-			if (post.getTitle().contains(searchTitle) || post.getStatus().equals(searchStatus)
-					&& post.getAnimals().equals(searchAnimals) && post.getArea().equals(searchArea)) {
+			if (post.getTitle().contains(searchTitle) && post.getStatus().equals(searchStatus)) {
 
 				keyword.setSearchTitle(post.getTitle());
 				keyword.setSearchStatus(post.getStatus());
 				keyword.setSearchAnimals(post.getAnimals());
 				keyword.setSearchArea(post.getArea());
-				keywordList.add(keyword);
 				List<ImagePathView> imagePathList = postImageBO.generateImagePathViewLsitByPostId(post.getId());
 				keyword.setImagePathView(imagePathList);
+				keywordList.add(keyword);
 
+			} else if (post.getTitle().contains(searchTitle) && post.getAnimals().equals(searchAnimals)) {
+				keyword.setSearchTitle(post.getTitle());
+				keyword.setSearchStatus(post.getStatus());
+				keyword.setSearchAnimals(post.getAnimals());
+				keyword.setSearchArea(post.getArea());
+				List<ImagePathView> imagePathList = postImageBO.generateImagePathViewLsitByPostId(post.getId());
+				keyword.setImagePathView(imagePathList);
+				keywordList.add(keyword);
+			} else if (post.getTitle().contains(searchTitle) && post.getArea().equals(searchArea)) {
+				keyword.setSearchTitle(post.getTitle());
+				keyword.setSearchStatus(post.getStatus());
+				keyword.setSearchAnimals(post.getAnimals());
+				keyword.setSearchArea(post.getArea());
+				List<ImagePathView> imagePathList = postImageBO.generateImagePathViewLsitByPostId(post.getId());
+				keyword.setImagePathView(imagePathList);
+				keywordList.add(keyword);
 			}
+			
+			
 
 		}
-
 		return keywordList;
 	}
 

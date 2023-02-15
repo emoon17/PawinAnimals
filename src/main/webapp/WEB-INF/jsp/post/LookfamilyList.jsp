@@ -61,7 +61,7 @@
 
 	</div>
 	<div class="line"></div>
-
+	
 	<!-- 글 목록 -->
 	<div id="contentsBox" class="contents-box ">
 		<div
@@ -134,7 +134,7 @@
 				success : function(data) {
 					console.log(data);
 					
-					$('body').html(data);
+					$('#contentsBox').html(data);
 
 				},
 				error : function(e) {

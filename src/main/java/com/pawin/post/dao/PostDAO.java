@@ -11,8 +11,12 @@ import com.pawin.post.model.Post;
 import com.pawin.post.model.PostView;
 @Repository
 public interface PostDAO {
-    //test용
+    
+	
+	//test용
 	public List<Map<String, Object>> selectPostListTest();
+	
+	
 	
 	public void insertPost(Post post);
 	
