@@ -8,12 +8,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.pawin.post.dao.PostDAO;
-import com.pawin.post.model.ImagePath;
 import com.pawin.post.model.ImagePathView;
 import com.pawin.post.model.Keyword;
 import com.pawin.post.model.Post;
 import com.pawin.post.model.PostView;
 import com.pawin.user.bo.UserBO;
+import com.pawin.user.model.User;
 
 @Service
 public class PostBO {
@@ -31,6 +31,37 @@ public class PostBO {
 
 	public List<Post> getPostList() {
 		return postDAO.selectPostList();
+	}
+
+	public List<PostView> getPostByPostIdUserId(int postId, Integer userId) {
+		
+		List<PostView> postViewList = new ArrayList<>();
+		// 글 목록 가져오기(post)
+		List<Post> postList = getPostList();
+
+		// 1)postview 리스트를 글 하나하나 뽑는 반복문 만들기
+		for (int i = 0; i < postList.size(); i++) {
+			
+			PostView postView = new PostView();
+			// 2) postview세팅
+			if (postList.get(i).getId() == postId ) {
+				postView.setPost(postList.get(i));
+				//이미지
+				List<ImagePathView> imagePathList = postImageBO.generateImagePathViewLsitByPostId(postList.get(i).getId());
+				postView.setImagePathList(imagePathList);
+				
+			
+				User user = userBO.getUserById(postList.get(i).getUserId());
+				postView.setUser(user);
+				
+				postViewList.add(postView);
+				
+				
+			}
+
+		}
+		return postViewList;
+
 	}
 
 	// 글쓰기 insert
@@ -96,7 +127,6 @@ public class PostBO {
 				keyword.setImagePathView(imagePathList);
 
 			}
-
 
 		}
 

@@ -33,7 +33,7 @@
 	
 	<select id="selectUserByLoginIdPassword" parameterType="map" resultType="com.pawin.user.model.User">
 		SELECT
-			id
+			`id`
 			,`name`
 			, `loginId`
 			, `password`
@@ -47,9 +47,9 @@
 			AND
 			`password` = #{password}
 	</select>
-	<select id="insertUserById" parameterType="int" resultType="com.pawin.user.model.User">
+	<select id="selectUserById" parameterType="int" resultType="com.pawin.user.model.User">
 		SELECT
-			id
+			`id`
 			,`name`
 			, `loginId`
 			, `password`

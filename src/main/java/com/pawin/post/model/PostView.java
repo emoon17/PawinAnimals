@@ -17,6 +17,12 @@ public class PostView {
 	// 글쓴이
 	private User user;
 	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	public Post getPost() {
 		return post;
 	}
@@ -24,12 +30,6 @@ public class PostView {
 		this.post = post;
 	}
 
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
 	public List<ImagePathView> getImagePathList() {
 		return imagePathList;
 	}

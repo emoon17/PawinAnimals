@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.pawin.post.model.Keyword;
 import com.pawin.post.model.Post;
+import com.pawin.post.model.PostView;
 @Repository
 public interface PostDAO {
     //test용
@@ -23,6 +24,8 @@ public interface PostDAO {
 			@Param("searchAnimals") String searchAnimals,
 			@Param("searchArea") String searchArea);
 	
-	
+	public List<PostView> selectPostByPostIdUserId(
+			@Param("postId") int postId,
+			@Param("userId") Integer userId);
 
 }

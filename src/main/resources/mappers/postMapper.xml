@@ -8,6 +8,24 @@
  		FROM
  			`post`
  	</select>
+ 	<select id="selectPostByPostIdUserId" resultType="com.pawin.post.model.Post" parameterType="map">
+ 		SELECT
+ 			`id`
+			,`userId`
+			,`title`
+			,`content`
+			,`animals`
+			,`status`
+			,`area`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`post`
+		WHERE
+			`userId` = #{userId}
+			AND
+			`id` = #{postId}
+ 	</select>
  	
  	<select id="selectPostList"  resultType="com.pawin.post.model.Post">
  		SELECT

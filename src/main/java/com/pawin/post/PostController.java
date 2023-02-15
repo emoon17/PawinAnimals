@@ -1,8 +1,6 @@
 package com.pawin.post;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.pawin.post.bo.PostBO;
 import com.pawin.post.model.Keyword;
 import com.pawin.post.model.PostView;
@@ -71,6 +68,26 @@ public class PostController {
 		model.addAttribute("keywordList", keywordList);
 		model.addAttribute("veiwName", "post/LookfamilyListSearch");
 		return "template/layout";
+		
+	}
+	
+	@GetMapping("/look_for_family_detail_view")
+	public String familyDetailView(
+			@RequestParam("postId") int postId,
+			Model model,
+			HttpSession session) {
+		
+		// 세션에서 userId가져오기- 수정하기 전까진 로그인 안 된 사람도 볼 수 있음 
+		Integer userId = (Integer)session.getAttribute("userId");
+		
+		
+		// 로그인 되어있는 사람- 1. DB select -userId, postId
+		List<PostView> postViewList = postBO.getPostByPostIdUserId(postId, userId);
+		model.addAttribute("postView", postViewList);
+		// 화면 이동
+		model.addAttribute("veiwName", "post/LookFamilyDetail");
+		return "template/layout";
+		
 		
 	}
 	
