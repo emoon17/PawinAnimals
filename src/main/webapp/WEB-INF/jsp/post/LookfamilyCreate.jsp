@@ -20,7 +20,7 @@
 					<%-- file 태그는 숨겨두고 이미지를 클릭하면 file 태그를 클릭한 것처럼 이벤트를 줄 것이다. --%>
 
 
-					<input type="file" id="file" name="file1" class="d-none"
+					<input type="file" id="file" name="file" class="d-none"
 						accept=".gif, .jpg, .png, .jpeg" multiple="multiple">
 
 
@@ -136,7 +136,7 @@
 				alert("파일 형식에 맞지 않습니다. \n가능 파일: jpg, jepg, gif, png ");
 				// 인풋 파일 제거 , 파일 이름 비우기
 				$('#file').val(''); //인풋파일 제거
-				$('#fileName').text('');
+				$('#fileName1').text('');
 				
 			}
 		
@@ -152,11 +152,13 @@
 					
 			 } 
 			 let file = $('#file').val();
+			
 			 if (textFileList.length > 3) {
 				alert("이미지는 최대 3개까지 업로드 가능합니다.");
 				$('#fileName1').text(''); // 세개 이상 추가 시 없애버림
-				$('#file').val('');
-				//alert(file);
+				
+				$('#file').val(''); //인풋파일 제거
+				alert(file);
 				textFileList.length = 0;
 				return;
 			 }	

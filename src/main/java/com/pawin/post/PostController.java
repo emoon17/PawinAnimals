@@ -52,6 +52,15 @@ public class PostController {
 		return "template/layout";
 	}
 	
+	/**
+	 * 목록 서치
+	 * @param searchTitle
+	 * @param searchStatus
+	 * @param searchAnimals
+	 * @param searchArea
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/search_list_view")
 	public String searchList(
 			@RequestParam(value="searchTitle", required=false) String searchTitle,
@@ -69,6 +78,7 @@ public class PostController {
 		return "post/LookfamilyListSearch";
 		
 	}
+	
 	
 	@GetMapping("/look_for_family_detail_view")
 	public String familyDetailView(

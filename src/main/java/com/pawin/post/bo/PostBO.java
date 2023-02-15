@@ -110,38 +110,18 @@ public class PostBO {
 		for (Post post : postList) {
 			Keyword keyword = new Keyword();
 			// 서치 내용 가져오기
-
 			keyword.setPost(post);
-			if (post.getTitle().contains(searchTitle) && post.getStatus().equals(searchStatus)) {
-
-				keyword.setSearchTitle(post.getTitle());
-				keyword.setSearchStatus(post.getStatus());
-				keyword.setSearchAnimals(post.getAnimals());
-				keyword.setSearchArea(post.getArea());
-				List<ImagePathView> imagePathList = postImageBO.generateImagePathViewLsitByPostId(post.getId());
-				keyword.setImagePathView(imagePathList);
-				keywordList.add(keyword);
-
-			} else if (post.getTitle().contains(searchTitle) && post.getAnimals().equals(searchAnimals)) {
-				keyword.setSearchTitle(post.getTitle());
-				keyword.setSearchStatus(post.getStatus());
-				keyword.setSearchAnimals(post.getAnimals());
-				keyword.setSearchArea(post.getArea());
-				List<ImagePathView> imagePathList = postImageBO.generateImagePathViewLsitByPostId(post.getId());
-				keyword.setImagePathView(imagePathList);
-				keywordList.add(keyword);
-			} else if (post.getTitle().contains(searchTitle) && post.getArea().equals(searchArea)) {
-				keyword.setSearchTitle(post.getTitle());
-				keyword.setSearchStatus(post.getStatus());
-				keyword.setSearchAnimals(post.getAnimals());
-				keyword.setSearchArea(post.getArea());
-				List<ImagePathView> imagePathList = postImageBO.generateImagePathViewLsitByPostId(post.getId());
-				keyword.setImagePathView(imagePathList);
-				keywordList.add(keyword);
-			}
 			
-			
+			if (post.getTitle().contains(searchTitle) && post.getStatus().equals(searchStatus) && post.getAnimals().equals(searchAnimals) && post.getArea().equals(searchArea) ) {
 
+				keyword.setSearchTitle(post.getTitle());
+				keyword.setSearchStatus(post.getStatus());
+				keyword.setSearchAnimals(post.getAnimals());
+				keyword.setSearchArea(post.getArea());
+				List<ImagePathView> imagePathList = postImageBO.generateImagePathViewLsitByPostId(post.getId());
+				keyword.setImagePathView(imagePathList);
+				keywordList.add(keyword);
+			} 
 		}
 		return keywordList;
 	}
