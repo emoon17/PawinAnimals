@@ -135,7 +135,7 @@
 			if (ext != 'jpg' && ext != 'jepg' && ext != 'gif' && ext != 'png') {
 				alert("파일 형식에 맞지 않습니다. \n가능 파일: jpg, jepg, gif, png ");
 				// 인풋 파일 제거 , 파일 이름 비우기
-				$('#file').val(''); //인풋파일 제거
+				files.clear(); //인풋파일 제거
 				$('#fileName1').text('');
 				
 			}
@@ -151,17 +151,19 @@
 				$('#fileName1').text(textFileList);// 배열에서 파일 이름을 꺼내서 보여준다.
 					
 			 } 
-			 let file = $('#file').val();
+			 
 			
 			 if (textFileList.length > 3) {
 				alert("이미지는 최대 3개까지 업로드 가능합니다.");
 				$('#fileName1').text(''); // 세개 이상 추가 시 없애버림
-				
-				$('#file').val(''); //인풋파일 제거
-				alert(file);
+				files = null;
 				textFileList.length = 0;
+				inputFileList.length = 0;
+				$('#file').val(''); //인풋파일 제거
 				return;
 			 }	
+			 
+				
 		});
 		
 		$('#writeTitle').keyup(function() {
@@ -170,6 +172,7 @@
 			if (writeTitle.length > 15) {
 				alert("제목은 15글자를 초과할 수 없습니다.");
 				$('#writeTitle').val('');
+				
 			} 
 			
 		});
@@ -182,6 +185,7 @@
 		   //alert(writeTitle);
 		   let writeArea =  $('#writeArea').val();
 		   let file = $('#file').val();
+		   alert(file);
 		   let userId = $('.create-box').data('user-id');
 		   let status = $("#status option:selected").val();
 		   let animals = $("#animals option:selected").val();

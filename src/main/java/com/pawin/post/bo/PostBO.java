@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.pawin.comment.bo.CommentBO;
+import com.pawin.comment.model.CommentView;
 import com.pawin.post.dao.PostDAO;
 import com.pawin.post.model.ImagePathView;
 import com.pawin.post.model.Keyword;
@@ -28,11 +30,13 @@ public class PostBO {
 	private UserBO userBO;
 
 	@Autowired
-
+	private CommentBO commentBO;
+	
 	public List<Post> getPostList() {
 		return postDAO.selectPostList();
 	}
 
+	// 글 디테일 내용
 	public List<PostView> getPostByPostIdUserId(int postId, Integer userId) {
 
 		List<PostView> postViewList = new ArrayList<>();
@@ -47,13 +51,20 @@ public class PostBO {
 			if (postList.get(i).getId() == postId) {
 				postView.setPost(postList.get(i));
 				// 이미지
-				List<ImagePathView> imagePathList = postImageBO
-						.generateImagePathViewLsitByPostId(postList.get(i).getId());
+				List<ImagePathView> imagePathList = postImageBO.generateImagePathViewLsitByPostId(postList.get(i).getId());
 				postView.setImagePathList(imagePathList);
-
+				
+				//user
 				User user = userBO.getUserById(postList.get(i).getUserId());
 				postView.setUser(user);
-
+				
+				// 댓글
+				List<CommentView> commentViewList =commentBO.generateCommentList(postList.get(i).getId());
+				postView.setCommentViewList(commentViewList);
+				
+				// 좋아요
+				
+				// 입양
 				postViewList.add(postView);
 			}
 		}
