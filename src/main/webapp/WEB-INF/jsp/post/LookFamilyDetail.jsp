@@ -15,7 +15,7 @@
 		</div>
 
 		<%-- 제목 --%>
-		<div class="content-subject mb-2 ml-3">${postview.post.title}</div>
+		<div id="postTitle" class="content-subject mb-2 ml-3">${postview.post.title}</div>
 
 		<div class="line mb-5"></div>
 		<%--사진 이미지 --%>
@@ -53,9 +53,8 @@
 				<%-- 좋아요가 해제되어 있을 때 --%>
 				<c:if test="${postviews.filledLike eq false}">
 					<a href="#" class="likeAdopt-btn" data-user-id="${userId}"
-						data-post-id="${postview.post.id}"
-						data-likeadopt-type="like"> <img
-						src="/static/image/like-icon.png" width="30" height="30"
+						data-post-id="${postview.post.id}" data-likeadopt-type="like">
+						<img src="/static/image/like-icon.png" width="30" height="30"
 						alt="empty heart">
 					</a>
 				</c:if>
@@ -72,12 +71,7 @@
 					${postviews.Count}명 </span>
 
 			</div>
-			<%-- 모달로 글 수정, 삭제하기 --%>
-			<%-- <c:if test="${userId eq d.user.id}"> --%>
-			<a href="#" class="more-btn write-area mt-3" data-toggle="modal"
-				data-target="#modal" data-post-id="${postviews.post.id}"> 수정|삭제
-			</a>
-			<%-- </c:if> --%>
+
 		</div>
 		<div class="line mb-3"></div>
 
@@ -108,8 +102,41 @@
 					data-post-id="${postview.post.id}">등록</button>
 			</div>
 		</c:if>
+		<%-- 모달로 글 수정, 삭제하기 --%>
+		<div class="d-flex justify-content-end">
+			<c:if test="${userId eq postview.user.id}">
+				<a href="#" class="more-btn write-area mt-5" data-toggle="modal"
+					data-target="#modal" data-post-id="${postview.post.id}"> 수정|삭제
+				</a>
+			</c:if>
+		</div>
 	</div>
 </c:forEach>
+
+<!-- Modal -->
+<div class="modal fade" id="modal">
+	<%--...을 눌렀을 때 post-data-id를 모달에 심어놓을거다. --%>
+	<%-- modal sm: 작은 모달 창  --%>
+	<%-- modal centered: 모달 창 수직으로 가운데 정렬 --%>
+	<div class="modal-dialog modal-lg modal-dialog-centered">
+		<div class="modal-content text-center">
+			<%-- 수정하기 --%>
+			<div class="py-3 border-bottom">
+				<a href="#" id="updatePostBtn"
+					class="content-area font-weight-bold">수정하기</a>
+			</div>
+			<div class="py-3 border-bottom">
+				<a href="#" id="deletePostBtn" class="content-area font-weight-bold">삭제하기</a>
+			</div>
+			<%-- data-dismiss="modal"추가하면 모달 창 닫힘 --%>
+			<div class="py-3 " data-dismiss="modal">
+				<a href="#" class="content-area font-weight-bold">취소하기</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+
 <script>
 	$(document).ready(function() {
 
@@ -163,23 +190,64 @@
 			}
 			//ajax
 			$.ajax({
-				type : 'get'
-				, url : '/likeAdopt/' + postId
-				, data:{"userId":userId, "type":type}
+				type : 'get',
+				url : '/likeAdopt/' + postId,
+				data : {
+					"userId" : userId,
+					"type" : type
+				}
 				//success
-				, success : function(data) {
+				,
+				success : function(data) {
 					if (data.code == 1) {
 						location.reload(true);
 					} else {
 						alert("오류발생")
 					}
-				}
-				, error:function(e){
+				},
+				error : function(e) {
 					alert(e + "에러가 발생했습니다.");
 				}
 			});
 
 		}); // like-btn end
+		
+		// 글 수정 삭제를 위한 더보기 버튼(...) 클릭
+		$('.more-btn').on('click', function(e){
+			e.preventDefault();
+				
+			let postId = $(this).data('post-id'); //getting (태그에 있는 걸 얻어오는것)
+			//alert(postId);
+				
+			$('#modal').data('post-id', postId); // setting(모달 태그에 data-post-id를 심어놓는것)
+				
+				
+			});
+		
+		$('#modal #updatePostBtn').on('click', function(e) {
+			e.preventDefault();
+			//alert("d");
+			// 모달 post id 다시 가져오기
+			let postId = $('#modal').data('post-id');
+			alert(postId);
+
+			$.ajax({
+				// request
+				type:"get"
+				, url:'/post/update_view'
+				, data:{
+					"postId":postId
+				}
+				, success:function(data){
+					console.log(data);
+				}
+				, error:function(e){
+					alert(e);
+				}
+			});
+ 
+		}); // updatePostBtn
+
 	}); // document end
 </script>
 

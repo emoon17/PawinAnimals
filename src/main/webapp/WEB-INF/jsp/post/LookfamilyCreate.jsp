@@ -185,7 +185,7 @@
 		   //alert(writeTitle);
 		   let writeArea =  $('#writeArea').val();
 		   let file = $('#file').val();
-		   alert(file);
+		   //alert(file);
 		   let userId = $('.create-box').data('user-id');
 		   let status = $("#status option:selected").val();
 		   let animals = $("#animals option:selected").val();
