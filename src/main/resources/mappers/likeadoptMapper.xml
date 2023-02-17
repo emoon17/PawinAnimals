@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.pawin.likeadopt.dao.LikeadoptDAO">
+ 	<select id="selectLikeadoptCountByPostOrUserId" parameterType="map" resultType="int">
+ 		SELECT
+ 			COUNT(1)
+		FROM
+			`likeadopt`
+		WHERE
+		 	`postId` = #{postId}
+		 	<if test="userId != null">
+		 	AND `userId` = #{userId}
+		 	</if>
+		 	AND `type` = #{type}
+ 	</select>
+ 	
+ 	<delete id="deleteLikeadoptByPostIdUserId" parameterType="map">
+ 		DELETE
+ 		FROM
+ 		 `likeadopt`
+ 		WHERE
+ 			`postId` = #{postId}
+ 			AND `userId` = #{userId}
+ 			AND `type` = #{type}
+ 	</delete>
+ 	
+ 	<insert id="insertLikeadoptByPostIdUserId" parameterType="map">
+ 		INSERT INTO `likeadopt`
+ 		(
+ 			`userId`
+			,`postId`
+			,`loginId`
+			,`type`
+			,`createdAt`
+ 		)
+ 		VALUES
+ 		(
+ 			#{userId}
+ 			,#{postId}
+ 			,#{loginId}
+ 			,#{type}
+ 			, NOW()
+ 		)
+ 	</insert>
+ </mapper>

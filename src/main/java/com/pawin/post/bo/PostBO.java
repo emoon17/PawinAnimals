@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.pawin.comment.bo.CommentBO;
 import com.pawin.comment.model.CommentView;
+import com.pawin.likeadopt.bo.LikeadoptBO;
 import com.pawin.post.dao.PostDAO;
 import com.pawin.post.model.ImagePathView;
 import com.pawin.post.model.Keyword;
@@ -31,6 +32,10 @@ public class PostBO {
 
 	@Autowired
 	private CommentBO commentBO;
+	
+	@Autowired
+	private LikeadoptBO likeAdoptBO;
+	
 	
 	public List<Post> getPostList() {
 		return postDAO.selectPostList();
@@ -62,9 +67,12 @@ public class PostBO {
 				List<CommentView> commentViewList =commentBO.generateCommentList(postList.get(i).getId());
 				postView.setCommentViewList(commentViewList);
 				
-				// 좋아요
+				// 좋아요 입양 눌렀는지 
+				postView.setFiledLikeAdopt(likeAdoptBO.existLikeadopt(postId, userId, null));
 				
-				// 입양
+				// 리스트
+				
+				
 				postViewList.add(postView);
 			}
 		}

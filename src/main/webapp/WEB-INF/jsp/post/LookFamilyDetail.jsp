@@ -45,7 +45,7 @@
 				<%-- 좋아요가 되어있을 때 --%>
 				<%-- 	<c:if test="${card.filledLike eq true}"> --%>
 				<a href="#" class="likeAdopt-btn" data-user-id="${userId}"
-					data-post-id="${postview.post.id}"> <img
+					data-post-id="${postview.post.id}" data-likeadopt-type="like" data-user-loginId="${loginId}"> <img
 					src="/static/image/heart-icon.png" width="30" height="30"
 					alt="filled heart">
 				</a>
@@ -53,7 +53,7 @@
 				<%-- 좋아요가 해제되어 있을 때 --%>
 				<c:if test="${postviews.filledLike eq false}">
 					<a href="#" class="likeAdopt-btn" data-user-id="${userId}"
-						data-post-id="${postview.post.id}" data-likeadopt-type="like">
+						data-post-id="${postview.post.id}" data-likeadopt-type="like" data-user-loginId="${loginId}">
 						<img src="/static/image/like-icon.png" width="30" height="30"
 						alt="empty heart">
 					</a>
@@ -64,11 +64,21 @@
 
 				<%-- 입양 희망자가 없을 때 --%>
 				<a href="#" class="likeAdopt-btn" data-user-id="${userId}"
-					data-post-id="${postview.post.id}"> <img
+					data-post-id="${postview.post.id}" data-likeadopt-type="adopt" data-user-loginId="${loginId}"> <img
 					src="/static/image/adopt_empty.png" width="45" height="45"
-					alt="filled heart" data-likeadopt-type="adopt">
+					alt="empty adopt" >
 				</a> <span class="content-area ml-3 mr-5"> 입양희망자
 					${postviews.Count}명 </span>
+					
+							<%-- 입양 희망자가 있을  때 --%>
+				<c:if test="${postviews.adopt eq false}">
+				<a href="#" class="likeAdopt-btn" data-user-id="${userId}"
+					data-post-id="${postview.post.id}" data-likeadopt-type="adopt" data-user-loginId="${loginId}"> <img
+					src="/static/image/adopt.png" width="45" height="45"
+					alt="adopt" >
+				</a> <span class="content-area ml-3 mr-5"> 입양희망자
+					${postviews.Count}명 </span>
+				</c:if>
 
 			</div>
 
@@ -82,13 +92,15 @@
 			<c:forEach items="${postview.commentViewList}" var="commentView">
 				<div class="card-comment  d-flex justify-content-between m-3">
 					<div class="font-weight-bold write-area ">
-						${commentView.user.loginId}<span class="ml-3">:</span> <span
-							class="write-area ml-3">${commentView.comment.content}</span>
+						${commentView.user.loginId}<span class="ml-3">:</span>
+						 <span id="content"  class="write-area ml-3">${commentView.comment.content}</span>
 					</div>
 
-					<%-- 댓글 삭제 버튼 --%>
-					<a href="#" class="commentDelBtn mt-1"><img
-						src="/static/image/delete.png" width="30px" height="33x"></a>
+						<%-- <%-- 모달로 댓글 삭제하기 --%> 
+					<c:if test="${userId eq postview.user.id}">
+						<img src="/static/image/delete.png" id="deleteCommentBtn" class="commentDelBtn mt-1 more-btn write-area" data-toggle="modal"
+						data-target="#modal" data-post-id="${postview.post.id}" width="30px" height="33x">
+					</c:if>
 				</div>
 			</c:forEach>
 			<%--댓글 달기 --%>
@@ -102,11 +114,12 @@
 					data-post-id="${postview.post.id}">등록</button>
 			</div>
 		</c:if>
-		<%-- 모달로 글 수정, 삭제하기 --%>
+		
 		<div class="d-flex justify-content-end">
 			<c:if test="${userId eq postview.user.id}">
-				<a href="#" class="more-btn write-area mt-5" data-toggle="modal"
-					data-target="#modal" data-post-id="${postview.post.id}"> 수정|삭제
+				<a href="#"><spna class="write-area">수정|</spna> 
+				</a>
+				<a href="#"><spna class="write-area">삭제</spna> 
 				</a>
 			</c:if>
 		</div>
@@ -120,11 +133,7 @@
 	<%-- modal centered: 모달 창 수직으로 가운데 정렬 --%>
 	<div class="modal-dialog modal-lg modal-dialog-centered">
 		<div class="modal-content text-center">
-			<%-- 수정하기 --%>
-			<div class="py-3 border-bottom">
-				<a href="#" id="updatePostBtn"
-					class="content-area font-weight-bold">수정하기</a>
-			</div>
+			<%-- 삭제하기 --%>
 			<div class="py-3 border-bottom">
 				<a href="#" id="deletePostBtn" class="content-area font-weight-bold">삭제하기</a>
 			</div>
@@ -180,10 +189,11 @@
 			let postId = $(this).data('post-id');
 			let userId = $(this).data('user-id');
 			let type = $(this).data('likeadopt-type');
-
+			let loginId = $(this).data('user-loginId');
+			
 			//alert(postId);
 			//alert(userId);
-			alert(type);
+			//alert(type);
 
 			if (userId == '') {
 				alert("로그인 시 이용 가능합니다");
@@ -193,16 +203,16 @@
 				type : 'get',
 				url : '/likeAdopt/' + postId,
 				data : {
-					"userId" : userId,
-					"type" : type
+					"type" : type,
 				}
 				//success
 				,
 				success : function(data) {
 					if (data.code == 1) {
 						location.reload(true);
+						alert("ㅇㅇ");
 					} else {
-						alert("오류발생")
+						alert(data.errorMessage);
 					}
 				},
 				error : function(e) {
@@ -212,7 +222,7 @@
 
 		}); // like-btn end
 		
-		// 글 수정 삭제를 위한 더보기 버튼(...) 클릭
+		// 댓글 삭제를 위한 더보기 버튼(...) 클릭
 		$('.more-btn').on('click', function(e){
 			e.preventDefault();
 				
@@ -221,32 +231,41 @@
 				
 			$('#modal').data('post-id', postId); // setting(모달 태그에 data-post-id를 심어놓는것)
 				
-				
-			});
+		}); // 모달에 데이터 심어 놓기
 		
-		$('#modal #updatePostBtn').on('click', function(e) {
-			e.preventDefault();
-			//alert("d");
-			// 모달 post id 다시 가져오기
+		$('#modal #deletePostBtn').on('click', function() {
+			
 			let postId = $('#modal').data('post-id');
 			alert(postId);
-
+			let content = $('#content').text();
+			alert(content);
+			
+			
+			//ajax
 			$.ajax({
-				// request
-				type:"get"
-				, url:'/post/update_view'
-				, data:{
-					"postId":postId
-				}
+				//request
+				type:"delete"
+				, url:"/comment/delete"
+				, data:{"postId":postId, "content":content}
+				
+				//response
 				, success:function(data){
-					console.log(data);
+					if (data.code ==1) {
+					document.location.reload();
+					alert("댓글이 삭제 되었습니다.");
+					} else {
+						alert(data.errorMessage);
+					}
 				}
-				, error:function(e){
-					alert(e);
+				,error:function(jqXHR, textStatus, ErrorThrown){
+						var errorMsg = jqXHR.responseJSON.status;
+						alert(errorMsg + ":" + textStatus);
 				}
+			
 			});
- 
-		}); // updatePostBtn
+			
+		}); // 댓글 삭제
+		
 
 	}); // document end
 </script>

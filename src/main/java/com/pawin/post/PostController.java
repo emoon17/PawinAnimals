@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -100,19 +101,16 @@ public class PostController {
 
 	}
 
-	@GetMapping("/update_view")
-	public String updateView(
-			@RequestParam("postId") int postId,
-			HttpSession session,
-			Model model) {
-
-		// 세션에서 userId가져오기
-		Integer userId = (Integer) session.getAttribute("userId");
-		
-		
-		model.addAttribute("viewName", "post/updatePost");
-		return "template/layout";
-		
-	}
-
+	/*
+	 * @PostMapping("/update_view") public String updateView(
+	 * 
+	 * @RequestParam("postId") int postId, HttpSession session, Model model) {
+	 * 
+	 * // 세션에서 userId가져오기 Integer userId = (Integer) session.getAttribute("userId");
+	 * 
+	 * 
+	 * model.addAttribute("viewName", "post/updatePost"); return "template/layout";
+	 * 
+	 * }
+	 */
 }

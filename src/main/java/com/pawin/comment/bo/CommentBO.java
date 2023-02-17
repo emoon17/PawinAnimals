@@ -30,6 +30,7 @@ public class CommentBO {
 		return commentDAO.selectCommentListByPostId(postId);
 	}
 	
+	// 댓글 쓰기
 	public List<CommentView> generateCommentList(int postId){ // 글 번호에 해당하는 댓글(정보) 목록을 가져온다.
 		
 		List<CommentView> commentViewList = new ArrayList<>();
@@ -53,4 +54,16 @@ public class CommentBO {
 		return commentViewList;
 		
 	}
+	
+	// 댓글삭제
+	public void deleteCommentListByPostId(int userId, int postId, String content){
+		List<Comment> commentList = getCommentListByPostId(postId);
+		
+		for (Comment comment : commentList) {
+			commentDAO.deleteCommentListByPostId(comment.getUserId(), comment.getPostId(), comment.getContent());
+		}
+		
+	}
+	
+	
 }

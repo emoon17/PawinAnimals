@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,6 +39,28 @@ public class CommentRestController {
 		// 코드 구분하기
 		result.put("code", 1);
 		// 응답 내리기
+		return result;
+	}
+	
+	@DeleteMapping("/comment/delete")
+	public Map<String, Object> deleteComment(
+			@RequestParam("postId") int postId,
+			@RequestParam("content") String content,
+			HttpSession session){
+		
+		Map<String, Object> result = new HashMap<>();
+		// 세션으로 userId
+		Integer userId = (Integer)session.getAttribute("userId");
+		if (userId == null) {
+			result.put("code", 500);
+			result.put("errorMessage", "로그인을 다시 해주세요.");
+			return result;
+		}
+		// delete
+		commentBO.deleteCommentListByPostId(postId, postId, content);
+		result.put("code", 1);
+		
+		// 응답
 		return result;
 	}
 }
