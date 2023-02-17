@@ -10,6 +10,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.pawin.comment.bo.CommentBO;
 import com.pawin.comment.model.CommentView;
 import com.pawin.likeadopt.bo.LikeadoptBO;
+import com.pawin.likeadopt.model.AdoptView;
+import com.pawin.likeadopt.model.LikeView;
 import com.pawin.post.dao.PostDAO;
 import com.pawin.post.model.ImagePathView;
 import com.pawin.post.model.Keyword;
@@ -42,7 +44,7 @@ public class PostBO {
 	}
 
 	// 글 디테일 내용
-	public List<PostView> getPostByPostIdUserId(int postId, Integer userId) {
+	public List<PostView> getPostByPostIdUserId(int postId, Integer userId, String type) {
 
 		List<PostView> postViewList = new ArrayList<>();
 		// 글 목록 가져오기(post)
@@ -68,11 +70,15 @@ public class PostBO {
 				postView.setCommentViewList(commentViewList);
 				
 				// 좋아요 입양 눌렀는지 
-				postView.setFiledLikeAdopt(likeAdoptBO.existLikeadopt(postId, userId, null));
+				postView.setFiledLikeAdopt(likeAdoptBO.existLikeadopt(postList.get(i).getId(), userId, type));
+				
+				// 누른 사람 리스트
+				List<LikeView> likeViewList = likeAdoptBO.generateLikeViewList(postList.get(i).getId(), userId, type);
+				List<AdoptView> adoptViewList = likeAdoptBO.generateAdoptViewList(postList.get(i).getId(), userId, type);
+				// 누른 사람 카운트
+				postView.setLikeAdoptCount(likeAdoptBO.getLikeadoptCountByPostId(postList.get(i).getId(), userId));
 				
 				// 리스트
-				
-				
 				postViewList.add(postView);
 			}
 		}

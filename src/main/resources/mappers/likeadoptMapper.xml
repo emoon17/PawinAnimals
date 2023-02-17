@@ -8,11 +8,26 @@
 		FROM
 			`likeadopt`
 		WHERE
-		 	`postId` = #{postId}
 		 	<if test="userId != null">
-		 	AND `userId` = #{userId}
+		 	 `userId` = #{userId}
 		 	</if>
-		 	AND `type` = #{type}
+		 	AND `postId` = #{postId}
+		 	
+ 	</select>
+ 	
+ 	<select id="selectLikeAdoptList" resultType="com.pawin.likeadopt.model.Likeadopt">
+ 		SELECT
+ 			`userId`
+			,`postId`
+			,`loginId`
+			,`type`
+			,`createdAt`
+		FROM
+			`likeadopt`
+		WHERE
+			`postId` = #{postId}
+ 			AND `userId` = #{userId}
+ 			AND `type` = #{type}
  	</select>
  	
  	<delete id="deleteLikeadoptByPostIdUserId" parameterType="map">

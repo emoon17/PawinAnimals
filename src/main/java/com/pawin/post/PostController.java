@@ -49,6 +49,7 @@ public class PostController {
 
 		// 세션 가져오기
 		Integer userId = (Integer) session.getAttribute("userId");
+		
 		// postView 카드 가져오기 - 댓글, 글, 사진 다 있는 거 가져오기.
 		List<PostView> postList = postBO.generatePostList(userId);
 		model.addAttribute("postList", postList);
@@ -91,9 +92,9 @@ public class PostController {
 
 		// 세션에서 userId가져오기
 		Integer userId = (Integer) session.getAttribute("userId");
-
-		// 로그인 되어있는 사람- 1. DB select -userId, postId
-		List<PostView> postViewList = postBO.getPostByPostIdUserId(postId, userId);
+		String type = (String)session.getAttribute("type");
+		// 1. DB select -userId, postId
+		List<PostView> postViewList = postBO.getPostByPostIdUserId(postId, userId, type); 
 		model.addAttribute("postView", postViewList);
 		// 화면 이동
 		model.addAttribute("veiwName", "post/LookFamilyDetail");

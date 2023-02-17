@@ -40,7 +40,8 @@ public class LikeAdoptRestController {
 		}
 		String loginId = (String)session.getAttribute("loginId");
 		// insert(로그인 된 사람만)
-		likeadoptBO.likeadoptTogle(postId, postId, loginId, type);
+		likeadoptBO.likeadoptTogle(postId, userId, loginId, type);
+		session.setAttribute("type", type);		
 		result.put("code", 1);
 		// 응답내리기
 		return result;
