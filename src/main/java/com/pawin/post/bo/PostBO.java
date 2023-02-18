@@ -44,7 +44,7 @@ public class PostBO {
 	}
 
 	// 글 디테일 내용
-	public List<PostView> getPostByPostIdUserId(int postId, Integer userId, String type) {
+	public List<PostView> getPostByPostIdUserId(int postId, int userId, String type) {
 
 		List<PostView> postViewList = new ArrayList<>();
 		// 글 목록 가져오기(post)
@@ -73,10 +73,12 @@ public class PostBO {
 				postView.setFiledLikeAdopt(likeAdoptBO.existLikeadopt(postList.get(i).getId(), userId, type));
 				
 				// 누른 사람 리스트
-				List<LikeView> likeViewList = likeAdoptBO.generateLikeViewList(postList.get(i).getId(), userId, type);
-				List<AdoptView> adoptViewList = likeAdoptBO.generateAdoptViewList(postList.get(i).getId(), userId, type);
+				List<LikeView> likeViewList = likeAdoptBO.generateLikeViewList(postId, userId, type);
+				postView.setLikeViewList(likeViewList);
+				List<AdoptView> adoptViewList = likeAdoptBO.generateAdoptViewList(postId, userId, type);
+				postView.setAdoptViewList(adoptViewList);
 				// 누른 사람 카운트
-				postView.setLikeAdoptCount(likeAdoptBO.getLikeadoptCountByPostId(postList.get(i).getId(), userId));
+				postView.setLikeAdoptCount(likeAdoptBO.getLikeadoptCountByPostId(postList.get(i).getId(), userId, type));
 				
 				// 리스트
 				postViewList.add(postView);

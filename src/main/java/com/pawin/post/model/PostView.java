@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.pawin.comment.model.CommentView;
 import com.pawin.likeadopt.model.AdoptView;
+import com.pawin.likeadopt.model.LikeAdoptView;
 import com.pawin.likeadopt.model.LikeView;
-import com.pawin.likeadopt.model.Likeadopt;
 import com.pawin.user.model.User;
 
 // 글 한개와 매핑
@@ -42,19 +42,6 @@ public class PostView {
 		this.filedLikeAdopt = filedLikeAdopt;
 	}
 
-	
-	public List<LikeView> getLikeViewList() {
-		return likeViewList;
-	}
-	public void setLikeViewList(List<LikeView> likeViewList) {
-		this.likeViewList = likeViewList;
-	}
-	public List<AdoptView> getAdoptViewList() {
-		return adoptViewList;
-	}
-	public void setAdoptViewList(List<AdoptView> adoptViewList) {
-		this.adoptViewList = adoptViewList;
-	}
 	public int getLikeAdoptCount() {
 		return likeAdoptCount;
 	}
@@ -86,6 +73,19 @@ public class PostView {
 	public void setImagePathList(List<ImagePathView> imagePathList) {
 		this.imagePathList = imagePathList;
 	}
+	public List<LikeView> getLikeViewList() {
+		return likeViewList;
+	}
+	public void setLikeViewList(List<LikeView> likeViewList) {
+		this.likeViewList = likeViewList;
+	}
+	public List<AdoptView> getAdoptViewList() {
+		return adoptViewList;
+	}
+	public void setAdoptViewList(List<AdoptView> adoptViewList) {
+		this.adoptViewList = adoptViewList;
+	}
+	
 	
 	
 	

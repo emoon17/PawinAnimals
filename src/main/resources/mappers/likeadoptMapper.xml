@@ -12,6 +12,7 @@
 		 	 `userId` = #{userId}
 		 	</if>
 		 	AND `postId` = #{postId}
+		 	AND `type` = #{type}
 		 	
  	</select>
  	
@@ -26,8 +27,7 @@
 			`likeadopt`
 		WHERE
 			`postId` = #{postId}
- 			AND `userId` = #{userId}
- 			AND `type` = #{type}
+ 		
  	</select>
  	
  	<delete id="deleteLikeadoptByPostIdUserId" parameterType="map">

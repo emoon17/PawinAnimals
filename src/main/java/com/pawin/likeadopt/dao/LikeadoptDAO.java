@@ -12,7 +12,8 @@ public interface LikeadoptDAO {
 
 	public int selectLikeadoptCountByPostOrUserId(
 			@Param("postId") int postId, 
-			@Param("userId") Integer userId
+			@Param("userId") Integer userId,
+			@Param("type") String type
 			);
 	
 	public void deleteLikeadoptByPostIdUserId(
@@ -27,8 +28,6 @@ public interface LikeadoptDAO {
 			@Param("type") String type);
 	
 	public List<Likeadopt> selectLikeAdoptList(
-			@Param("postId") int postId, 
-			@Param("userId") int userId,
-			@Param("type") String type);
+			@Param("postId") int postId);
 }
 

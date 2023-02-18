@@ -3,10 +3,12 @@ package com.pawin.likeadopt.model;
 import com.pawin.user.model.User;
 
 public class AdoptView {
-	
 	private Likeadopt likeadopt;
-	
+
 	private User user;
+
+	private boolean filedLikeAdopt;
+	
 
 	public Likeadopt getLikeadopt() {
 		return likeadopt;
@@ -24,5 +26,13 @@ public class AdoptView {
 		this.user = user;
 	}
 
+	public boolean isFiledLikeAdopt() {
+		return filedLikeAdopt;
+	}
+
+	public void setFiledLikeAdopt(boolean filedLikeAdopt) {
+		this.filedLikeAdopt = filedLikeAdopt;
+	}
 	
+
 }
