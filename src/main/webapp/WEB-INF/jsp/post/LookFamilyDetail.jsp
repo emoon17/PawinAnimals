@@ -45,8 +45,7 @@
 				
 			
 			<%-- 좋아요가 되어있을 때 --%>
-<%-- 			<c:set var="like" value="like"> --%>
-			<c:if test="${postview.filedLike eq false}">
+			<c:if test="${postview.filedLikeAdopt eq false }">
 				<a href="#" class="likeAdopt-btn" data-user-id="${userId}"
 					data-post-id="${postview.post.id}" data-likeadopt-type="like" data-user-loginId="${loginId}"> <img
 					src="/static/image/heart-icon.png" width="30" height="30"
@@ -55,17 +54,17 @@
 			</c:if>	
 			
 				<%-- 좋아요가 해제되어 있을 때 --%>
-				<c:if test="${postview.filedLike eq true}">
+				<c:if test="${postview.filedLikeAdopt eq true }">
 					<a href="#" class="likeAdopt-btn" data-user-id="${userId}"
 						data-post-id="${postview.post.id}" data-likeadopt-type="like" data-user-loginId="${loginId}">
 						<img src="/static/image/like-icon.png" width="30" height="30"
 						alt="empty heart"> ${type}
 					</a>
 				</c:if>
-		<%-- 	</c:set> --%>
+			
 		
 				<%-- 입양 희망자가 해제 되어 있을 때 --%>
-			<c:if test="${postview.filedAdopt eq false}">
+			<c:if test="${postview.filedLikeAdopt eq false}">
 				<a href="#" class="likeAdopt-btn" data-user-id="${userId}"
 					data-post-id="${postview.post.id}" data-likeadopt-type="adopt" data-user-loginId="${loginId}"> <img
 					src="/static/image/adopt_empty.png" width="45" height="45"
@@ -73,7 +72,7 @@
 				</a> 
 			</c:if>	
 				<%-- 입양 희망자가 눌려있을 때 --%>
-			<c:if test="${postview.filedAdopt eq true}">
+			<c:if test="${postview.filedLikeAdopt eq true}">
 				<a href="#" class="likeAdopt-btn" data-user-id="${userId}"
 					data-post-id="${postview.post.id}" data-likeadopt-type="adopt" data-user-loginId="${loginId}"> <img
 					src="/static/image/adopt.jpg" width="45" height="45"
@@ -82,9 +81,9 @@
 				</c:if>
 	
 				<span class="content-area ml-3 mr-5"> 좋아요
-					${postviews.likeCount}개 </span>
+					${postview.likeCount}개 </span>
 				 <span class="content-area ml-3 mr-5"> 입양희망자
-					${postviews.Count}명 </span>
+					${postview.adoptCount}명 </span>
 			</div>
 
 		</div>

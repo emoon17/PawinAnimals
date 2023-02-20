@@ -22,19 +22,21 @@ public class LikeadoptBO {
 	@Autowired
 	private UserBO userBO;
 
-	public boolean existLikeAdopt(int postId, Integer userId, String type) {
+	public boolean existLike(int postId, Integer userId, String type) {
 		// 비로그인 아웃
 		if (userId == null) {
 			return false;
 		}
-
-		// 로그인
-		return likeadoptDAO.selectLikeadoptCountByPostOrUserId(postId, userId, type) > 0? true : false;
-	}
+		
+		if (likeadoptDAO.selectLikeadoptCountByPostOrUserId(postId, userId, type) > 0) {
+			return true;
+		}
 	
+		return false;
+	}
 
 	public int getLikeadoptCountByPostId(int postId, int userId, String type) {
-		// 행의 갯수 가져오기 - postBO에서 쓸려고 만듬
+		// 행의 갯수 가져오기 
 		return likeadoptDAO.selectLikeadoptCountByPostOrUserId(postId, userId, type);
 	}
 
@@ -69,7 +71,7 @@ public class LikeadoptBO {
 			LikeView likeView = new LikeView();
 			
 			likeView.setLikeadopt(likeadopt);
-			if (likeView.getLikeadopt().getType().equals("like")) { //likeView.likeadopt.type == "adopt"
+			if (likeView.getLikeadopt().getType().equals("like")) { 
 				
 				//사용자
 				User user = userBO.getUserById(likeadopt.getUserId());

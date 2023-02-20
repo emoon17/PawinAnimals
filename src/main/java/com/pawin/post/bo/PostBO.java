@@ -69,20 +69,21 @@ public class PostBO {
 				List<CommentView> commentViewList =commentBO.generateCommentList(postList.get(i).getId());
 				postView.setCommentViewList(commentViewList);
 				
+				
 				// 좋아요 입양 눌렀는지 
-				if (type.equals("like")) {
-					postView.setFiledLike(likeAdoptBO.existLikeAdopt(postList.get(i).getId(), userId, type));
-				}
-				if (type.equals("adopt")) {
-					postView.setFiledAdopt(likeAdoptBO.existLikeAdopt(postList.get(i).getId(), userId, type));
-				}
+			
+					postView.setFiledLikeAdopt(likeAdoptBO.existLike(postList.get(i).getId(), userId, type));
+					postView.setLikeCount(likeAdoptBO.getLikeadoptCountByPostId(postList.get(i).getId(), userId, type));
+				
+				
+//					postView.setAdoptCount(likeAdoptBO.getLikeadoptCountByPostId(postList.get(i).getId(), userId, type));
+				
 				// 누른 사람 리스트
 				List<LikeView> likeViewList = likeAdoptBO.generateLikeViewList(postId, userId, type);
 				postView.setLikeViewList(likeViewList);
 				List<AdoptView> adoptViewList = likeAdoptBO.generateAdoptViewList(postId, userId, type);
 				postView.setAdoptViewList(adoptViewList);
 				// 누른 사람 카운트
-				postView.setLikeAdoptCount(likeAdoptBO.getLikeadoptCountByPostId(postList.get(i).getId(), userId, type));
 				
 				// 리스트
 				postViewList.add(postView);

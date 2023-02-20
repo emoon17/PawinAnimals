@@ -25,35 +25,37 @@ public class PostView {
 	private List<CommentView> commentViewList;
 	
 	// 내가 좋아요, 입양을 눌렀는지
-	private boolean filedLike;
-	private boolean filedAdopt;
+	private boolean filedLikeAdopt;
+	
 	// 좋아요, 입양희망자 리스트
 	private List<LikeView> likeViewList;
 	private List<AdoptView> adoptViewList;
 	
 	// 좋아요, 입양희망자 카운트
-	private int likeAdoptCount;
-	
+	private int likeCount;
+	private int adoptCount;
 	
 
 
-	public boolean isFiledLike() {
-		return filedLike;
+	public int getLikeCount() {
+		return likeCount;
 	}
-	public void setFiledLike(boolean filedLike) {
-		this.filedLike = filedLike;
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
 	}
-	public boolean isFiledAdopt() {
-		return filedAdopt;
+	public int getAdoptCount() {
+		return adoptCount;
 	}
-	public void setFiledAdopt(boolean filedAdopt) {
-		this.filedAdopt = filedAdopt;
+	public void setAdoptCount(int adoptCount) {
+		this.adoptCount = adoptCount;
 	}
-	public int getLikeAdoptCount() {
-		return likeAdoptCount;
+
+	
+	public boolean isFiledLikeAdopt() {
+		return filedLikeAdopt;
 	}
-	public void setLikeAdoptCount(int likeAdoptCount) {
-		this.likeAdoptCount = likeAdoptCount;
+	public void setFiledLikeAdopt(boolean filedLikeAdopt) {
+		this.filedLikeAdopt = filedLikeAdopt;
 	}
 	public List<CommentView> getCommentViewList() {
 		return commentViewList;
