@@ -8,7 +8,7 @@ public class LikeView {
 
 	private User user;
 
-	private boolean filedLikeAdopt;
+
 
 	public Likeadopt getLikeadopt() {
 		return likeadopt;
@@ -26,12 +26,5 @@ public class LikeView {
 		this.user = user;
 	}
 
-	public boolean isFiledLikeAdopt() {
-		return filedLikeAdopt;
-	}
-
-	public void setFiledLikeAdopt(boolean filedLikeAdopt) {
-		this.filedLikeAdopt = filedLikeAdopt;
-	}
 	
 }

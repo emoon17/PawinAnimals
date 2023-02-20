@@ -70,8 +70,6 @@ public class LikeadoptBO {
 			likeView.setLikeadopt(likeadopt);
 			if (likeView.getLikeadopt().getType().equals("like")) { //likeView.likeadopt.type == "adopt"
 				
-				// 좋아요,입양 체크유무
-				likeView.setFiledLikeAdopt(existLikeadopt(postId, userId, type));
 				//사용자
 				User user = userBO.getUserById(likeadopt.getUserId());
 				likeView.setUser(user);
@@ -95,8 +93,6 @@ public class LikeadoptBO {
 			adoptView.setLikeadopt(likeadopt);
 			if (adoptView.getLikeadopt().getType().equals("adopt")) {
 				
-				// 좋아요,입양 체크유무
-				adoptView.setFiledLikeAdopt(existLikeadopt(postId, userId, type));
 				//사용자
 				User user = userBO.getUserById(likeadopt.getUserId());
 				adoptView.setUser(user);

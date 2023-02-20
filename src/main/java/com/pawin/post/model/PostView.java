@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.pawin.comment.model.CommentView;
 import com.pawin.likeadopt.model.AdoptView;
-import com.pawin.likeadopt.model.LikeAdoptView;
 import com.pawin.likeadopt.model.LikeView;
 import com.pawin.user.model.User;
 
@@ -25,28 +24,42 @@ public class PostView {
 	private List<CommentView> commentViewList;
 	
 	// 내가 좋아요, 입양을 눌렀는지
-	private boolean filedLikeAdopt;
+	private boolean filedLike;
+	private boolean filedAdopt;
 	
 	// 좋아요, 입양희망자 리스트
 	private List<LikeView> likeViewList;
 	private List<AdoptView> adoptViewList;
 	
 	// 좋아요, 입양희망자 카운트
-	public int likeAdoptCount;
+	private int likeCount;
+	private int adoptCount;
 	
-	
-	public boolean isFiledLikeAdopt() {
-		return filedLikeAdopt;
-	}
-	public void setFiledLikeAdopt(boolean filedLikeAdopt) {
-		this.filedLikeAdopt = filedLikeAdopt;
-	}
 
-	public int getLikeAdoptCount() {
-		return likeAdoptCount;
+
+	public int getLikeCount() {
+		return likeCount;
 	}
-	public void setLikeAdoptCount(int likeAdoptCount) {
-		this.likeAdoptCount = likeAdoptCount;
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
+	}
+	public int getAdoptCount() {
+		return adoptCount;
+	}
+	public void setAdoptCount(int adoptCount) {
+		this.adoptCount = adoptCount;
+	}
+	public boolean isFiledLike() {
+		return filedLike;
+	}
+	public void setFiledLike(boolean filedLike) {
+		this.filedLike = filedLike;
+	}
+	public boolean isFiledAdopt() {
+		return filedAdopt;
+	}
+	public void setFiledAdopt(boolean filedAdopt) {
+		this.filedAdopt = filedAdopt;
 	}
 	public List<CommentView> getCommentViewList() {
 		return commentViewList;
