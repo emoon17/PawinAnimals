@@ -22,14 +22,30 @@ public class LikeadoptBO {
 	@Autowired
 	private UserBO userBO;
 
-	public boolean existLikeadopt(int postId, Integer userId, String type) {
+	public boolean existLike(int postId, Integer userId, String type) {
 		// 비로그인 아웃
 		if (userId == null) {
 			return false;
 		}
 
 		// 로그인
-		return likeadoptDAO.selectLikeadoptCountByPostOrUserId(postId, userId, type) > 0 ? true : false;
+		if (type.equals("like")) {
+			likeadoptDAO.selectLikeadoptCountByPostOrUserId(postId, userId, type);
+		}
+		return likeadoptDAO.selectLikeadoptCountByPostOrUserId(postId, userId, type) > 0? true : false;
+	}
+	
+	public boolean existAdopt(int postId, Integer userId, String type) {
+		// 비로그인 아웃
+		if (userId == null) {
+			return false;
+		}
+
+		// 로그인
+		if (type.equals("adopt")) {
+			likeadoptDAO.selectLikeadoptCountByPostOrUserId(postId, userId, type);
+		}
+		return likeadoptDAO.selectLikeadoptCountByPostOrUserId(postId, userId, type) > 0? true : false;
 	}
 
 	public int getLikeadoptCountByPostId(int postId, int userId, String type) {

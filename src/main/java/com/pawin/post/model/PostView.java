@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.pawin.comment.model.CommentView;
 import com.pawin.likeadopt.model.AdoptView;
+import com.pawin.likeadopt.model.LikeAdoptView;
 import com.pawin.likeadopt.model.LikeView;
 import com.pawin.user.model.User;
 
@@ -32,23 +33,11 @@ public class PostView {
 	private List<AdoptView> adoptViewList;
 	
 	// 좋아요, 입양희망자 카운트
-	private int likeCount;
-	private int adoptCount;
+	private int likeAdoptCount;
+	
 	
 
 
-	public int getLikeCount() {
-		return likeCount;
-	}
-	public void setLikeCount(int likeCount) {
-		this.likeCount = likeCount;
-	}
-	public int getAdoptCount() {
-		return adoptCount;
-	}
-	public void setAdoptCount(int adoptCount) {
-		this.adoptCount = adoptCount;
-	}
 	public boolean isFiledLike() {
 		return filedLike;
 	}
@@ -60,6 +49,12 @@ public class PostView {
 	}
 	public void setFiledAdopt(boolean filedAdopt) {
 		this.filedAdopt = filedAdopt;
+	}
+	public int getLikeAdoptCount() {
+		return likeAdoptCount;
+	}
+	public void setLikeAdoptCount(int likeAdoptCount) {
+		this.likeAdoptCount = likeAdoptCount;
 	}
 	public List<CommentView> getCommentViewList() {
 		return commentViewList;
