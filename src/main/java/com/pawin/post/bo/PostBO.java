@@ -70,8 +70,12 @@ public class PostBO {
 				postView.setCommentViewList(commentViewList);
 				
 				// 좋아요 입양 눌렀는지 
-				postView.setFiledLike(likeAdoptBO.existLike(postList.get(i).getId(), userId, type));
-				postView.setFiledAdopt(likeAdoptBO.existAdopt(postList.get(i).getId(), userId, type));
+				if (type.equals("like")) {
+					postView.setFiledLike(likeAdoptBO.existLikeAdopt(postList.get(i).getId(), userId, type));
+				}
+				if (type.equals("adopt")) {
+					postView.setFiledAdopt(likeAdoptBO.existLikeAdopt(postList.get(i).getId(), userId, type));
+				}
 				// 누른 사람 리스트
 				List<LikeView> likeViewList = likeAdoptBO.generateLikeViewList(postId, userId, type);
 				postView.setLikeViewList(likeViewList);

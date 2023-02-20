@@ -46,7 +46,6 @@
 			
 			<%-- 좋아요가 되어있을 때 --%>
 <%-- 			<c:set var="like" value="like"> --%>
-		//이렇게 해도 안됌
 			<c:if test="${postview.filedLike eq false}">
 				<a href="#" class="likeAdopt-btn" data-user-id="${userId}"
 					data-post-id="${postview.post.id}" data-likeadopt-type="like" data-user-loginId="${loginId}"> <img
@@ -64,8 +63,8 @@
 					</a>
 				</c:if>
 		<%-- 	</c:set> --%>
+		
 				<%-- 입양 희망자가 해제 되어 있을 때 --%>
-			
 			<c:if test="${postview.filedAdopt eq false}">
 				<a href="#" class="likeAdopt-btn" data-user-id="${userId}"
 					data-post-id="${postview.post.id}" data-likeadopt-type="adopt" data-user-loginId="${loginId}"> <img

@@ -27,7 +27,6 @@ public class PostView {
 	// 내가 좋아요, 입양을 눌렀는지
 	private boolean filedLike;
 	private boolean filedAdopt;
-	
 	// 좋아요, 입양희망자 리스트
 	private List<LikeView> likeViewList;
 	private List<AdoptView> adoptViewList;

@@ -22,31 +22,16 @@ public class LikeadoptBO {
 	@Autowired
 	private UserBO userBO;
 
-	public boolean existLike(int postId, Integer userId, String type) {
+	public boolean existLikeAdopt(int postId, Integer userId, String type) {
 		// 비로그인 아웃
 		if (userId == null) {
 			return false;
 		}
 
 		// 로그인
-		if (type.equals("like")) {
-			likeadoptDAO.selectLikeadoptCountByPostOrUserId(postId, userId, type);
-		}
 		return likeadoptDAO.selectLikeadoptCountByPostOrUserId(postId, userId, type) > 0? true : false;
 	}
 	
-	public boolean existAdopt(int postId, Integer userId, String type) {
-		// 비로그인 아웃
-		if (userId == null) {
-			return false;
-		}
-
-		// 로그인
-		if (type.equals("adopt")) {
-			likeadoptDAO.selectLikeadoptCountByPostOrUserId(postId, userId, type);
-		}
-		return likeadoptDAO.selectLikeadoptCountByPostOrUserId(postId, userId, type) > 0? true : false;
-	}
 
 	public int getLikeadoptCountByPostId(int postId, int userId, String type) {
 		// 행의 갯수 가져오기 - postBO에서 쓸려고 만듬
