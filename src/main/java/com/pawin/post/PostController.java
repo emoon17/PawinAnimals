@@ -61,7 +61,7 @@ public class PostController {
 	}
 
 	/**
-	 * 목록 서치
+	 * 가족을 찾습니다 목록 서치 view
 	 * 
 	 * @param searchTitle
 	 * @param searchStatus
@@ -87,7 +87,14 @@ public class PostController {
 		return "post/LookfamilyListSearch";
 
 	}
-
+	
+	/**
+	 * 가족을 찾습니다 상세화면 view
+	 * @param postId
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@GetMapping("/look_for_family_detail_view")
 	public String familyDetailView(@RequestParam("postId") int postId, Model model, HttpSession session) {
 
@@ -96,9 +103,8 @@ public class PostController {
 		if (userId == null) {
 			return "redirect:/user/signIn_view";
 		}
-		String type = (String)session.getAttribute("type");
 		// 1. DB select -userId, postId
-		List<PostView> postViewList = postBO.getPostByPostIdUserId(postId, userId, type); 
+		List<PostView> postViewList = postBO.getPostByPostIdUserId(postId, userId); 
 		model.addAttribute("postView", postViewList);
 		// 화면 이동
 		model.addAttribute("veiwName", "post/LookFamilyDetail");

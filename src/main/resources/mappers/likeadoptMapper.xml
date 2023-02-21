@@ -8,11 +8,11 @@
 		FROM
 			`likeadopt`
 		WHERE
-		 	<if test="userId != null">
-		 	 `userId` = #{userId}
-		 	</if>
-		 	AND `postId` = #{postId}
+		 	 `postId` = #{postId}
 		 	AND `type` = #{type}
+		 	<if test="userId != null">
+		 	 AND `userId` = #{userId}
+		 	</if>
 		 	
  	</select>
  	

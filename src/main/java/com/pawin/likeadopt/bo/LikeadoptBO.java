@@ -22,22 +22,20 @@ public class LikeadoptBO {
 	@Autowired
 	private UserBO userBO;
 
-	public boolean existLike(int postId, Integer userId, String type) {
+	public boolean existLikeAdopt(int postId, Integer userId, String type) {
 		// 비로그인 아웃
 		if (userId == null) {
 			return false;
 		}
 		
-		if (likeadoptDAO.selectLikeadoptCountByPostOrUserId(postId, userId, type) > 0) {
-			return true;
-		}
-	
-		return false;
+		return likeadoptDAO.selectLikeadoptCountByPostOrUserId(postId, userId, type) > 0 ? true :false;
 	}
+	
 
-	public int getLikeadoptCountByPostId(int postId, int userId, String type) {
+
+	public int getLikeadoptCountByPostId(int postId, String type) {
 		// 행의 갯수 가져오기 
-		return likeadoptDAO.selectLikeadoptCountByPostOrUserId(postId, userId, type);
+		return likeadoptDAO.selectLikeadoptCountByPostOrUserId(postId,null, type);
 	}
 
 	public void deleteLikeadoptByPostIdUserId(int postId, int userId, String type) {
@@ -61,7 +59,7 @@ public class LikeadoptBO {
 
 	}
 
-	public List<LikeView> generateLikeViewList(int postId, int userId, String type) {
+	public List<LikeView> generateLikeViewList(int postId, String type) {
 
 		List<LikeView> likeViewList = new ArrayList<>();
 
@@ -84,7 +82,7 @@ public class LikeadoptBO {
 
 	}
 
-	public List<AdoptView> generateAdoptViewList(int postId, int userId, String type) {
+	public List<AdoptView> generateAdoptViewList(int postId, String type) {
 
 		List<AdoptView> AdoptViewList = new ArrayList<>();
 

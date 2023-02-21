@@ -12,6 +12,7 @@ import com.pawin.comment.model.CommentView;
 import com.pawin.likeadopt.bo.LikeadoptBO;
 import com.pawin.likeadopt.model.AdoptView;
 import com.pawin.likeadopt.model.LikeView;
+import com.pawin.likeadopt.model.Likeadopt;
 import com.pawin.post.dao.PostDAO;
 import com.pawin.post.model.ImagePathView;
 import com.pawin.post.model.Keyword;
@@ -44,7 +45,7 @@ public class PostBO {
 	}
 
 	// 글 디테일 내용
-	public List<PostView> getPostByPostIdUserId(int postId, int userId, String type) {
+	public List<PostView> getPostByPostIdUserId(int postId, int userId) {
 
 		List<PostView> postViewList = new ArrayList<>();
 		// 글 목록 가져오기(post)
@@ -71,17 +72,17 @@ public class PostBO {
 				
 				
 				// 좋아요 입양 눌렀는지 
-			
-					postView.setFiledLikeAdopt(likeAdoptBO.existLike(postList.get(i).getId(), userId, type));
-					postView.setLikeCount(likeAdoptBO.getLikeadoptCountByPostId(postList.get(i).getId(), userId, type));
+				postView.setFiledLike(likeAdoptBO.existLikeAdopt(postList.get(i).getId(), userId, "like"));
+				postView.setFiledAdopt(likeAdoptBO.existLikeAdopt(postList.get(i).getId(), userId, "adopt"));
 				
-				
-//					postView.setAdoptCount(likeAdoptBO.getLikeadoptCountByPostId(postList.get(i).getId(), userId, type));
+				// 좋아요 입양 갯수
+				postView.setLikeCount(likeAdoptBO.getLikeadoptCountByPostId(postList.get(i).getId(), "like"));
+				postView.setAdoptCount(likeAdoptBO.getLikeadoptCountByPostId(postList.get(i).getId(), "adopt"));
 				
 				// 누른 사람 리스트
-				List<LikeView> likeViewList = likeAdoptBO.generateLikeViewList(postId, userId, type);
+				List<LikeView> likeViewList = likeAdoptBO.generateLikeViewList(postId, "like");
 				postView.setLikeViewList(likeViewList);
-				List<AdoptView> adoptViewList = likeAdoptBO.generateAdoptViewList(postId, userId, type);
+				List<AdoptView> adoptViewList = likeAdoptBO.generateAdoptViewList(postId, "adopt");
 				postView.setAdoptViewList(adoptViewList);
 				// 누른 사람 카운트
 				

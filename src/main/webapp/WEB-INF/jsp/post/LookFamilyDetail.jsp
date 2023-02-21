@@ -45,7 +45,7 @@
 				
 			
 			<%-- 좋아요가 되어있을 때 --%>
-			<c:if test="${postview.filedLikeAdopt eq false }">
+			<c:if test="${postview.filedLike eq false}">
 				<a href="#" class="likeAdopt-btn" data-user-id="${userId}"
 					data-post-id="${postview.post.id}" data-likeadopt-type="like" data-user-loginId="${loginId}"> <img
 					src="/static/image/heart-icon.png" width="30" height="30"
@@ -54,39 +54,46 @@
 			</c:if>	
 			
 				<%-- 좋아요가 해제되어 있을 때 --%>
-				<c:if test="${postview.filedLikeAdopt eq true }">
+				<c:if test="${postview.filedLike eq true}">
 					<a href="#" class="likeAdopt-btn" data-user-id="${userId}"
 						data-post-id="${postview.post.id}" data-likeadopt-type="like" data-user-loginId="${loginId}">
 						<img src="/static/image/like-icon.png" width="30" height="30"
-						alt="empty heart"> ${type}
+						alt="empty heart">
 					</a>
 				</c:if>
 			
-		
+			<span class="content-area ml-3 mr-5"> <a href="#" data-toggle="modal"
+						data-target="#likeModal" >좋아요
+					${postview.likeCount}개 </a></span>
+			
 				<%-- 입양 희망자가 해제 되어 있을 때 --%>
-			<c:if test="${postview.filedLikeAdopt eq false}">
+			<c:if test="${postview.filedAdopt eq false}">
 				<a href="#" class="likeAdopt-btn" data-user-id="${userId}"
 					data-post-id="${postview.post.id}" data-likeadopt-type="adopt" data-user-loginId="${loginId}"> <img
 					src="/static/image/adopt_empty.png" width="45" height="45"
-					alt="empty adopt" > ${type}
+					alt="empty adopt" >
 				</a> 
 			</c:if>	
+			
 				<%-- 입양 희망자가 눌려있을 때 --%>
-			<c:if test="${postview.filedLikeAdopt eq true}">
+			<c:if test="${postview.filedAdopt eq true}">
 				<a href="#" class="likeAdopt-btn" data-user-id="${userId}"
 					data-post-id="${postview.post.id}" data-likeadopt-type="adopt" data-user-loginId="${loginId}"> <img
 					src="/static/image/adopt.jpg" width="45" height="45"
 					alt="adopt" >
 				</a>
 				</c:if>
-	
-				<span class="content-area ml-3 mr-5"> 좋아요
-					${postview.likeCount}개 </span>
-				 <span class="content-area ml-3 mr-5"> 입양희망자
-					${postview.adoptCount}명 </span>
+				
+				 <span class="content-area ml-3 mr-5"><a href="#" data-toggle="modal"
+						data-target="#adoptModal"> 입양희망자
+					${postview.adoptCount}명 </a></span>
 			</div>
 
 		</div>
+				
+				
+				
+				
 		<div class="line mb-3"></div>
 
 		<%-- 댓글 목록 --%>
@@ -128,9 +135,9 @@
 			</c:if>
 		</div>
 	</div>
-</c:forEach>
 
-<!-- Modal -->
+
+<!--댓글 Modal -->
 <div class="modal fade" id="modal">
 	<%--...을 눌렀을 때 post-data-id를 모달에 심어놓을거다. --%>
 	<%-- modal sm: 작은 모달 창  --%>
@@ -149,7 +156,41 @@
 	</div>
 </div>
 
+<!-- like Modal -->
+<div class="modal fade" id="likeModal">
+	<%--...을 눌렀을 때 post-data-id를 모달에 심어놓을거다. --%>
+	<%-- modal sm: 작은 모달 창  --%>
+	<%-- modal centered: 모달 창 수직으로 가운데 정렬 --%>
+	<div class="modal-dialog modal-lg modal-dialog-centered">
+		<div class="modal-content text-center">
+			<%-- 누른 사람 아이디 보여지기 --%>
+			<c:forEach items="${postview.likeViewList}" var="likeView">
+			<div class="py-3 border-bottom">
+				<a id="loginId" class="content-area font-weight-bold">${likeView.user.loginId}</a>
+			</div>
+			</c:forEach>
+		</div>
+	</div>
+</div>
 
+
+<!-- adopt Modal -->
+<div class="modal fade" id="adoptModal">
+	<%--...을 눌렀을 때 post-data-id를 모달에 심어놓을거다. --%>
+	<%-- modal sm: 작은 모달 창  --%>
+	<%-- modal centered: 모달 창 수직으로 가운데 정렬 --%>
+	<div class="modal-dialog modal-lg modal-dialog-centered">
+		<div class="modal-content text-center">
+			<%-- 누른 사람 아이디 보여지기 --%>
+			<c:forEach items="${postview.adoptViewList}" var="adoptView">
+			<div class="py-3 border-bottom">
+				<a id="loginId" class="content-area font-weight-bold">${adoptView.user.loginId}</a>
+			</div>
+			</c:forEach>
+		</div>
+	</div>
+</div>
+</c:forEach>
 <script>
 	$(document).ready(function() {
 
