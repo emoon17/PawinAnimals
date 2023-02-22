@@ -55,13 +55,18 @@ public class PostBO {
 	public List<Post> getPostListByPostId(int postId) {
 		return postDAO.selectPostListByPostId(postId);
 	}
+	
+	public List<Post> getPostByPostListIdUserId(int postId, int userId) {
+		return postDAO.selectPostListByPostIdUserId(postId, userId);
+	}
+	
 
 	// 글 디테일 내용
 	public List<PostView> getPostByPostIdUserId(int postId, int userId) {
 
 		List<PostView> postViewList = new ArrayList<>();
 		// 글 목록 가져오기(post)
-		List<Post> postList = getPostList();
+		List<Post> postList = getPostListByPostId(postId);
 
 		// 1)postview 리스트를 글 하나하나 뽑는 반복문 만들기
 		for (int i = 0; i < postList.size(); i++) {
@@ -118,18 +123,22 @@ public class PostBO {
 	}
 	
 	// 글 update
-	public void updatePost(Post post, List<MultipartFile> files, int userId) {
-		
-		post.setUserId(userId);
-		postDAO.updatePost(post);
-		User user = userBO.getUserById(userId);
-		
-		postImageBO.updateImage(files, userId, user.getLoginId(), post.getId());
-		
-		if (post == null) {
-			logger.warn("=========[update post] 수정할 메모가 존재하지 않습니다. post:{}, userId:{}", post, userId);
-			return;
+	public void updatePost(int postId, String title, String content,
+			String status, String animals,String area,
+			List<MultipartFile> files, int userId) {
+		// post 글 하나 가져오기.
+		List<Post> postList = getPostListByPostId(postId);
+		for (Post post : postList) {
+			if (post == null) {
+				logger.warn("=========[update post] 수정할 메모가 존재하지 않습니다. postId:{}, userId:{}", postId, userId);
+				return;
+			}
+			
 		}
+		postDAO.updatePost(postId, title, content, status, animals, area);
+		User user = userBO.getUserById(userId);
+		postImageBO.updateImage(files, userId, user.getLoginId(), postId);
+		
 		
 	}
 	
@@ -187,6 +196,27 @@ public class PostBO {
 			} 
 		}
 		return keywordList;
+	}
+	
+	public int deletePostByPostIdUserId(int postId, int userId) {
+		
+		List<Post> postList = getPostListByPostId(postId);
+		for (Post post : postList) {
+			if (post == null) {
+				logger.warn("[글 삭제] post is null. postId:{}, userId{}", postId, userId);
+				return 0;
+			}
+		}
+		User user = userBO.getUserById(userId);
+		// 이미지 삭제
+		
+		postImageBO.deleteImage(null, userId, user.getLoginId(), postId);
+		// 댓글 삭제
+		commentBO.deleteCommentListByPostId(userId, postId, null);
+		// 좋아요 삭제
+		likeAdoptBO.deleteLikeadoptByPostIdUserId(postId, userId, null);
+		// 삭제 리턴
+		return postDAO.deletePostByPostIdUserId(postId, userId);
 	}
 
 }

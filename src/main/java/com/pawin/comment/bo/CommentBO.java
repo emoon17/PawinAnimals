@@ -60,6 +60,7 @@ public class CommentBO {
 		commentDAO.deleteCommentListByPostId(userId, postId, content);
 		
 	}
+		
 	
 	
 }

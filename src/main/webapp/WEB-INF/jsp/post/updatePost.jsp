@@ -220,9 +220,7 @@
 		 		// response
 		 		, success:function(data){
 		 			if (data.code == 1) {
-		 				location.href="/post/look_for_family_detail_view";
-		 			} else {
-		 				alert(data.errorMessage);
+		 				location.href="/post/look_for_family_list_view";
 		 			}
 		 		}
 				, error:function(e){

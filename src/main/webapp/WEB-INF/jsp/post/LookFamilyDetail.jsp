@@ -138,7 +138,7 @@
 				<a href="/post/update_view?postId=${postview.post.id}"
 					class="write-area mr-2">수정 </a>
 				<span class="mr-2 mt-1">|</span>
-				<a href="#"><span id="deletePostBtn" class="write-area">삭제</span>
+				<a href="#"><span id="deletePostBtn" class="write-area" data-post-id="${postview.post.id}">삭제</span>
 				</a>
 			</c:if>
 		</div>
@@ -328,7 +328,33 @@
 			});
 
 		}); // comment delete
-
+		
+		// 글 삭제 버튼 눌렀을 때
+		$('#deletePostBtn').on('click', function(){
+			//alert("d");
+			let postId = $(this).data('post-id');
+			alert(postId);
+			
+			//ajax
+			$.ajax({
+				//request
+				type:"delete"
+				, url:"/post/post_delete"
+				, data:{"postId":postId}
+				//response
+				, success:function(data){
+					if (data.code == 1){
+						alert("게시글이 삭제되었습니다.");
+						location.href="/post/look_for_family_list_view";
+					} else{
+						alert(data.errorMessage);
+					}
+				}
+				, error:function(e){
+					alert("오류가 발생했습니다.");
+				}
+			});
+		}); // post delete
 	}); // document end
 </script>
 

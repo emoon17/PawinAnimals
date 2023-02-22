@@ -20,11 +20,19 @@ public interface PostDAO {
 	
 	public void insertPost(Post post);
 	
-	public void updatePost(Post post);
+	public void updatePost(
+			@Param("postId") int postId,
+			@Param("title") String title,
+			@Param("content") String content,
+			@Param("status") String status,
+			@Param("animals") String animals,
+			@Param("area") String area);
 	
 	public List<Post> selectPostList();
 	
 	public List<Post> selectPostListByPostId(int postId);
+	
+	public List<Post> selectPostListByPostIdUserId(int postId, int userId);
 	
 	public List<Keyword> selectKeywordListByTitleStatusAnimalsArea(
 			@Param("searchTitle") String searchTitle,
@@ -33,6 +41,10 @@ public interface PostDAO {
 			@Param("searchArea") String searchArea);
 	
 	public List<PostView> selectPostByPostIdUserId(
+			@Param("postId") int postId,
+			@Param("userId") Integer userId);
+	
+	public int deletePostByPostIdUserId(
 			@Param("postId") int postId,
 			@Param("userId") Integer userId);
 
