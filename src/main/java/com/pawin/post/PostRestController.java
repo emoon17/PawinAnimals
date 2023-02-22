@@ -39,7 +39,7 @@ public class PostRestController {
 	 */
 	@PostMapping("/post_create")
 	public Map<String, Object> create(
-			@ModelAttribute Post post, // name 태그 값과 일치하는 필드에 값이 들어간다.
+			@ModelAttribute Post post, 
 			@RequestPart("files") List<MultipartFile> files,
 			HttpSession session) {
 
@@ -73,12 +73,17 @@ public class PostRestController {
 		
 		// 필요한 세션 - userId, loginId
 		int userId = (int)session.getAttribute("userId");
-		String loginId = (String)session.getAttribute("loginId");
 		
 		// db update
-		
+		postBO.updatePost(post, files, userId);
 		//코드 나누기
 		Map<String, Object> result = new HashMap<>();
+		 if (post != null) { 
+		      result.put("code", 1); 
+         } 
+		  else {
+			  result.put("errorMessage","관리자에게 문의하여 주세요."); 
+		  }
 		
 		// 응답하기
 		return result;

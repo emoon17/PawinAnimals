@@ -43,5 +43,17 @@
 		WHERE
 			`postId` = #{postId}
  	</select>
+ 	
+ 	<update id="updateImage" parameterType="map">
+ 	UPDATE `imagePath`
+ 	SET
+ 		`userId` = #{userId}
+ 		, `postId` = #{postId}
+ 		, `imagePath` = #{imagePath}
+ 		, `updatedAt` = NOW()
+ 	WHERE
+ 		`userId` = #{userId}
+ 		AND `postId` = #{postId}
+ 	</update>
  
  </mapper>

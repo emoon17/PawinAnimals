@@ -13,3 +13,10 @@ spring:
     url: jdbc:mysql://localhost:3306/pawin_230130?&characterEncoding=UTF-8
     username: root
     password: root
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+      
+        
+  

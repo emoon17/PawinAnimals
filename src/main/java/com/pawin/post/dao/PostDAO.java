@@ -20,7 +20,11 @@ public interface PostDAO {
 	
 	public void insertPost(Post post);
 	
+	public void updatePost(Post post);
+	
 	public List<Post> selectPostList();
+	
+	public List<Post> selectPostListByPostId(int postId);
 	
 	public List<Keyword> selectKeywordListByTitleStatusAnimalsArea(
 			@Param("searchTitle") String searchTitle,

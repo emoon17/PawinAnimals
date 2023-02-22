@@ -36,14 +36,11 @@ public class PostImageBO {
 	}
 
 	public void addPost(List<MultipartFile> files, int userId, String loginId, int postId) {
-
+		
 		// 파일 업로드 => 내 컴퓨터 서버에만 올린다. 경로로 보여지기.
 		String imagePath = null;
 		if (files != null) {
 			// 파일이 있을 때만 업로드 -> 이미지 경로를 얻어냄
-
-			// 파일메니저 파일 갯수만큼 반복
-
 			for (MultipartFile file : files) {
 				imagePath = fileManagerService.saveFile(loginId, file);
 				// 파일 갯수만큼 다오에 넣게 (n개)
@@ -51,28 +48,27 @@ public class PostImageBO {
 			}
 		}
 	}
-
+	// 이미지 수정
 	public void updateImage(List<MultipartFile> files, int userId, String loginId, int postId) {
 
-		ImagePath imagePath = getIamgePathByPostId(postId);
+		List<ImagePath> imagePathList = getImagePathListByPostId(postId);
 
 		// 파일 업로드 => 내 컴퓨터 서버에만 올린다. 경로로 보여지기.
 		String imagePaths = null;
 		if (files != null) {
-			// 파일이 있을 때만 업로드 -> 이미지 경로를 얻어냄
-
 			// 파일메니저 파일 갯수만큼 반복
-
 			for (MultipartFile file : files) {
+				// 파일이 있을 때만 업로드 -> 이미지 경로를 얻어냄
 				imagePaths = fileManagerService.saveFile(loginId, file);
-				// 파일 갯수만큼 다오에 넣게 (n개)
-				postImageDAO.insertImagePost(imagePaths, userId, postId);
-				
-				if (imagePaths != null && imagePath.getImagePath() != null) {
-					// 이미지 제거
-					fileManagerService.deleteFile(imagePath.getImagePath());
+				for (ImagePath imagePath : imagePathList) {
+					if (imagePaths != null && imagePath.getImagePath() != null) {
+						// 이미지 제거
+						fileManagerService.deleteFile(imagePath.getImagePath());
+					}
 				}
 			}
+			postImageDAO.updateImage(imagePaths, userId, postId);
+			
 		}
 	}
 

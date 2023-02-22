@@ -51,6 +51,10 @@ public class PostBO {
 	public List<Post> getPostList() {
 		return postDAO.selectPostList();
 	}
+	
+	public List<Post> getPostListByPostId(int postId) {
+		return postDAO.selectPostListByPostId(postId);
+	}
 
 	// 글 디테일 내용
 	public List<PostView> getPostByPostIdUserId(int postId, int userId) {
@@ -108,21 +112,24 @@ public class PostBO {
 		// 1. 글 등록
 		post.setUserId(userId);
 		postDAO.insertPost(post);
-
+		User user = userBO.getUserById(userId);
 		// 2 . 이미지 업로들을 내 컴퓨터에 업로드
-		postImageBO.addPost(files, userId, post.getStatus(), post.getId());
+		postImageBO.addPost(files, userId, user.getLoginId(), post.getId());
 	}
 	
 	// 글 update
 	public void updatePost(Post post, List<MultipartFile> files, int userId) {
 		
 		post.setUserId(userId);
+		postDAO.updatePost(post);
+		User user = userBO.getUserById(userId);
+		
+		postImageBO.updateImage(files, userId, user.getLoginId(), post.getId());
 		
 		if (post == null) {
 			logger.warn("=========[update post] 수정할 메모가 존재하지 않습니다. post:{}, userId:{}", post, userId);
 			return;
 		}
-		
 		
 	}
 	

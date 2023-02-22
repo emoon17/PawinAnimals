@@ -43,6 +43,23 @@
 		ORDER BY `id` DESC 
  	</select>
  	
+ 	<select id="selectPostListByPostId" resultType="com.pawin.post.model.Post">
+ 	SELECT
+ 			`id`
+			,`userId`
+			,`title`
+			,`content`
+			,`animals`
+			,`status`
+			,`area`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`post`
+		WHERE
+			`id` = #{postId}
+ 	</select>
+ 	
  	<select id="selectKeywordListByTitleStatusAnimalsArea" resultType="com.pawin.post.model.Post">
  		SELECT
  			`id`
@@ -97,5 +114,27 @@
  		)
  		
  	</insert>
+ 	<update id="updatePost" parameterType="map">
+ 		<selectKey keyColumn="id" order="AFTER" resultType="map" keyProperty="id">
+ 			SELECT
+ 				`id`
+ 			FROM
+ 				`post`
+ 			WHERE
+ 				`userId` = #{userId}
+ 				AND 
+ 				`id` = #{id}
+ 		</selectKey>
+ 		UPDATE `post`
+ 		SET
+ 			`userId` = #{userId}
+			,`title` = #{title}
+			,`content` = #{content}
+			,`animals` = #{animals}
+			,`status` = #{status}
+			,`area` = #{area}
+			,`updatedAt` = NOW()
+ 	</update>
+ 	
  	
  </mapper>
