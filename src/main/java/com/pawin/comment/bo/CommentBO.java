@@ -57,11 +57,7 @@ public class CommentBO {
 	
 	// 댓글삭제
 	public void deleteCommentListByPostId(int userId, int postId, String content){
-		List<Comment> commentList = getCommentListByPostId(postId);
-		
-		for (Comment comment : commentList) {
-			commentDAO.deleteCommentListByPostId(comment.getUserId(), comment.getPostId(), comment.getContent());
-		}
+		commentDAO.deleteCommentListByPostId(userId, postId, content);
 		
 	}
 	

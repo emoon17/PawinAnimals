@@ -43,14 +43,11 @@ public class PostController {
 	 * @return
 	 */
 	@GetMapping("/look_for_family_list_view")
-	public String lookFamilyListView(
-			Model model, 
-			HttpSession session) {
+	public String lookFamilyListView(Model model, HttpSession session) {
 
 		// 세션 가져오기
 		Integer userId = (Integer) session.getAttribute("userId");
-		
-		
+
 		// postView 카드 가져오기 - 댓글, 글, 사진 다 있는 거 가져오기.
 		List<PostView> postList = postBO.generatePostList(userId);
 		model.addAttribute("postList", postList);
@@ -71,13 +68,12 @@ public class PostController {
 	 * @return
 	 */
 	@GetMapping("/search_list_view")
-	public String searchList(
-			@RequestParam(value = "searchTitle", required = false) String searchTitle,
-			@RequestParam("searchStatus") String searchStatus, 
-			@RequestParam("searchAnimals") String searchAnimals,
-			@RequestParam("searchArea") String searchArea,
-			Model model) {
+	public String searchList(@RequestParam(value = "searchTitle", required = false) String searchTitle,
+			@RequestParam("searchStatus") String searchStatus, @RequestParam("searchAnimals") String searchAnimals,
+			@RequestParam("searchArea") String searchArea, Model model) {
 
+		//session
+		
 		// select
 		List<Keyword> keywordList = postBO.getKeywordListByTitleStatusAnimalsArea(searchTitle, searchStatus,
 				searchAnimals, searchArea);
@@ -87,9 +83,10 @@ public class PostController {
 		return "post/LookfamilyListSearch";
 
 	}
-	
+
 	/**
 	 * 가족을 찾습니다 상세화면 view
+	 * 
 	 * @param postId
 	 * @param model
 	 * @param session
@@ -104,7 +101,7 @@ public class PostController {
 			return "redirect:/user/signIn_view";
 		}
 		// 1. DB select -userId, postId
-		List<PostView> postViewList = postBO.getPostByPostIdUserId(postId, userId); 
+		List<PostView> postViewList = postBO.getPostByPostIdUserId(postId, userId);
 		model.addAttribute("postView", postViewList);
 		// 화면 이동
 		model.addAttribute("veiwName", "post/LookFamilyDetail");
@@ -112,16 +109,21 @@ public class PostController {
 
 	}
 
-	/*
-	 * @PostMapping("/update_view") public String updateView(
-	 * 
-	 * @RequestParam("postId") int postId, HttpSession session, Model model) {
-	 * 
-	 * // 세션에서 userId가져오기 Integer userId = (Integer) session.getAttribute("userId");
-	 * 
-	 * 
-	 * model.addAttribute("viewName", "post/updatePost"); return "template/layout";
-	 * 
-	 * }
-	 */
+	@GetMapping("/update_view")
+	public String updateView(
+			@RequestParam("postId") int postId,
+			HttpSession session, 
+			Model model) {
+
+		// 세션에서 userId가져오기
+		Integer userId = (Integer) session.getAttribute("userId");
+		// 필요한 post 가져오기
+		List<PostView> postViewList = postBO.getPostByPostIdUserId(postId, userId);
+		model.addAttribute("postView", postViewList);
+		
+		model.addAttribute("veiwName", "post/updatePost");
+		return "template/layout";
+
+	}
+
 }

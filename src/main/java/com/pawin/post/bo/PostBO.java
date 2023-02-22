@@ -3,17 +3,20 @@ package com.pawin.post.bo;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.pawin.comment.bo.CommentBO;
 import com.pawin.comment.model.CommentView;
+import com.pawin.common.FileManagerService;
 import com.pawin.likeadopt.bo.LikeadoptBO;
 import com.pawin.likeadopt.model.AdoptView;
 import com.pawin.likeadopt.model.LikeView;
-import com.pawin.likeadopt.model.Likeadopt;
 import com.pawin.post.dao.PostDAO;
+import com.pawin.post.dao.PostImageDAO;
 import com.pawin.post.model.ImagePathView;
 import com.pawin.post.model.Keyword;
 import com.pawin.post.model.Post;
@@ -23,6 +26,8 @@ import com.pawin.user.model.User;
 
 @Service
 public class PostBO {
+	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private PostDAO postDAO;
@@ -38,6 +43,9 @@ public class PostBO {
 	
 	@Autowired
 	private LikeadoptBO likeAdoptBO;
+	
+	@Autowired
+	private FileManagerService fileManagerService;
 	
 	
 	public List<Post> getPostList() {
@@ -104,6 +112,21 @@ public class PostBO {
 		// 2 . 이미지 업로들을 내 컴퓨터에 업로드
 		postImageBO.addPost(files, userId, post.getStatus(), post.getId());
 	}
+	
+	// 글 update
+	public void updatePost(Post post, List<MultipartFile> files, int userId) {
+		
+		post.setUserId(userId);
+		
+		if (post == null) {
+			logger.warn("=========[update post] 수정할 메모가 존재하지 않습니다. post:{}, userId:{}", post, userId);
+			return;
+		}
+		
+		
+	}
+	
+	
 
 	// 글 목록 보여주기
 	public List<PostView> generatePostList(Integer userId) {

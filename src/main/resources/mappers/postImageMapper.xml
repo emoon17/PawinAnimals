@@ -31,7 +31,7 @@
 			`postId` = #{postId}
  	</select>
  	
- 	<select id="selectIamgePath" resultType="com.pawin.post.model.ImagePath">
+ 	<select id="selectIamgePathByPostId" resultType="com.pawin.post.model.ImagePath">
  		SELECT
 	 		`id`
 			,`userId`
@@ -40,6 +40,8 @@
 			,`createdAt`
 		FROM
 			`imagepath`
+		WHERE
+			`postId` = #{postId}
  	</select>
  
  </mapper>

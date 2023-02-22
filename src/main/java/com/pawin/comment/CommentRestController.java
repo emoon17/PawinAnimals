@@ -57,7 +57,7 @@ public class CommentRestController {
 			return result;
 		}
 		// delete
-		commentBO.deleteCommentListByPostId(postId, postId, content);
+		commentBO.deleteCommentListByPostId(userId, postId, content);
 		result.put("code", 1);
 		
 		// 응답

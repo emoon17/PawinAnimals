@@ -11,7 +11,7 @@
 		<div
 			class="d-flex align-itmes-end justify-content-end font-weight-bold">
 			<fmt:formatDate value="${postview.post.createdAt}"
-				pattern="yyyy-mm-dd a hh:mm:ss" />
+				pattern="yyyy-MM-dd a hh:mm:ss" />
 		</div>
 
 		<%-- 제목 --%>
@@ -110,7 +110,7 @@
 						<%-- <%-- 모달로 댓글 삭제하기 --%> 
 					<c:if test="${userId eq postview.user.id}">
 						<img src="/static/image/delete.png" id="deleteCommentBtn" class="commentDelBtn mt-1 more-btn write-area" data-toggle="modal"
-						data-target="#modal" data-post-id="${postview.post.id}" width="30px" height="33x">
+						data-target="#modal" data-post-id="${postview.post.id}"  data-comment-content="${commentView.comment.content}" width="30px" height="33x">
 					</c:if>
 				</div>
 			</c:forEach>
@@ -126,11 +126,12 @@
 			</div>
 		</c:if>
 		
-		<div class="d-flex justify-content-end">
+		<div class="d-flex justify-content-end mt-5">
 			<c:if test="${userId eq postview.user.id}">
-				<a href="#"><spna class="write-area">수정|</spna> 
+				<a href="/post/update_view?postId=${postview.post.id}" class="write-area mr-2">수정
 				</a>
-				<a href="#"><spna class="write-area">삭제</spna> 
+				<span class="mr-2 mt-1">|</span>
+				<a href="#"><span id="deletePostBtn" class="write-area">삭제</span> 
 				</a>
 			</c:if>
 		</div>
@@ -146,7 +147,7 @@
 		<div class="modal-content text-center">
 			<%-- 삭제하기 --%>
 			<div class="py-3 border-bottom">
-				<a href="#" id="deletePostBtn" class="content-area font-weight-bold">삭제하기</a>
+				<a href="#" id="deleteCommentBtn" class="content-area font-weight-bold">삭제하기</a>
 			</div>
 			<%-- data-dismiss="modal"추가하면 모달 창 닫힘 --%>
 			<div class="py-3 " data-dismiss="modal">
@@ -191,6 +192,8 @@
 	</div>
 </div>
 </c:forEach>
+
+
 <script>
 	$(document).ready(function() {
 
@@ -273,17 +276,21 @@
 				
 			let postId = $(this).data('post-id'); //getting (태그에 있는 걸 얻어오는것)
 			//alert(postId);
-				
+			let content = $(this).data('comment-content');
+			//alert(content);	
 			$('#modal').data('post-id', postId); // setting(모달 태그에 data-post-id를 심어놓는것)
-				
+			$('#modal').data('comment-content', content);
+			
 		}); // 모달에 데이터 심어 놓기
 		
-		$('#modal #deletePostBtn').on('click', function() {
+		// 모달의 
+		$('#modal #deleteCommentBtn').on('click', function(e) {
+			e.preventDefault();
 			
 			let postId = $('#modal').data('post-id');
-			alert(postId);
-			let content = $('#content').text();
-			alert(content);
+			//alert(postId);
+			let content = $('#modal').data('comment-content');
+			//alert(content);
 			
 			
 			//ajax
@@ -296,7 +303,7 @@
 				//response
 				, success:function(data){
 					if (data.code ==1) {
-					document.location.reload();
+						location.reload(true);
 					alert("댓글이 삭제 되었습니다.");
 					} else {
 						alert(data.errorMessage);
@@ -309,7 +316,7 @@
 			
 			});
 			
-		}); // 댓글 삭제
+		}); // comment delete
 		
 
 	}); // document end

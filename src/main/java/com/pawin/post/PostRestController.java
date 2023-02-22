@@ -5,20 +5,16 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pawin.post.bo.PostBO;
 import com.pawin.post.bo.PostImageBO;
-import com.pawin.post.model.Keyword;
 import com.pawin.post.model.Post;
 
 import jakarta.servlet.http.HttpSession;
@@ -59,12 +55,6 @@ public class PostRestController {
 		
 		  if (post != null) { 
 		      result.put("code", 1); 
-		      session.setAttribute("title", post.getTitle());
-		      session.setAttribute("content", post.getContent());
-		      session.setAttribute("status", post.getStatus());
-		      session.setAttribute("animals", post.getAnimals());
-		      session.setAttribute("postId", post.getId());
-		      session.setAttribute("area", post.getArea());
           } 
 		  else {
 			  result.put("errorMessage","관리자에게 문의하여 주세요."); 
@@ -75,6 +65,24 @@ public class PostRestController {
 		return result;
 	}
 	
+	@PutMapping("/post_update")
+	public Map<String, Object> postUpdate(
+			@ModelAttribute Post post, // name 태그 값과 일치하는 필드에 값이 들어간다.
+			@RequestPart("files") List<MultipartFile> files,
+			HttpSession session){
+		
+		// 필요한 세션 - userId, loginId
+		int userId = (int)session.getAttribute("userId");
+		String loginId = (String)session.getAttribute("loginId");
+		
+		// db update
+		
+		//코드 나누기
+		Map<String, Object> result = new HashMap<>();
+		
+		// 응답하기
+		return result;
+	}
 	
 
 }

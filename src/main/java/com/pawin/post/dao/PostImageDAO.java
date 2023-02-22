@@ -17,5 +17,5 @@ public interface PostImageDAO {
 	
 	public List<ImagePath> selectImagePathListByPostId(int postId);
 	
-	public List<ImagePath> selectIamgePath();
+	public ImagePath selectIamgePathByPostId(int postId);
 }
