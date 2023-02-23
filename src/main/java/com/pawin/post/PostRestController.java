@@ -92,6 +92,12 @@ public class PostRestController {
 		return result;
 	}
 
+	/**
+	 * 게시글 삭제하기 API
+	 * @param postId
+	 * @param session
+	 * @return
+	 */
 	@DeleteMapping("/post_delete")
 	public Map<String, Object> postDelete(
 			@RequestParam("postId") int postId,

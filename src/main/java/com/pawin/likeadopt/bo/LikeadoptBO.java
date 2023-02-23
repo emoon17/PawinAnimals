@@ -27,15 +27,13 @@ public class LikeadoptBO {
 		if (userId == null) {
 			return false;
 		}
-		
-		return likeadoptDAO.selectLikeadoptCountByPostOrUserId(postId, userId, type) > 0 ? true :false;
-	}
-	
 
+		return likeadoptDAO.selectLikeadoptCountByPostOrUserId(postId, userId, type) > 0 ? true : false;
+	}
 
 	public int getLikeadoptCountByPostId(int postId, String type) {
-		// 행의 갯수 가져오기 
-		return likeadoptDAO.selectLikeadoptCountByPostOrUserId(postId,null, type);
+		// 행의 갯수 가져오기
+		return likeadoptDAO.selectLikeadoptCountByPostOrUserId(postId, null, type);
 	}
 
 	public void deleteLikeadoptByPostIdUserId(int postId, int userId, String type) {
@@ -59,6 +57,12 @@ public class LikeadoptBO {
 
 	}
 
+	public void deleteLikeAdopt(int postId, int userId) {
+
+		likeadoptDAO.deleteLikeAdopt(postId, userId);
+
+	}
+
 	public List<LikeView> generateLikeViewList(int postId, String type) {
 
 		List<LikeView> likeViewList = new ArrayList<>();
@@ -67,14 +71,14 @@ public class LikeadoptBO {
 
 		for (Likeadopt likeadopt : likeadoptList) {
 			LikeView likeView = new LikeView();
-			
+
 			likeView.setLikeadopt(likeadopt);
-			if (likeView.getLikeadopt().getType().equals("like")) { 
-				
-				//사용자
+			if (likeView.getLikeadopt().getType().equals("like")) {
+
+				// 사용자
 				User user = userBO.getUserById(likeadopt.getUserId());
 				likeView.setUser(user);
-				
+
 				likeViewList.add(likeView);
 			}
 		}
@@ -90,14 +94,14 @@ public class LikeadoptBO {
 
 		for (Likeadopt likeadopt : likeadoptList) {
 			AdoptView adoptView = new AdoptView();
-			
+
 			adoptView.setLikeadopt(likeadopt);
 			if (adoptView.getLikeadopt().getType().equals("adopt")) {
-				
-				//사용자
+
+				// 사용자
 				User user = userBO.getUserById(likeadopt.getUserId());
 				adoptView.setUser(user);
-				
+
 				AdoptViewList.add(adoptView);
 			}
 		}

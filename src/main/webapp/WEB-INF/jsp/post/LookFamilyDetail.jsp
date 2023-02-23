@@ -333,7 +333,7 @@
 		$('#deletePostBtn').on('click', function(){
 			//alert("d");
 			let postId = $(this).data('post-id');
-			alert(postId);
+			//alert(postId);
 			
 			//ajax
 			$.ajax({

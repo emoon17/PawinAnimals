@@ -40,6 +40,15 @@
  			AND `type` = #{type}
  	</delete>
  	
+ 	<delete id="deleteLikeAdopt" parameterType="map">
+ 		DELETE
+ 		FROM
+ 		 `likeadopt`
+ 		WHERE
+ 			`postId` = #{postId}
+ 			AND `userId` = #{userId}
+ 	</delete>
+ 	
  	<insert id="insertLikeadoptByPostIdUserId" parameterType="map">
  		INSERT INTO `likeadopt`
  		(

@@ -32,8 +32,14 @@
 										<thead>
 											<tr>
 												<th class="menu_subject font-weight-bold">Menu</th>
+												<c:if test="${empty userId}">
 												<th class="menu_login_info font-weight-bold"><a href="/user/signIn_view">로그인</a></th>
 												<th class="menu_login_info font-weight-bold"><a href="/user/signUp_view">회원가입</a></th>
+												</c:if>
+												<c:if test="${not empty userId}">
+												<th class="menu_login_info font-weight-bold"><a href="#">${loginId}</a></th>
+												<th class="menu_login_info font-weight-bold"><a href="/user/signOut">logout</a></th>
+												</c:if>
 											</tr>
 										</thead>
 										
@@ -48,7 +54,7 @@
 												<td colspan='3' class="menu_content font-weight-bold pt-5"><a href="#">반려용품 무료 나눔</a></td>
 											</tr>
 											<tr>
-												<td colspan='3' class="menu_content font-weight-bold pt-5"><a href="#">동물병원 위치 안내</a></td>
+												<td colspan='3' class="menu_content font-weight-bold pt-5"><a href="/post/hospital_list_view">동물병원 위치 안내</a></td>
 											</tr>
 											<tr>
 												<td colspan='3' class="menu_content font-weight-bold pt-5"><a href="#">유기동물 보호 시설</a></td>

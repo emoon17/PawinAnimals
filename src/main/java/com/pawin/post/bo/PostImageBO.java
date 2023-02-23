@@ -80,7 +80,6 @@ public class PostImageBO {
 		String imagePaths = null;
 		if (files != null) {
 			for (MultipartFile file : files) {
-				// 파일이 있을 때만 업로드 -> 이미지 경로를 얻어냄
 				imagePaths = fileManagerService.saveFile(loginId, file);
 				for (ImagePath imagePath : imagePathList) {
 					// 이미지 제거
@@ -89,6 +88,7 @@ public class PostImageBO {
 				}
 			}
 		}
+		postImageDAO.deleteImage(userId, postId);
 	}
 
 	public List<ImagePathView> generateImagePathViewLsitByPostId(int postId) {

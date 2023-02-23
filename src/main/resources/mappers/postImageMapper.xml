@@ -55,5 +55,15 @@
  		`userId` = #{userId}
  		AND `postId` = #{postId}
  	</update>
+ 	
+ 	<delete id="deleteImage" parameterType="map">
+ 	DELETE
+ 	FROM
+ 		`imagePath`
+ 	WHERE
+ 		`userId` = #{userId}
+ 		AND `postId` = #{postId}
+ 	
+ 	</delete>
  
  </mapper>

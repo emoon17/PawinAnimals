@@ -141,6 +141,27 @@ public class PostBO {
 		
 		
 	}
+	 // 글 delete
+	public int deletePostByPostIdUserId(int postId, int userId) {
+		
+		List<Post> postList = getPostListByPostId(postId);
+		for (Post post : postList) {
+			if (post == null) {
+				logger.warn("[글 삭제] post is null. postId:{}, userId{}", postId, userId);
+				return 0;
+			}
+			User user = userBO.getUserById(userId);
+			// 이미지 삭제
+			postImageBO.deleteImage(null, userId, user.getLoginId(), postId);
+			// 댓글 삭제
+			commentBO.deleteCommentListByPostId(userId, postId, null);
+			// 좋아요 삭제
+			likeAdoptBO.deleteLikeAdopt(postId, userId);
+			
+		}
+		return postDAO.deletePostByPostIdUserId(postId, userId);
+	}
+
 	
 	
 
@@ -198,25 +219,5 @@ public class PostBO {
 		return keywordList;
 	}
 	
-	public int deletePostByPostIdUserId(int postId, int userId) {
-		
-		List<Post> postList = getPostListByPostId(postId);
-		for (Post post : postList) {
-			if (post == null) {
-				logger.warn("[글 삭제] post is null. postId:{}, userId{}", postId, userId);
-				return 0;
-			}
-		}
-		User user = userBO.getUserById(userId);
-		// 이미지 삭제
-		
-		postImageBO.deleteImage(null, userId, user.getLoginId(), postId);
-		// 댓글 삭제
-		commentBO.deleteCommentListByPostId(userId, postId, null);
-		// 좋아요 삭제
-		likeAdoptBO.deleteLikeadoptByPostIdUserId(postId, userId, null);
-		// 삭제 리턴
-		return postDAO.deletePostByPostIdUserId(postId, userId);
-	}
 
 }

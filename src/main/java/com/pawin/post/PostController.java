@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -108,7 +107,14 @@ public class PostController {
 		return "template/layout";
 
 	}
-
+	
+	/**
+	 * 게시글 수정하기 view
+	 * @param postId
+	 * @param session
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/update_view")
 	public String updateView(
 			@RequestParam("postId") int postId,
@@ -124,6 +130,14 @@ public class PostController {
 		model.addAttribute("veiwName", "post/updatePost");
 		return "template/layout";
 
+	}
+	
+	@GetMapping("/hospital_list_view")
+	public String hospitalListView(Model model) {
+		
+		
+		model.addAttribute("veiwName", "post/hospital/list");
+		return "template/layout";
 	}
 
 }

@@ -20,6 +20,10 @@ public interface PostImageDAO {
 	
 	public ImagePath selectIamgePathByPostId(int postId);
 	
+	public void deleteImage(
+			@Param("userId") int userId, 
+			@Param("postId") int postId);
+	
 	public void updateImage(
 			@Param("imagePath") String imagePath,
 			@Param("userId") int userId, 

@@ -21,6 +21,10 @@ public interface LikeadoptDAO {
 			@Param("userId") Integer userId,
 			@Param("type") String type);
 	
+	public void deleteLikeAdopt(
+			@Param("postId") int postId, 
+			@Param("userId") int userId);
+	
 	public void insertLikeadoptByPostIdUserId(
 			@Param("postId") int postId, 
 			@Param("userId") int userId,
