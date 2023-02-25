@@ -27,9 +27,9 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
 	implementation group: 'org.glassfish.web', name: 'jakarta.servlet.jsp.jstl', version: '2.0.0'
+	implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 	implementation 'org.apache.httpcomponents:httpcore:4.4.15'
 	implementation 'org.apache.httpcomponents:httpclient:4.5.13'
-	
 }
 
 tasks.named('test') {

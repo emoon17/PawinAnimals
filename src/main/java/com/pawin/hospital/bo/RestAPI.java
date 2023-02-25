@@ -1,19 +1,18 @@
 package com.pawin.hospital.bo;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
@@ -23,13 +22,15 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@RestController
+@Service
 public class RestAPI {
+	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	 private final String seoulUrl = "http://openapi.seoul.go.kr:8088/";
 
 	 
-	 @GetMapping("/seoul")
+	 //@GetMapping("/seoul")
 	 public String seoulAPI() throws JsonProcessingException{
 		
 		// 0. 결과 값을 담을 객체를 생성한다.
@@ -69,22 +70,25 @@ public class RestAPI {
 	        result.put("header", responseMap.getHeaders()); //헤더 정보 확인
 	        result.put("body", responseMap.getBody()); //실제 데이터 정보 확인
 	        
-	        //전체 정보를 담는 LOCALDATA_020301의 value 접근
-	        LinkedHashMap linkMap = (LinkedHashMap)responseMap.getBody().get("LOCALDATA_020301"); 
-	        // 병원리스트를 담고 있는 row 의 value 접근(list형태임)
-	        ArrayList<Map> rowList = (ArrayList<Map>)linkMap.get("row");
-	        LinkedHashMap hospitalMap = new LinkedHashMap<>();
 	        
-	       for (Map row : rowList) {
-	    	   hospitalMap.put(row.get("BPLCNM"), row.get("SITEWHLADDR"));
-	    	   hospitalMap.put(row.get("X"), row.get("Y"));
-	    	   
-	       }
+			/*
+			 * //전체 정보를 담는 LOCALDATA_020301의 value 접근 LinkedHashMap linkMap =
+			 * (LinkedHashMap)responseMap.getBody().get("LOCALDATA_020301"); // 병원리스트를 담고 있는
+			 * row 의 value 접근(list형태임) ArrayList<Map> rowList =
+			 * (ArrayList<Map>)linkMap.get("row"); LinkedHashMap hospitalMap = new
+			 * LinkedHashMap<>();
+			 * 
+			 * for (Map row : rowList) { hospitalMap.put(row.get("BPLCNM"),
+			 * row.get("SITEWHLADDR")); hospitalMap.put(row.get("X"), row.get("Y"));
+			 * 
+			 * }
+			 */
 	        
+	      
 	        
 	        // 데이터를 제대로 전달 받았는 지 확인. String형태로 파싱해줌
 	        ObjectMapper mapper = new ObjectMapper();
-	        jsonInString = mapper.writeValueAsString(hospitalMap);
+	        jsonInString = mapper.writeValueAsString(responseMap.getBody());
 		} catch (HttpClientErrorException | HttpServerErrorException e) {
 			result.put("statusCode", e.getRawStatusCode());
 			result.put("body", e.getStatusText());
@@ -97,6 +101,9 @@ public class RestAPI {
 		
 		return jsonInString;
 	}
+	 
+
+	 
 	 
 	 public String kangwonAPI() throws JsonProcessingException{
 			

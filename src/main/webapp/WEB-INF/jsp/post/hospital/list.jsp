@@ -40,7 +40,7 @@
 				<thead>
 					<tr>
 						<th class="menu_login_info font-weight-bold">NO.</th>
-						<th class="menu_login_info font-weight-bold">상호</th>
+						<th class="menu_login_info font-weight-bold">${name}</th>
 						<th class="menu_login_info font-weight-bold">지역</th>
 					</tr>
 				</thead>
