@@ -46,7 +46,7 @@ public class HospitalController {
 	}
 	
 	@GetMapping("/hospital_list_detail_view")
-	public String hostpitalListDetailView(Model model) {
+	public String hostpitalListDetailView(Model model, String name, String X, String Y) {
 		
 		model.addAttribute("veiwName", "post/hospital/detail");
 		return "template/layout";

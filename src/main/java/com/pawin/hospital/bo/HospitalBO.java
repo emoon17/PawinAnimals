@@ -39,19 +39,22 @@ public class HospitalBO {
 			
 			Map<String, Object> map = new HashMap<String, Object>();
 			String closed = (String)item.get("TRDSTATENM");
+			String name = (String)item.get("BPLCNM");
+			String address = (String)item.get("RDNWHLADDR");
+			String X = (String)item.get("X");
+			String Y = (String)item.get("Y");
 			
 			if (!closed.contains("휴업") && !closed.contains("폐업") ) {
 				
-				String name = (String)item.get("BPLCNM");
+				if (!X.isEmpty() && !Y.isEmpty()) {
 				map.put("name", name);
-				String address = (String)item.get("RDNWHLADDR");
+				
 				map.put("address", address);
-				String X = (String)item.get("X");
 				map.put("X", X);
-				String Y = (String)item.get("Y");
 				map.put("Y", Y);
 				
 				hospitalList.add(map);
+				}
 			}
 			
 		}
