@@ -30,7 +30,7 @@ public class RestAPI {
 	 private final String seoulUrl = "http://openapi.seoul.go.kr:8088/";
 
 	 
-	 //@GetMapping("/seoul")
+	 
 	 public String seoulAPI() throws JsonProcessingException{
 		
 		// 0. 결과 값을 담을 객체를 생성한다.
@@ -60,7 +60,7 @@ public class RestAPI {
 			HttpHeaders header = new HttpHeaders();
 			HttpEntity<String> entity = new HttpEntity<>(header);
 			
-			//http://openapi.seoul.go.kr:8088/4a7357466b65756e37386462676f62/json/LOCALDATA_020301/1/100/
+			
 			// 4. url와 key값
 			UriComponents uri = UriComponentsBuilder.fromHttpUrl(seoulUrl + "4a7357466b65756e37386462676f62" + "/json/LOCALDATA_020301/1/150/").build();
 			
