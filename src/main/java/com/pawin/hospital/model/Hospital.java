@@ -6,9 +6,12 @@ public class Hospital {
 	
 	private int id;
 	private String name;
-	private String coordinate;
+	private String coordinateX;
+	private String coordinateY;
 	private String address;
 	private Date createdAt;
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -21,12 +24,6 @@ public class Hospital {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getCoordinate() {
-		return coordinate;
-	}
-	public void setCoordinate(String coordinate) {
-		this.coordinate = coordinate;
-	}
 	public String getAddress() {
 		return address;
 	}
@@ -38,6 +35,18 @@ public class Hospital {
 	}
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
+	}
+	public String getCoordinateX() {
+		return coordinateX;
+	}
+	public void setCoordinateX(String coordinateX) {
+		this.coordinateX = coordinateX;
+	}
+	public String getCoordinateY() {
+		return coordinateY;
+	}
+	public void setCoordinateY(String coordinateY) {
+		this.coordinateY = coordinateY;
 	}
 
 	

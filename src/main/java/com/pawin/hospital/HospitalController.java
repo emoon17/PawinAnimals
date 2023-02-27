@@ -1,7 +1,8 @@
 package com.pawin.hospital;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+import java.util.List;
+import java.util.Map;
+
 import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.pawin.hospital.bo.HospitalBO;
 import com.pawin.hospital.bo.RestAPI;
+
 
 @Controller
 public class HospitalController {
@@ -21,37 +24,31 @@ public class HospitalController {
 	@Autowired
 	private RestAPI restAPI;
 	
+	@Autowired
+	private HospitalBO hospitalBO;
+	
+	/**
+	 *  동물병원 목록 view
+	 * @param model
+	 * @return
+	 * @throws JsonProcessingException
+	 * @throws ParseException
+	 */
 	@GetMapping("/hospital_list_view")
-	public String hostpital(Model model) throws ParseException, JsonProcessingException {
+	public String hostpitalListView(Model model) throws JsonProcessingException, ParseException{
 
-		// json 파싱하기
-		String json = restAPI.seoulAPI();
-
-		JSONParser jsonParser = new JSONParser();
-		JSONObject jsonObject = (JSONObject) jsonParser.parse(json);
-
-		JSONObject LOCALDATA = (JSONObject) jsonObject.get("LOCALDATA_020301");
-
-		JSONObject row = (JSONObject) LOCALDATA.get("row");
 		
-		JSONObject item;
-		for (int i = 0; i < row.size(); i++) {
-			item = (JSONObject)row.get(i);
-			String name = (String)item.get("BPLCNM");
-			String address = (String)item.get("RDNWHLADDR");
-			String X = (String)item.get("X");
-			String Y = (String)item.get("Y");
-			model.addAttribute("name",name);
-			model.addAttribute("address",address);
-			model.addAttribute("X",X);
-			model.addAttribute("Y",Y);
-		}
-
-		// logger.info(docuObject.get("keyValue").toString());
-		// 뽑아오기 원하는 Key 이름을 넣어주면 그 value가 반환된다.
-
-		model.addAttribute("veiwName", "post/hospital_list_view");
+		List<Map<String, Object>> hospitalList = hospitalBO.restParshing();
+		
+		model.addAttribute("hospitalList", hospitalList);
+		model.addAttribute("veiwName", "post/hospital/list");
 		return "template/layout";
 	}
-
+	
+	@GetMapping("/hospital_list_detail_view")
+	public String hostpitalListDetailView(Model model) {
+		
+		model.addAttribute("veiwName", "post/hospital/detail");
+		return "template/layout";
+	}
 }
