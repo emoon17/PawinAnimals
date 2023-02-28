@@ -1,5 +1,9 @@
 package com.pawin.hospital.bo;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -8,6 +12,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -28,7 +33,9 @@ public class RestAPI {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	 private final String seoulUrl = "http://openapi.seoul.go.kr:8088/";
-
+	 @Value("${kakao_apikey}")
+	 private String kakao_apiKey;
+		// 카카오 api key를 헤더에 셋팅
 	 
 	 
 	 public String seoulAPI() throws JsonProcessingException{
@@ -85,6 +92,43 @@ public class RestAPI {
 		
 		return jsonInString;
 	}
+	 
+	 public String kakaoMapAPI(String name, String X, String Y) {
+			//https://dapi.kakao.com/v2/local/search/keyword.JSON?
+		 try {
+			 //파라미터를 사용하여 요청 url을 구성
+		 String apiURL = "https://dapi.kakao.com/v2/local/search/keyword.JSON?" 
+				 + "x=" + X
+				 + "&y=" + Y;
+		 URL url = new URL(apiURL);
+		 HttpURLConnection con = (HttpURLConnection)url.openConnection();
+		 
+		 //요청 헤더를 setRequestProperty로 지정해준다. 헤더가 많을 시 더 추가하면 됌.
+		 con.setRequestProperty("Authorization",  "KakaoAK " + kakao_apiKey);
+		 con.setRequestMethod("get");
+		 
+		 // 응답 코드 확인
+		 int responseCode = con.getResponseCode();
+		 BufferedReader br;
+		 if (responseCode == 200) { // 정상 호출
+			 br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+		 }else {
+			 // 에러 발생
+			 br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+		 }
+		 String inputLine;
+		 StringBuffer response = new StringBuffer();
+		 while((inputLine = br.readLine()) != null) {
+			 response.append(inputLine);
+		 }
+		 br.close();
+		 return response.toString();
+		 } catch(Exception e) {
+			 System.out.print(e);
+		 }
+		 return "";
+		}
+	 
 	 
 
 	 

@@ -60,4 +60,9 @@ public class HospitalBO {
 		}
 		return hospitalList;
 	}
+	
+	public String getkakaoAPI(String name, String X, String Y) {
+		return restAPI.kakaoMapAPI(name, X, Y);
+	}
+	
 }

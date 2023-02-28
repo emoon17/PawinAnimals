@@ -47,8 +47,10 @@ public class HospitalController {
 	
 	@GetMapping("/hospital_list_detail_view")
 	public String hostpitalListDetailView(Model model, String name, String X, String Y) {
+		return hospitalBO.getkakaoAPI(name, X, Y);
 		
-		model.addAttribute("veiwName", "post/hospital/detail");
-		return "template/layout";
+		//JSP file [/WEB-INF/jsp/.jsp] not found 라고 뜸.
+		//model.addAttribute("veiwName", "post/hospital/detail");
+		//return "template/layout";
 	}
 }
