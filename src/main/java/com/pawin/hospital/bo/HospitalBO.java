@@ -19,9 +19,9 @@ public class HospitalBO {
 
 	@Autowired
 	private RestAPI restAPI;
-	
-	public List<Map<String, Object>> restParshing() throws JsonProcessingException, ParseException{
-		
+
+	public List<Map<String, Object>> restParshing() throws JsonProcessingException, ParseException {
+
 		// json 파싱하기
 		String json = restAPI.seoulAPI();
 
@@ -35,34 +35,42 @@ public class HospitalBO {
 
 		List<Map<String, Object>> hospitalList = new ArrayList<>();
 		for (int i = 0; i < row.size(); i++) {
-			item = (JSONObject)row.get(i);
-			
+			item = (JSONObject) row.get(i);
+
 			Map<String, Object> map = new HashMap<String, Object>();
-			String closed = (String)item.get("TRDSTATENM");
-			String name = (String)item.get("BPLCNM");
-			String address = (String)item.get("RDNWHLADDR");
-			String X = (String)item.get("X");
-			String Y = (String)item.get("Y");
-			
-			if (!closed.contains("휴업") && !closed.contains("폐업") ) {
-				
+			String closed = (String) item.get("TRDSTATENM");
+			String name = (String) item.get("BPLCNM");
+			String address = (String) item.get("RDNWHLADDR");
+			String X = (String) item.get("X");
+			String Y = (String) item.get("Y");
+
+			if (!closed.contains("휴업") && !closed.contains("폐업")) {
+
 				if (!X.isEmpty() && !Y.isEmpty()) {
-				map.put("name", name);
-				
-				map.put("address", address);
-				map.put("X", X);
-				map.put("Y", Y);
-				
-				hospitalList.add(map);
+					map.put("name", name);
+
+					map.put("address", address);
+					map.put("X", X);
+					map.put("Y", Y);
+
+					hospitalList.add(map);
 				}
 			}
-			
+
 		}
 		return hospitalList;
 	}
-	
-	public String getkakaoAPI(String name, String X, String Y) {
-		return restAPI.kakaoMapAPI(name, X, Y);
+
+	public List<Map<String, Object>> kakaoParshing(String name, String X, String Y) throws JsonProcessingException, ParseException {
+
+		// json 파싱하기
+		String json = restAPI.callApi(name, X, Y);
+
+		JSONParser jsonParser = new JSONParser();
+		JSONObject jsonObject = (JSONObject) jsonParser.parse(json);
+
+		JSONArray documents = (JSONArray) jsonObject.get("documents");
+		JSONObject item;
 	}
-	
+
 }
