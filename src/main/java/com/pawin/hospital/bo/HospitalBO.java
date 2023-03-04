@@ -61,16 +61,5 @@ public class HospitalBO {
 		return hospitalList;
 	}
 
-	public List<Map<String, Object>> kakaoParshing(String name, String X, String Y) throws JsonProcessingException, ParseException {
-
-		// json 파싱하기
-		String json = restAPI.callApi(name, X, Y);
-
-		JSONParser jsonParser = new JSONParser();
-		JSONObject jsonObject = (JSONObject) jsonParser.parse(json);
-
-		JSONArray documents = (JSONArray) jsonObject.get("documents");
-		JSONObject item;
-	}
 
 }
