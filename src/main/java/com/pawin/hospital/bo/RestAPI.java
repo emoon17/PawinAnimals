@@ -2,16 +2,16 @@ package com.pawin.hospital.bo;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
-import org.apache.http.client.HttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.hc.client5.http.classic.HttpClient;
+import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
@@ -41,17 +41,17 @@ public class RestAPI {
 		String jsonInString = "";
 
 		try {
-			// Apache HttpComponents : 각 호스트 (Ip와 Port의 조합) 당 커넥션 풀에 생성 가능한 커넥션 수
-			HttpClient httpClient = HttpClientBuilder.create().setMaxConnTotal(50) // 최대 커넥션 수
-					.setMaxConnPerRoute(20).setConnectionTimeToLive(5, TimeUnit.SECONDS) // keep - alive
-					.build();
+			
 			// 1. 타임아웃 설정 시 이 객체를 통해 타임아웃을 제어할 수 있음
-			/*
-			 * HttpComponentsClientHttpRequestFactory factory = new
-			 * HttpComponentsClientHttpRequestFactory(); factory.setConnectTimeout(5000); //
-			 * 타임아웃 설정 5초 factory.setReadTimeout(4500); // 타임아웃 설정 5초
-			 * factory.setHttpClient(httpClient);
-			 */
+			  HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
+			  factory.setConnectTimeout(5000); //타임아웃 설정 5초 
+			  factory.setReadTimeout(3000);
+			  
+			// Apache HttpComponents : 각 호스트 (Ip와 Port의 조합) 당 커넥션 풀에 생성 가능한 커넥션 수
+				HttpClient httpClient = HttpClientBuilder.create().build();
+						
+			 
+			 factory.setHttpClient(httpClient);
 
 			// 2. RestTemplate 객체 생성
 			RestTemplate restTemplate = new RestTemplate();
@@ -62,7 +62,7 @@ public class RestAPI {
 
 			// 4. url와 key값
 			UriComponents uri = UriComponentsBuilder
-					.fromHttpUrl(seoulUrl + "4a7357466b65756e37386462676f62" + "/json/LOCALDATA_020301/1/50/").build();
+					.fromHttpUrl(seoulUrl + "4a7357466b65756e37386462676f62" + "/json/LOCALDATA_020301/1/150/").build();
 
 			// 5. exchange() 코드로 api를 호출해 map 타입으로 전달 받는다.
 			ResponseEntity<Map> responseMap = restTemplate.exchange(uri.toString(), HttpMethod.GET, entity, Map.class);
@@ -85,5 +85,6 @@ public class RestAPI {
 
 		return jsonInString;
 	}
+	
 
 }
