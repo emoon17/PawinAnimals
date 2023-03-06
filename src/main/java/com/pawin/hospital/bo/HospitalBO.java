@@ -61,5 +61,13 @@ public class HospitalBO {
 		return hospitalList;
 	}
 
-	
+	public List<Map<String, String>> nameAddressList(String name, String address) {
+		List<Map<String, String>> nameAddressList = new ArrayList<>();
+		Map<String, String> nameAddressMap = new HashMap<>();
+		nameAddressMap.put("name", name);
+		nameAddressMap.put("address", address);
+		nameAddressList.add(nameAddressMap);
+		
+		return nameAddressList;
+	}
 }

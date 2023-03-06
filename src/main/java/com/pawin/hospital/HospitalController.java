@@ -49,12 +49,12 @@ public class HospitalController {
 	@GetMapping("/hospital_list_detail_view")
 	public String hostpitalListDetailView(Model model, 
 			@RequestParam("name") String name,
-			@RequestParam("coordinateX") String X,
-			@RequestParam("coordinateY" ) String Y) {
+			@RequestParam("address") String address) {
 		
-		//JSP file [/WEB-INF/jsp/.jsp] not found 라고 뜸.
-		List<Map<Object, Object>> transCoordList = transCoord.transform(X, Y);
-		model.addAttribute("transCoordList", transCoordList);
+		//List<Map<Object, Object>> transCoordList = transCoord.transform(X, Y);
+		//model.addAttribute("transCoordList", transCoordList);
+		List<Map<String, String>> nameAddressList = hospitalBO.nameAddressList(name, address);
+		model.addAttribute("nameAddressList", nameAddressList);
 		model.addAttribute("veiwName", "post/hospital/detail");
 		return "template/layout";
 	}
