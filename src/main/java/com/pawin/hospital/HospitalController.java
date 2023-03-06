@@ -10,10 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.pawin.hospital.bo.HospitalBO;
-import com.pawin.hospital.bo.RestAPI;
+import com.pawin.hospital.bo.TransCoord;
 
 
 @Controller
@@ -22,7 +23,7 @@ public class HospitalController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	private RestAPI restAPI;
+	private TransCoord transCoord;
 	
 	@Autowired
 	private HospitalBO hospitalBO;
@@ -46,9 +47,14 @@ public class HospitalController {
 	}
 	
 	@GetMapping("/hospital_list_detail_view")
-	public String hostpitalListDetailView(Model model, String name, String X, String Y) {
+	public String hostpitalListDetailView(Model model, 
+			@RequestParam("name") String name,
+			@RequestParam("coordinateX") String X,
+			@RequestParam("coordinateY" ) String Y) {
 		
 		//JSP file [/WEB-INF/jsp/.jsp] not found 라고 뜸.
+		List<Map<Object, Object>> transCoordList = transCoord.transform(X, Y);
+		model.addAttribute("transCoordList", transCoordList);
 		model.addAttribute("veiwName", "post/hospital/detail");
 		return "template/layout";
 	}

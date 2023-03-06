@@ -1,38 +1,40 @@
 package com.pawin.hospital.bo;
 
-import org.osgeo.proj4j.CRSFactory;
-import org.osgeo.proj4j.CoordinateReferenceSystem;
-import org.osgeo.proj4j.CoordinateTransform;
-import org.osgeo.proj4j.CoordinateTransformFactory;
-import org.osgeo.proj4j.ProjCoordinate;
-import org.osgeo.proj4j.CRSFactory;
-import org.osgeo.proj4j.CoordinateReferenceSystem;
-import org.osgeo.proj4j.CoordinateTransform;
-import org.osgeo.proj4j.CoordinateTransformFactory;
-import org.osgeo.proj4j.ProjCoordinate;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-@SpringBootApplication
+import org.osgeo.proj4j.BasicCoordinateTransform;
+import org.osgeo.proj4j.CRSFactory;
+import org.osgeo.proj4j.CoordinateReferenceSystem;
+import org.osgeo.proj4j.ProjCoordinate;
+import org.springframework.stereotype.Service;
+
+@Service	
 public class TransCoord {
 	
-	public ProjCoordinate transform(String X, String Y) {
-
-	    //parse to Double
-	    Double dblLon = Double.parseDouble(X);
-	    Double dblLat = Double.parseDouble(Y);
-	    CoordinateTransformFactory ctFactory = new CoordinateTransformFactory();
-	    CRSFactory factory = new CRSFactory();
-	    CoordinateReferenceSystem grs80 = factory.createFromName("EPSG:5179"); 
-	    CoordinateReferenceSystem wgs84 = factory.createFromName("EPSG:4326");
-	    CoordinateTransform trans = ctFactory.createTransform(grs80, wgs84);
+	public List<Map<Object, Object>> transform(String X, String Y) {
+		List<Map<Object, Object>> transCoordList = new ArrayList<>();
+		Map<Object, Object> transCoordMap = new HashMap<>();
 		
-	    ProjCoordinate beforeCoord = new ProjCoordinate(dblLon, dblLat);
-	    ProjCoordinate afterCoord = new ProjCoordinate();
-	    
-	    //변환된 좌표 
-	    System.out.println(afterCoord.x + "," + afterCoord.y);
-	    
-	    return trans.transform(beforeCoord, afterCoord);
+		double x = Double.parseDouble(X);
+		double y = Double.parseDouble(Y);
+		CRSFactory factory = new CRSFactory();
+		CoordinateReferenceSystem srcCrs = factory.createFromName("EPSG:5181");
+		CoordinateReferenceSystem dstCrs = factory.createFromName("EPSG:4326");
+		BasicCoordinateTransform transform = new BasicCoordinateTransform(srcCrs, dstCrs);
+		ProjCoordinate srcCoord = new ProjCoordinate(x, y);
+		ProjCoordinate dstCoord = new ProjCoordinate();
+		transform.transform(srcCoord, dstCoord); // 좌표 변환
+		
+		
+		transCoordMap.put("x", dstCoord.x);
+		transCoordMap.put("y", dstCoord.y);
+		transCoordList.add(transCoordMap);
+		
+		
+	    return transCoordList;
 	  }
 	  
 }

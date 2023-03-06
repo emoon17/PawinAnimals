@@ -61,5 +61,5 @@ public class HospitalBO {
 		return hospitalList;
 	}
 
-
+	
 }

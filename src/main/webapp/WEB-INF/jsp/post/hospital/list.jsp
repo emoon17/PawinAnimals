@@ -31,7 +31,7 @@
 					<c:forEach items="${hospitalList}" var="hospital" varStatus="status">
 					<tr>
 						<td class="table-font font-weight-bold">${status.count}</td>
-						<td class="table-font font-weight-bold"><a href="/hospital_list_detail_view?name=${hospital.name}&coordinateX=${hospital.X}&coordinateY=${hospital.X}">${hospital.name}</a></td>
+						<td class="table-font font-weight-bold"><a href="/hospital_list_detail_view?name=${hospital.name}&coordinateX=${hospital.X}&coordinateY=${hospital.Y}">${hospital.name}</a></td>
 						<td class="table-font font-weight-bold">${hospital.address}</td>
 					</tr>
 					</c:forEach>

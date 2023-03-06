@@ -54,7 +54,7 @@
 												<td colspan='3' class="menu_content font-weight-bold pt-5"><a href="#">반려용품 무료 나눔</a></td>
 											</tr>
 											<tr>
-												<td colspan='3' class="menu_content font-weight-bold pt-5"><a href="/post/hospital_list_view">동물병원 위치 안내</a></td>
+												<td colspan='3' class="menu_content font-weight-bold pt-5"><a href="/hospital_list_view">동물병원 위치 안내</a></td>
 											</tr>
 											<tr>
 												<td colspan='3' class="menu_content font-weight-bold pt-5"><a href="#">유기동물 보호 시설</a></td>
