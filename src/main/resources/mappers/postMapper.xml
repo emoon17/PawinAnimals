@@ -8,6 +8,44 @@
  		FROM
  			`post`
  	</select>
+ 	<select id="selectAdoptPostListByPostId" resultType="com.pawin.post.model.Post">
+		SELECT
+			SELECT
+ 			`id`
+			,`userId`
+			,`title`
+			,`content`
+			,`animals`
+			,`status`
+			,`area`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`post`
+		WHERE
+			`status` = '입양완료' 
+			AND
+			`id` = #{postId}	
+ 	
+ 	</select>
+ 	
+ 	<select id="selectAdoptPostList" resultType="com.pawin.post.model.Post">
+ 		SELECT
+ 			`id`
+			,`userId`
+			,`title`
+			,`content`
+			,`animals`
+			,`status`
+			,`area`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`post`
+		WHERE
+			`status` = '입양완료'
+ 	</select>
+
  	<select id="selectPostByPostIdUserId" resultType="com.pawin.post.model.Post" parameterType="map">
  		SELECT
  			`id`

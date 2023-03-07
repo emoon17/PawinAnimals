@@ -53,10 +53,6 @@
 					등록</button></a>
 		</c:if>
 		<c:if test="${empty userId}">
-			<a href="/user/signIn_view"><button type="button" id="createBtn"
-					class="header-btn btn ml-3 copy-font"
-					style="height: 50px; width: 80px;" data-user-id="${userId}">글
-					등록</button></a>
 		</c:if>
 
 	</div>

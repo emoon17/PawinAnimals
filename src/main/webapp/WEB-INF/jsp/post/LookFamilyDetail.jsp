@@ -21,7 +21,7 @@
 		<%--사진 이미지 --%>
 		<div class="card-img">
 			<!-- 시간 남으면 슬라이스로 볼 수 있게하기 -->
-			<c:forEach items='${postview.imagePathList}' var="image">
+			<c:forEach items="${postview.imagePathList}" var="image">
 				<img src="${image.imagePaths.imagePath}" class="w-100 mb-4"
 					alt="본문 이미지">
 			</c:forEach>
@@ -93,10 +93,6 @@
 			</div>
 
 		</div>
-
-
-
-
 		<div class="line mb-3"></div>
 
 		<%-- 댓글 목록 --%>
@@ -152,11 +148,13 @@
 		<%-- modal centered: 모달 창 수직으로 가운데 정렬 --%>
 		<div class="modal-dialog modal-lg modal-dialog-centered">
 			<div class="modal-content text-center">
+			<c:if test="${userId eq postview.user.id}">
 				<%-- 삭제하기 --%>
 				<div class="py-3 border-bottom">
 					<a href="#" id="deleteCommentBtn"
 						class="content-area font-weight-bold">삭제하기</a>
 				</div>
+			</c:if>
 				<%-- data-dismiss="modal"추가하면 모달 창 닫힘 --%>
 				<div class="py-3 " data-dismiss="modal">
 					<a href="#" class="content-area font-weight-bold">취소하기</a>

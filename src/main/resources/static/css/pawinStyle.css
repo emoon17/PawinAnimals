@@ -290,3 +290,7 @@ input[id="menuicon"]:checked+label+div {
 	font-size: 30px;
 }
 
+#logoFont{
+	margin-right:100px;
+	font-size: 22px;
+}

@@ -55,6 +55,21 @@ public class PostController {
 		model.addAttribute("veiwName", "post/LookfamilyList");
 		return "template/layout";
 	}
+	
+	
+	@GetMapping("/adopt_review_list_view")
+	public String adoptListView(Model model, HttpSession session) {
+		
+		// 세션 가져오기
+		Integer userId = (Integer) session.getAttribute("userId");
+		// 입양완료 글만 가져오기
+		List<PostView> postList = postBO.generateAdoptPostList(userId);
+		model.addAttribute("postList", postList);
+		
+		// view 응답
+		model.addAttribute("veiwName", "post/adopt/reviewList");
+		return "template/layout";
+	}
 
 	/**
 	 * 가족을 찾습니다 목록 서치 view
@@ -71,7 +86,6 @@ public class PostController {
 			@RequestParam("searchStatus") String searchStatus, @RequestParam("searchAnimals") String searchAnimals,
 			@RequestParam("searchArea") String searchArea, Model model) {
 
-		//session
 		
 		// select
 		List<Keyword> keywordList = postBO.getKeywordListByTitleStatusAnimalsArea(searchTitle, searchStatus,
@@ -82,6 +96,8 @@ public class PostController {
 		return "post/LookfamilyListSearch";
 
 	}
+	
+	
 
 	/**
 	 * 가족을 찾습니다 상세화면 view
@@ -131,7 +147,11 @@ public class PostController {
 		return "template/layout";
 
 	}
-	
+	/**
+	 *  동물 병원 리스트 view
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/hospital_list_view")
 	public String hospitalListView(Model model) {
 		
@@ -139,5 +159,18 @@ public class PostController {
 		model.addAttribute("veiwName", "post/hospital/list");
 		return "template/layout";
 	}
+	
+	/**
+	 * 입양 완료 글 view
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/adopt_review_view")
+	public String adoptReviewView(Model model) {
+		
+		model.addAttribute("veiwName", "post/adopt/review");
+		return "template/layout";
+	}
+	
 
 }

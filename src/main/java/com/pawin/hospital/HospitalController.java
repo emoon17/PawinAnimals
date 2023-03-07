@@ -46,6 +46,7 @@ public class HospitalController {
 		return "template/layout";
 	}
 	
+	
 	@GetMapping("/hospital_list_detail_view")
 	public String hostpitalListDetailView(Model model, 
 			@RequestParam("name") String name,

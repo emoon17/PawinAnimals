@@ -52,6 +52,14 @@ public class PostBO {
 		return postDAO.selectPostList();
 	}
 	
+	public List<Post> getAdoptPostList(){
+		return postDAO.selectAdoptPostList();
+	}
+	
+	public List<Post> getAdoptPostListByPostId(int postId) {
+		return postDAO.selectAdoptPostListByPostId(postId);
+	}
+	
 	public List<Post> getPostListByPostId(int postId) {
 		return postDAO.selectPostListByPostId(postId);
 	}
@@ -183,13 +191,47 @@ public class PostBO {
 			// 이미지 파일들 첫장만 꺼내기
 			List<ImagePathView> imagePathList = postImageBO.generateImagePathViewLsitByPostId(postsList.get(i).getId());
 			postView.setImagePathList(imagePathList);
-
+			
+			// user
+			User user = userBO.getUserById(userId);
+			postView.setUser(user);
+			
 			// 3) postviewList에 넣기
 			postViewList.add(postView);
 		}
 
 		return postViewList;
 	}
+	
+	// 입양 글 목록 보여주기
+		public List<PostView> generateAdoptPostList(Integer userId) {
+
+			List<PostView> postViewList = new ArrayList<>();
+
+			// 글 목록 가져오기(post)
+			List<Post> postsList = getAdoptPostList();
+
+			// 1)post 리스트를 글 하나하나 뽑는 반복문 만들기
+			for (int i = 0; i < postsList.size(); i++) {
+				// 2) postview세팅
+				PostView postView = new PostView();
+				
+				// 글
+				postView.setPost(postsList.get(i));
+				// 이미지 파일들 첫장만 꺼내기
+				List<ImagePathView> imagePathList = postImageBO.generateImagePathViewLsitByPostId(postsList.get(i).getId());
+				postView.setImagePathList(imagePathList);
+				
+				// user
+				User user = userBO.getUserById(userId);
+				postView.setUser(user);
+				
+				// 3) postviewList에 넣기
+				postViewList.add(postView);
+			}
+
+			return postViewList;
+		}
 
 	// 글 검색하기
 	public List<Keyword> getKeywordListByTitleStatusAnimalsArea(String searchTitle, String searchStatus,

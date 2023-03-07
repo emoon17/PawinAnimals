@@ -30,6 +30,10 @@ public interface PostDAO {
 	
 	public List<Post> selectPostList();
 	
+	public List<Post> selectAdoptPostList();
+	
+	public List<Post> selectAdoptPostListByPostId(int postId);
+	
 	public List<Post> selectPostListByPostId(int postId);
 	
 	public List<Post> selectPostListByPostIdUserId(int postId, int userId);
