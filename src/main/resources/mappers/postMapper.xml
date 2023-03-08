@@ -8,6 +8,28 @@
  		FROM
  			`post`
  	</select>
+ 	<select id="selectFamilyPostListDesc" resultType="com.pawin.post.model.Post">
+		SELECT
+ 			`id`
+			,`userId`
+			,`title`
+			,`content`
+			,`animals`
+			,`status`
+			,`area`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`post`
+		WHERE
+			`status` = '목격'
+			OR `status` = '실종'
+			OR `status` = '찾음'
+			OR `status` = '입양가능'
+		ORDER BY
+			`id` DESC
+		LIMIT 10
+ 	</select>
  	<select id="selectAdoptPostListByPostId" resultType="com.pawin.post.model.Post">
 		SELECT
 			SELECT
@@ -182,48 +204,6 @@
 			AND `userId` = #{userId}
  	</select>
  	
- 	<select id="selectPostListByUserId" parameterType="int" resultType="com.pawin.post.model.Post">
- 		SELECT 
- 			`id`
-			,`userId`
-			,`title`
-			,`content`
-			,`animals`
-			,`status`
-			,`area`
-			,`createdAt`
-			,`updatedAt`
-		FROM
-			`post`
-		WHERE
-			`userId` = #{userId}
-		<if test="direction == null">
-			ORDER BY `id` DESC
-		</if>
-		<if test="direction == 'next'">
-			<![CDATA[
-			AND `id` <  #{standardId}
-			]]>
-		ORDER BY `id` DESC
-		</if>
-		<if test="direction == 'prev'">
-			<![CDATA[
-			AND `id` >  #{standardId}
-			]]>
-		</if>
-		LIMIT ${limit}  <!--mybatis에서 ${} 이건 숫자를 가져오겠다 '' 없이 -->
- 	</select>
- 	
- 	<select id="selectPostIdByUserIdSort" parameterType="map" resultType="int">
- 		SELECT
- 			`id`
- 		FROM
- 			`post`
- 		WHERE 
- 			`userId` = #{userId}
-		ORDER BY `id` ${sort}  <!--mybatis에서 ${} 이건 숫자를 가져오겠다 '' 없이 -->
-		LIMIT 1
- 	</select>
  	
  	<insert id="insertPost" parameterType="map" useGeneratedKeys="true" keyProperty="id">
  		INSERT INTO `post`

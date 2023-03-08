@@ -69,7 +69,7 @@ header {
 	border: 0.2px solid lightgray;
 	width: 550px;
 	height: auto;
-	margin: 30px;
+	margin: 20px;
 	border-radius: 40px;
 	background-color: white;
 	box-shadow: 2px 2px 20px #c0c0c0;
@@ -129,7 +129,7 @@ footer {
 }
 
 .nav>li {
-	margin-left: 84px;
+	margin-left: 40px;
 	font-size: 23px;
 	margin-top: 40px;
 }

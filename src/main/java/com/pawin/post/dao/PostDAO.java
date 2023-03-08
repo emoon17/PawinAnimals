@@ -33,6 +33,8 @@ public interface PostDAO {
 	public List<Post> selectAdoptPostList();
 	
 	public List<Post> selectStatusPostList();
+
+	public List<Post> selectFamilyPostListDesc();
 	
 	public List<Post> selectAdoptPostListByPostId(int postId);
 	
@@ -59,14 +61,5 @@ public interface PostDAO {
 			@Param("postId") int postId,
 			@Param("userId") Integer userId);
 	
-	public List<Post> selectPostListByUserId(
-			@Param("userId") int userId,
-			@Param("direction") String direction,
-			@Param("standardId") Integer standardId,
-			@Param("limit") int limit);
-	
-	public int selectPostIdByUserIdSort(
-			@Param("userId") int userId,
-			@Param("sort") String sort);
 
 }
