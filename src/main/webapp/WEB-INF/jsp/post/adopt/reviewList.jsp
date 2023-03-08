@@ -50,7 +50,7 @@
 						src="${posts.imagePathList[0].imagePaths.imagePath}" alt="이미지"
 						width="300" height="300" class="list-box"
 						data-post-id="${posts.post.id}">
-						<div>${posts.post.id}</div>
+						<%-- <div>${posts.post.id}</div> --%>
 						<div class="copy-font ml-3 font-weight-bold">
 							제목 : <span class="ml-3"> ${posts.post.title}</span>
 						</div>

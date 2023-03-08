@@ -46,7 +46,6 @@
 								<option value="실종">실종</option>
 								<option value="찾음">찾음</option>
 								<option value="입양가능">입양 가능</option>
-								<option value="입양완료">입양 완료</option>
 							</select>
 						</div>
 						<div class="w-100 copy-font">
