@@ -179,10 +179,10 @@
 		FROM
 			`post`
 		WHERE
-			<if test="searchTitle != null">
 			`title` LIKE CONCAT('%', #{searchTitle}, '%')
-			</if>
+			<if test="searchAnimals != null">
 			AND `animals` = #{searchAnimals}
+			</if>
 			AND `status` = '입양완료'
 		ORDER BY `id` DESC
  	</select>

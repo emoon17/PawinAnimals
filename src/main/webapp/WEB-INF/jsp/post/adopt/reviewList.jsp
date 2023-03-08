@@ -55,7 +55,7 @@
 							제목 : <span class="ml-3"> ${posts.post.title}</span>
 						</div>
 						<div class="copy-font ml-3 font-weight-bold">
-							상황 : <span class="ml-3">${posts.post.status}</span>
+							상황 : <span class="ml-3" id="status" data-post-status="${posts.post.status}">${posts.post.status}</span>
 						</div>
 						<div class="copy-font ml-3 font-weight-bold">
 							동물 종: <span class="ml-3">${posts.post.animals}</span>
@@ -105,8 +105,8 @@
 		$('#serachBtn').on('click', function() {
 			let searchTitle = $('#title').val();
 			let searchAnimals = $("#animals option:selected").val();
-			let searchStatus = $('#adoptStatus').data('post-status');
-			alert(searchStatus);
+			let searchStatus = $('#status').data('post-status');
+			//alert(searchStatus);
 
 			// ajax
 			$.ajax({

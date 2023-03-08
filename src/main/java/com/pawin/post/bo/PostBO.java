@@ -1,7 +1,6 @@
 package com.pawin.post.bo;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -294,7 +293,6 @@ public class PostBO {
 			keyword.setPost(post);
 			
 			if (post.getTitle().contains(searchTitle) && post.getStatus().equals(searchStatus) && post.getAnimals().equals(searchAnimals) && post.getArea().equals(searchArea) ) {
-
 				keyword.setSearchTitle(post.getTitle());
 				keyword.setSearchStatus(post.getStatus());
 				keyword.setSearchAnimals(post.getAnimals());
@@ -307,22 +305,22 @@ public class PostBO {
 		return keywordList;
 	}
 	
-	// 글 검색하기
+	// 입양후기 글 검색하기
 		public List<Keyword> getKeywordAdoptListByTitleStatusAnimals(String searchTitle,
 				String searchAnimals, String searchStatus) {
 
 			List<Keyword> keywordList = new ArrayList<>();
 
 			postDAO.selectKeywordAdoptListByTitleStatusAnimals(searchTitle, searchAnimals, searchStatus);
-			// 글 목록 가져오기(post)
+	
 			List<Post> postList = getPostList();
 			for (Post post : postList) {
 				Keyword keyword = new Keyword();
 				// 서치 내용 가져오기
 				keyword.setPost(post);
 				
-				if (post.getTitle().contains(searchTitle) && post.getStatus().equals(searchStatus) && post.getAnimals().equals(searchAnimals)) {
-
+				if (post.getTitle().contains(searchTitle)  && post.getAnimals().equals(searchAnimals) && post.getStatus().contains(searchStatus)) {
+					
 					keyword.setSearchTitle(post.getTitle());
 					keyword.setSearchAnimals(post.getAnimals());
 					keyword.setSearchStatus(post.getStatus());
