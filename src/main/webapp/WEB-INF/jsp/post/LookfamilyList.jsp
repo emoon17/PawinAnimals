@@ -12,7 +12,6 @@
 			<option value="실종">실종</option>
 			<option value="찾음">찾음</option>
 			<option value="입양가능">입양 가능</option>
-			<option value="입양완료">입양 완료</option>
 		</select> <select id="animals" name="animals"
 			class="content-foot-box ml-4 text-center copy-font"
 			style="height: 50px; width: 150px;">
@@ -61,7 +60,7 @@
 	<!-- 글 목록 -->
 	<div id="contentsBox" class="contents-box ">
 		<div
-			class="contents-parent-box d-flex flex-wrap justify-content-between">
+			class="contents-parent-box d-flex flex-wrap">
 			<c:forEach var='posts' items='${postList}' varStatus="status">
 				<!--  var="imagePathView" items="${postView.imagePathList}"  imagePathView.imagePath.imagePath-->
 				<article id="postBox" class="post-box">
@@ -90,17 +89,7 @@
 
 <script>
 	$(document).ready(function() {
-		// 글등록 버튼을 눌렀을 때
-		$('#createBtn').on('click', function() {
-			// 비로그인 시 로그인창으로 이동할 때
-			let userId = $(this).data('user-id');
-			//alert(userId);
-			if (userId == '') {
-				alert("로그인 후 사용 가능합니다.");
-
-			}
-		});
-
+		
 		// 검색 버튼을 눌렀을 때
 		$('#serachBtn').on('click', function() {
 			let searchTitle = $('#title').val();

@@ -75,7 +75,7 @@ public class PostRestController {
 	@PutMapping("/post_update")
 	public Map<String, Object> postUpdate(@RequestParam("postId") int postId, @RequestParam("title") String title,
 			@RequestParam("content") String content, @RequestParam("status") String status,
-			@RequestParam("animals") String animals, @RequestParam("area") String area,
+			@RequestParam("animals") String animals, @RequestParam(value="area", required=false) String area,
 			@RequestPart("files") List<MultipartFile> files, HttpSession session) {
 
 		// 필요한 세션 - userId, loginId

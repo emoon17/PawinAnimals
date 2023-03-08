@@ -106,6 +106,8 @@ public class PostImageBO {
 
 			User user = userBO.getUserById(imagepath.getUserId());
 			imagePathView.setUser(user);
+			
+			imagepath.setPostId(postId);
 
 			// 결과물에 넣기
 			imagePathViewList.add(imagePathView);

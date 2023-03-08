@@ -16,10 +16,10 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileManagerService {
 										
 	private Logger logger =  LoggerFactory.getLogger(this.getClass());
-										//은해 "C:\\jungeunhye\\7.pawinAnimals\\workspace\\image"
+										//은해 "C:\jungeunhye\7.pawin Animals\workspace\image"
 										// 호성노1 C:\JAVA_EUNHYE\7.pawinAnimals\Pawin\workspace\image/
 	// 실제 이미지가 저장될 경로(내컴퓨터 서버) // 학원 : D:\jungeunhye\7.Pawin Animals\workspace\image
-	public static final String FILE_UPLOAD_PATH = "D:\\jungeunhye\\7.Pawin Animals\\workspace\\image/";
+	public static final String FILE_UPLOAD_PATH = "C:\\jungeunhye\\7.pawin Animals\\workspace\\image/";
 	
 	//실제 업로드하는 메소드
 	//input : MultipartFile, loginId

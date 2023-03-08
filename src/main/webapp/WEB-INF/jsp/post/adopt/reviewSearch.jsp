@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
@@ -16,14 +16,11 @@
 					제목 : <span class="ml-3"> ${keyword.post.title}</span>
 				</div>
 				<div class="copy-font ml-3 font-weight-bold">
-					상황 : <span class="ml-3">${keyword.post.status}</span>
-				</div>
-				<div class="copy-font ml-3 font-weight-bold">
 					동물 종: <span class="ml-3">${keyword.post.animals}</span>
 				</div>
 				<div class="copy-font ml-3 font-weight-bold">
-					지역 : <span class="ml-3">${keyword.post.area}</span>
-				</div>
+						상황 : <span class="ml-3" id="adoptStatus" >${keyword.post.status}</span>
+						</div>
 				</a>
 			</article>
 		 </c:forEach> 

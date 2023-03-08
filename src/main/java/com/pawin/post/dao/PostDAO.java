@@ -32,6 +32,8 @@ public interface PostDAO {
 	
 	public List<Post> selectAdoptPostList();
 	
+	public List<Post> selectStatusPostList();
+	
 	public List<Post> selectAdoptPostListByPostId(int postId);
 	
 	public List<Post> selectPostListByPostId(int postId);
@@ -43,6 +45,11 @@ public interface PostDAO {
 			@Param("searchStatus") String searchStatus, 
 			@Param("searchAnimals") String searchAnimals,
 			@Param("searchArea") String searchArea);
+	
+	public List<Keyword> selectKeywordAdoptListByTitleStatusAnimals(
+			@Param("searchTitle") String searchTitle,
+			@Param("searchAnimals") String searchAnimals,
+			@Param("searchStatus") String searchStatus);
 	
 	public List<PostView> selectPostByPostIdUserId(
 			@Param("postId") int postId,

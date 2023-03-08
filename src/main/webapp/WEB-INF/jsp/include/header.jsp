@@ -51,7 +51,7 @@
 												<td colspan='3' class="menu_content font-weight-bold pt-5"><a href="/post/adopt_review_list_view">입양 후기 리스트</a></td>
 											</tr>
 											<tr>
-												<td colspan='3' class="menu_content font-weight-bold pt-5"><a href="#">반려용품 무료 나눔</a></td>
+												<td colspan='3' class="menu_content font-weight-bold pt-5"><a href="/post/free_sharing_list_view">반려용품 무료 나눔</a></td>
 											</tr>
 											<tr>
 												<td colspan='3' class="menu_content font-weight-bold pt-5"><a href="/hospital_list_view">동물병원 위치 안내</a></td>

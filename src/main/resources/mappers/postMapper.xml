@@ -45,6 +45,24 @@
 		WHERE
 			`status` = '입양완료'
  	</select>
+ 	<select id="selectStatusPostList" resultType="com.pawin.post.model.Post">
+ 		SELECT
+ 			`id`
+			,`userId`
+			,`title`
+			,`content`
+			,`animals`
+			,`status`
+			,`area`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`post`
+		WHERE
+			`status` = '장난감'
+			OR `status` = '옷'
+			OR `status` = '기타'
+ 	</select>
 
  	<select id="selectPostByPostIdUserId" resultType="com.pawin.post.model.Post" parameterType="map">
  		SELECT
@@ -124,6 +142,27 @@
 			</if>
 		ORDER BY `id` DESC
 			
+ 	</select>
+ 	<select id="selectKeywordAdoptListByTitleStatusAnimals" resultType="com.pawin.post.model.Post">
+ 		SELECT
+ 			`id`
+			,`userId`
+			,`title`
+			,`content`
+			,`animals`
+			,`status`
+			,`area`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`post`
+		WHERE
+			<if test="searchTitle != null">
+			`title` LIKE CONCAT('%', #{searchTitle}, '%')
+			</if>
+			AND `animals` = #{searchAnimals}
+			AND `status` = '입양완료'
+		ORDER BY `id` DESC
  	</select>
  	<select id="selectPostListByPostIdUserId"  resultType="com.pawin.post.model.Post">
  		SELECT

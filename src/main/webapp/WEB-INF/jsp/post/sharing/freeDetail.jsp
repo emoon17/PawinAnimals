@@ -68,28 +68,14 @@
 					data-toggle="modal" data-target="#likeModal">좋아요
 						${postview.likeCount}개 </a></span>
 
-				<%-- 입양 희망자가 해제 되어 있을 때 --%>
-				<c:if test="${postview.filedAdopt eq false}">
-					<a href="#" class="likeAdopt-btn" data-user-id="${userId}"
-						data-post-id="${postview.post.id}" data-likeadopt-type="adopt"
-						data-user-loginId="${loginId}"> <img
-						src="/static/image/adopt_empty.png" width="45" height="45"
-						alt="empty adopt">
-					</a>
-				</c:if>
+				<%-- 쪽지 보내기 --%>
+				<%-- <a href="#" data-user-id="${userId}"
+					data-post-id="${postview.post.id}" data-user-loginId="${loginId}">
+					<img src="/static/image/message.png" width="50" height="35"
+					alt="message" class="mb-2"> <span class="content-area"">쪽지
+						보내기</span>
 
-				<%-- 입양 희망자가 눌려있을 때 --%>
-				<c:if test="${postview.filedAdopt eq true}">
-					<a href="#" class="likeAdopt-btn" data-user-id="${userId}"
-						data-post-id="${postview.post.id}" data-likeadopt-type="adopt"
-						data-user-loginId="${loginId}"> <img
-						src="/static/image/adopt.jpg" width="45" height="45" alt="adopt">
-					</a>
-				</c:if>
-
-				<span class="content-area ml-3 mr-5"><a href="#"
-					data-toggle="modal" data-target="#adoptModal"> 입양희망자
-						${postview.adoptCount}명 </a></span>
+				</a> --%>
 			</div>
 
 		</div>
@@ -109,9 +95,8 @@
 					<%-- <%-- 모달로 댓글 삭제하기 --%>
 					<c:if test="${userId eq postview.user.id}">
 						<img src="/static/image/delete.png" id="deleteCommentBtn"
-							class="mt-1 more-btn write-area"
-							data-toggle="modal" data-target="#modal"
-							data-post-id="${postview.post.id}"
+							class="mt-1 more-btn write-area" data-toggle="modal"
+							data-target="#modal" data-post-id="${postview.post.id}"
 							data-comment-content="${commentView.comment.content}"
 							width="30px" height="33x">
 					</c:if>
@@ -128,14 +113,15 @@
 					data-post-id="${postview.post.id}">등록</button>
 			</div>
 		</c:if>
-		<%-- 글 삭제 --%>
+		
+		<%-- 글 수정 삭제 --%>
 		<div class="d-flex justify-content-end mt-5">
 			<c:if test="${userId eq postview.user.id}">
-				<a href="/post/update_view?postId=${postview.post.id}"
+				<a href="/post/free_update_view?postId=${postview.post.id}"
 					class="write-area mr-2">수정 </a>
 				<span class="mr-2 mt-1">|</span>
-				<a href="#"><span id="deletePostBtn" class="write-area" data-post-id="${postview.post.id}">삭제</span>
-				</a>
+				<a href="#"><span id="deletePostBtn" class="write-area"
+					data-post-id="${postview.post.id}">삭제</span> </a>
 			</c:if>
 		</div>
 	</div>
@@ -148,13 +134,13 @@
 		<%-- modal centered: 모달 창 수직으로 가운데 정렬 --%>
 		<div class="modal-dialog modal-lg modal-dialog-centered">
 			<div class="modal-content text-center">
-			<c:if test="${userId eq postview.user.id}">
-				<%-- 삭제하기 --%>
-				<div class="py-3 border-bottom">
-					<a href="#" id="deleteCommentBtn"
-						class="content-area font-weight-bold">삭제하기</a>
-				</div>
-			</c:if>
+				<c:if test="${userId eq postview.user.id}">
+					<%-- 삭제하기 --%>
+					<div class="py-3 border-bottom">
+						<a href="#" id="deleteCommentBtn"
+							class="content-area font-weight-bold">삭제하기</a>
+					</div>
+				</c:if>
 				<%-- data-dismiss="modal"추가하면 모달 창 닫힘 --%>
 				<div class="py-3 " data-dismiss="modal">
 					<a href="#" class="content-area font-weight-bold">취소하기</a>
@@ -199,7 +185,6 @@
 	</div>
 </c:forEach>
 
-
 <script>
 	$(document).ready(function() {
 
@@ -237,44 +222,6 @@
 				}
 			});
 		}) // comment-btn end
-
-		$('.likeAdopt-btn').on('click', function(e) {
-			e.preventDefault();
-			let postId = $(this).data('post-id');
-			let userId = $(this).data('user-id');
-			let type = $(this).data('likeadopt-type');
-			let loginId = $(this).data('user-loginId');
-
-			//alert(postId);
-			//alert(userId);
-			//alert(type);
-
-			if (userId == '') {
-				alert("로그인 시 이용 가능합니다");
-			}
-			//ajax
-			$.ajax({
-				type : 'get',
-				url : '/likeAdopt/' + postId,
-				data : {
-					"type" : type,
-				}
-				//success
-				,
-				success : function(data) {
-					if (data.code == 1) {
-						location.reload(true);
-
-					} else {
-						alert(data.errorMessage);
-					}
-				},
-				error : function(e) {
-					alert(e + "에러가 발생했습니다.");
-				}
-			});
-
-		}); // like-btn end
 
 		// 댓글 삭제를 위한 더보기 버튼(...) 클릭
 		$('.more-btn').on('click', function(e) {
@@ -326,35 +273,70 @@
 			});
 
 		}); // comment delete
-		
+
+		$('.likeAdopt-btn').on('click', function(e) {
+			e.preventDefault();
+			let postId = $(this).data('post-id');
+			let userId = $(this).data('user-id');
+			let type = $(this).data('likeadopt-type');
+			let loginId = $(this).data('user-loginId');
+
+			if (userId == '') {
+				alert("로그인 시 이용 가능합니다");
+			}
+			//ajax
+			$.ajax({
+				type : 'get',
+				url : '/likeAdopt/' + postId,
+				data : {
+					"type" : type,
+				}
+				//success
+				,
+				success : function(data) {
+					if (data.code == 1) {
+						location.reload(true);
+
+					} else {
+						alert(data.errorMessage);
+					}
+				},
+				error : function(e) {
+					alert(e + "에러가 발생했습니다.");
+				}
+			});
+
+		}); // like-btn end
+
 		// 글 삭제 버튼 눌렀을 때
-		$('#deletePostBtn').on('click', function(){
-			//alert("d");
-			
+		$('#deletePostBtn').on('click', function(e) {
+			e.preventDefault();
 			let postId = $(this).data('post-id');
 			//alert(postId);
-			
+
 			//ajax
 			$.ajax({
 				//request
-				type:"delete"
-				, url:"/post/post_delete"
-				, data:{"postId":postId}
+				type : "delete",
+				url : "/post/post_delete",
+				data : {
+					"postId" : postId
+				}
 				//response
-				, success:function(data){
-					if (data.code == 1){
+				,
+				success : function(data) {
+					if (data.code == 1) {
 						alert("게시글이 삭제되었습니다.");
-						location.href="/post/look_for_family_list_view";
-					} else{
+						location.href = "/post/free_sharing_list_view";
+					} else {
 						alert(data.errorMessage);
 					}
-				}
-				, error:function(e){
+				},
+				error : function(e) {
 					alert("오류가 발생했습니다.");
 				}
 			});
 		}); // post delete
-	}); // document end
+	});
 </script>
-
 

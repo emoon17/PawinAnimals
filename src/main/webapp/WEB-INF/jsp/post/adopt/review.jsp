@@ -49,6 +49,7 @@
 						<option value="입양완료">입양 완료</option>
 					</select>
 				</div>
+				
 				<div class="copy-font">
 					<span class="ml-2">동물 종: </span> 
 					<select id="animals"
@@ -127,9 +128,9 @@
 			 } 
 			 
 			
-			 if (textFileList.length > 3) {
-				alert("이미지는 최대 3개까지 업로드 가능합니다.");
-				$('#fileName1').text(''); // 세개 이상 추가 시 없애버림
+			 if (textFileList.length > 1) {
+				alert("이미지는 최대 1개까지 업로드 가능합니다.");
+				$('#fileName1').text(''); // 한 개 이상 추가 시 없애버림
 				files = null;
 				textFileList.length = 0;
 				inputFileList.length = 0;

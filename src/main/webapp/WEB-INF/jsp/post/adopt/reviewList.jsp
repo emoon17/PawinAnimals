@@ -35,64 +35,122 @@
 
 	<!-- 글 목록 -->
 	<div id="contentsBox" class="contents-box ">
-		<div
-			class="contents-parent-box d-flex flex-wrap justify-content-between">
-			
-				<!--  var="imagePathView" items="${postView.imagePathList}"  imagePathView.imagePath.imagePath-->
+		<div class="contents-parent-box d-flex flex-wrap ">
+
+			<!--  var="imagePathView" items="${postView.imagePathList}"  imagePathView.imagePath.imagePath-->
 			<c:forEach var='posts' items='${postList}' varStatus="status">
-				<article id="postBox" class="post-box">
-					<a href="/post/adopt_review_list_view?postId=${posts.post.id}" data-toggle="modal" data-target="#postModal"> <img
+				<c:forEach items='${posts.imagePathList}' var="image">
+					<article id="postBox" class="post-box"
+					data-post-id="${posts.post.id}" data-toggle="modal"
+					data-target="#postModal" data-post-content="${posts.post.content}"
+					 data-post-image="${image.imagePaths.imagePath}">
+					 
+				
+					<a href="#"> <img
 						src="${posts.imagePathList[0].imagePaths.imagePath}" alt="이미지"
-						width="300" height="300" class="list-box"> <%-- <div>${posts.post.id}</div> --%>
+						width="300" height="300" class="list-box"
+						data-post-id="${posts.post.id}">
+						<div>${posts.post.id}</div>
 						<div class="copy-font ml-3 font-weight-bold">
 							제목 : <span class="ml-3"> ${posts.post.title}</span>
+						</div>
+						<div class="copy-font ml-3 font-weight-bold">
+							상황 : <span class="ml-3">${posts.post.status}</span>
 						</div>
 						<div class="copy-font ml-3 font-weight-bold">
 							동물 종: <span class="ml-3">${posts.post.animals}</span>
 						</div>
 					</a>
 				</article>
+			</c:forEach>
+				
+							
+			</c:forEach>
 		</div>
 	</div>
 </div>
 
-<!--adopt post Modal -->
+<c:forEach var='posts' items='${postList}' varStatus="status">
+			
+<!-- post Modal -->
 <div class="modal fade" id="postModal">
-	<%--...을 눌렀을 때 post-data-id를 모달에 심어놓을거다. --%>
-	<%-- modal sm: 작은 모달 창  --%>
-	<%-- modal centered: 모달 창 수직으로 가운데 정렬 --%>
 	<div class="modal-dialog modal-lg modal-dialog-centered">
 		<div class="modal-content">
-			<c:forEach items='${posts.imagePathList}' var="image">
+			
 				<div class="py-3">
-				   <img src="${image.imagePaths.imagePath}" class="w-100"
-							alt="본문 이미지">
+					<img src="${image.imagePaths.imagePath}" class="w-100" alt="본문 이미지" id="imageBox">
 				</div>
-			</c:forEach>
-				
-			<div class="py-3 border-bottom content-area ml-4">
-				   ${posts.post.content}
-				   
-			</div>
 
-			<%-- 삭제하기 --%>
+				<div id="contentBox" class="py-3 border-bottom content-area ml-4">
+					${posts.post.content}</div>
+		
 			<c:if test="${userId eq posts.user.id}">
 				<div class="py-3 border-bottom text-center">
 					<a href="#" id="deletePostBtn"
-						class="content-area font-weight-bold" data-post-id="${posts.post.id}">삭제하기</a>
+						class="content-area font-weight-bold">삭제하기</a>
+				</div>
+				<div class="py-3 border-bottom text-center">
+					<a href="/post/review_update_view?postId=${posts.post.id}" id="updatePostBtn" class="content-area font-weight-bold">수정하기</a>
 				</div>
 			</c:if>
 		</div>
 	</div>
 </div>
+	
 </c:forEach>
 
 <script>
 	$(document).ready(function() {
-		// 글 삭제 버튼 눌렀을 때
-		$('#deletePostBtn').on('click', function(){
-			//alert("d");
-			let postId = $(this).data('post-id');
+
+		$('#serachBtn').on('click', function() {
+			let searchTitle = $('#title').val();
+			let searchAnimals = $("#animals option:selected").val();
+			let searchStatus = $('#adoptStatus').data('post-status');
+			alert(searchStatus);
+
+			// ajax
+			$.ajax({
+				//request
+				type : 'get',
+				url : '/post/adopt_search_list_view',
+				data : {
+					"searchTitle" : searchTitle,
+					"searchAnimals" : searchAnimals,
+					"searchStatus" : searchStatus
+				}
+
+				//response
+				,
+				success : function(data) {
+					console.log(data);
+
+					$('#contentsBox').html(data);
+
+				},
+				error : function(e) {
+					alert(e + "오류가 발생했습니다. 다시 시도해주세요.");
+				}
+
+			});
+		});
+		$('.post-box').on('click', function(e) {
+			e.preventDefault();
+
+			let postId = $(this).data('post-id'); //getting (태그에 있는 걸 얻어오는것)
+			//alert(postId);
+			let image = $(this).data('post-image');
+			//alert(image);
+			$('#postModal').data('post-id', postId);
+			$('#postModal #contentBox').text($(this).data('post-content'));
+			//$('#postModal  #imageBox').html($(this).data('post-image'));
+			//$('#postModal #imageBox img').attr({ src: image });
+			$('#postModal #imageBox').attr("src", image);
+		});
+
+		$('#postModal #deletePostBtn').on('click', function(e) {
+			e.preventDefault();
+			
+			let postId = $('#postModal').data('post-id');
 			alert(postId);
 			
 			//ajax
@@ -113,9 +171,11 @@
 				, error:function(e){
 					alert("오류가 발생했습니다.");
 				}
+		
 			});
 		}); // post delete
+
 		
-		
-	}); 
+
+	});
 </script>
