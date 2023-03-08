@@ -58,5 +58,15 @@ public interface PostDAO {
 	public int deletePostByPostIdUserId(
 			@Param("postId") int postId,
 			@Param("userId") Integer userId);
+	
+	public List<Post> selectPostListByUserId(
+			@Param("userId") int userId,
+			@Param("direction") String direction,
+			@Param("standardId") Integer standardId,
+			@Param("limit") int limit);
+	
+	public int selectPostIdByUserIdSort(
+			@Param("userId") int userId,
+			@Param("sort") String sort);
 
 }

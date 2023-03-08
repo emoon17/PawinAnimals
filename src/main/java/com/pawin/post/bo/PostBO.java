@@ -1,6 +1,7 @@
 package com.pawin.post.bo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -16,7 +17,6 @@ import com.pawin.likeadopt.bo.LikeadoptBO;
 import com.pawin.likeadopt.model.AdoptView;
 import com.pawin.likeadopt.model.LikeView;
 import com.pawin.post.dao.PostDAO;
-import com.pawin.post.dao.PostImageDAO;
 import com.pawin.post.model.ImagePathView;
 import com.pawin.post.model.Keyword;
 import com.pawin.post.model.Post;
@@ -29,6 +29,8 @@ public class PostBO {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+	private static final int POST_MAX_SIZE = 9;  // 한 페이지에 몇개씩 있게 할 것인지 상수
+	
 	@Autowired
 	private PostDAO postDAO;
 
@@ -329,5 +331,41 @@ public class PostBO {
 			return keywordList;
 		}
 	
+		//페이징
+		public List<Post> getPostListByUserId(int userId, Integer prevId, Integer nextId){//서비스를 만들 때는 객체로 해야된다.
+			// 게시글 번호 :  10 9 8 | 7 6 5| 4 3 2| 1
+			// 만약 4 3 2 페이지에 있을 때 
+			// 1) 이전 : 정방향ASC 4보다 큰 3개 (5 6 7) = > 뿌려질 땐 7 6 5 => List reverse
+			// 2) 다음 :  2보다 작은 3개 DESC 
+			// 3) 첫 페이지 (이전, 다음 없음) : DESC 3개
+			String direction = null; // 방향
+			Integer standardId = null; // 기준 postId
+			
+			if (prevId != null) { // 여기에 오면 이전
+				direction = "prev";
+				standardId = prevId;
+				
+				List<Post> postList = postDAO.selectPostListByUserId(userId, direction, standardId, POST_MAX_SIZE);
+				Collections.reverse(postList); // 리스트를 뒤집는 메소드 (바꿔놓고 저장까지 해줌:void)
+				return postList;
+			} else if (nextId != null) { // 다음
+				direction = "next";
+				standardId = nextId;
+			} 
+			// 첫 페이지 일 때 ( 페이징 안 함)  standardId, direction == null
+			// 다음일 때 standardId, directionId 채워져서 넘어감
+			return postDAO.selectPostListByUserId(userId, direction, standardId, POST_MAX_SIZE);
+			
+		}
+		
+		public boolean isPrevLastPage(int prevId, int userId) {
+			int maxPostId = postDAO.selectPostIdByUserIdSort(userId, "DESC");
+			return maxPostId == prevId ? true : false;
+		}
+		
+		public boolean isNextLastPage(int nextId, int userId) {
+			int minPostId = postDAO.selectPostIdByUserIdSort(userId, "ASC");
+			return minPostId == nextId ? true : false;
+		}
 
 }
