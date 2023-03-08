@@ -19,7 +19,7 @@ import com.pawin.post.bo.PostBO;
 import com.pawin.post.bo.PostImageBO;
 import com.pawin.post.model.Post;
 
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 
 @RequestMapping("/post")
 @RestController

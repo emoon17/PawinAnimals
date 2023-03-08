@@ -15,7 +15,7 @@ import com.pawin.common.EncrypUtils;
 import com.pawin.user.bo.UserBO;
 import com.pawin.user.model.User;
 
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 @RequestMapping("/user")
 @RestController
 public class UserRestController {

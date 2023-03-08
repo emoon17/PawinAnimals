@@ -14,7 +14,7 @@ import com.pawin.post.model.Keyword;
 import com.pawin.post.model.Post;
 import com.pawin.post.model.PostView;
 
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 
 @RequestMapping("/post")
 @Controller

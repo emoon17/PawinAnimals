@@ -51,7 +51,7 @@ public class RestAPI {
 				HttpClient httpClient = HttpClientBuilder.create().build();
 						
 			 
-			 factory.setHttpClient(httpClient);
+			// factory.setHttpClient(httpClient);
 
 			// 2. RestTemplate 객체 생성
 			RestTemplate restTemplate = new RestTemplate();
