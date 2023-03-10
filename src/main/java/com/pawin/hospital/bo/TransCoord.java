@@ -21,7 +21,7 @@ public class TransCoord {
 		double x = Double.parseDouble(X);
 		double y = Double.parseDouble(Y);
 		CRSFactory factory = new CRSFactory();
-		CoordinateReferenceSystem srcCrs = factory.createFromName("EPSG:5181");
+		CoordinateReferenceSystem srcCrs = factory.createFromName("EPSG:2097");
 		CoordinateReferenceSystem dstCrs = factory.createFromName("EPSG:4326");
 		BasicCoordinateTransform transform = new BasicCoordinateTransform(srcCrs, dstCrs);
 		ProjCoordinate srcCoord = new ProjCoordinate(x, y);
