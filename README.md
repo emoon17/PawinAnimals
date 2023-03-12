@@ -125,9 +125,8 @@ View에서는 Model에서 forEach를 통해 꺼내 화면에 보여지도록 함
   RestAPI BO를 만들어 서울특별시 동물병원 api를 가져오는 로직 구성.<br><br>
  api를 가져오기 위해 HttpComponentsClientHttpRequestFactory를 통해 타임아웃을 설정하고, HttpClient라이브러리를 이용해 Rest API를 <b>호출</b>.<br><br>
 RestTemplate 객체를 생성하여 header설정을 위해 HttpHeaders 클래스를 생성 한 후 HttpEntity 객체를 넣어,<br>
-UriComponentsBuilder를 통해 url를 동적으로 생성해준 클래스를 build 할 수 있게 해주어exchange() 함수를 이용하여 api를 호출해 map 타입으로 전달 받음<br><br>. 
-
-    전달받은 데이터를 Spring으로 파싱하기 위해 writeValueAsString() 함수를 이용해 JsonString으로 받아 <b>반환</b>.<br><br>
+UriComponentsBuilder를 통해 url를 동적으로 생성해준 클래스를 build 할 수 있게 해주어exchange() 함수를 이용하여 api를 호출해 map 타입으로 전달 받음.<br><br>
+전달받은 데이터를 Spring으로 파싱하기 위해 writeValueAsString() 함수를 이용해 JsonString으로 받아 <b>반환</b>.<br><br>
 Hospital BO에서는 RestAPI BO에서 내려 받은 JsonString중 필요한 항목만 담아야 하기 때문에  JSONParser, JSONObject, JSONArray를 이용해 필요한 리스트를 열 수 있게 만든 후, <br> JSONArray을 반복문을 통해 필요한 항목들을 <b>hospitalList</b>에 따로 담아 <b>반환</b>.<br><br>
 Controller에서는 HospitalBO에서 반환받은 리스트를 model로 담음.<br><br>
 View 화면에서는 Model에 있는 리스트를 동물병원 게시판에 forEach로 뽑아 필요 항목에 넣어 보여 줌.
@@ -144,3 +143,49 @@ Controller에서는 반환 받은 List를 model에 담음.<br><br>
 View에서는 model의 List를 꺼내어 카카오맵 x, y 좌표에 넣어 카카오맵 구현.
 </p>
  </details>
+ 
+ 
+## 프로젝트 사용 방법
+> #### 회원가입 없이 로그인 시 Id/ password
+> ##### Id : cccc
+> ##### password:123456789a
+
+## 트러블 이슈 
+1. #### 게시글 작성 화면 View에서 작성완료를 눌러 Controller로 요청할 때 file이 null로 Controller에 넘어옴.
+
+원인 : 작성 완료 버튼을 <button></button> 태그로 만들어 type을 지정 하지 않았더니 자동으로 submit으로 넘어가게 되어 ajax랑 같이 작동해서 안 넘어옴.
+
+해결방법 : button type을 button으로 지정하고, ajax의 data를 formData로 넘겨주었더니 file의 값도 넘어옴.
+
+느낀 점 : submit과 ajax가 서로 데이터를 주고받는점에서는 같지만 둘을 같이 사용했을 땐 submit으로 작동이 되는걸 알게되어 다음부터는 ajax를 사용할지 submit을 사용할지 먼저 구상 후에 한 개만 넣는 로직을 짜게 되는 계기가 되었음.
+
+2. #### 글쓰기 insert 시 imagepathDB에 있는 postId가 null로 들어감 
+
+원인 : imagepathBO 이미지를 DB에 저장하기 위해서는 저장하는 postId가 필요한데, post를 insert할 때 imagepath도 postBO에 가져와 같이 insert를 하고 난 후에야 postId가 DB에 생기기 때문에 postId를 가져올 곳이 없었음.
+
+
+1) ImagePath DB 칼럼 중 postId 삭제하기 
+문제점 : postId를 사진과 mapping할 다른 방안이 없음.
+
+2) useGeneratedKeys 를 사용하여 자동 생성 된 키 가져오기
+Controller에서 ajax 요청 데이터를 Post 객체와 MultipartFile로 받고 세션에 있던 userId까지 합쳐 BO로 파라미터를 보냄.
+BO에서는 insert시 useGeneratedKeys 로 인해 자동 생성 된 postId의 키를 세팅하는 로직을 구성.
+Post객체에 파라미터로 넘어온 userId의 값을 setUserId로 ajax에서 요청 받지 못한 userId를 채워 넣었고, 완성 된 Post자체를 insert하였고 imagepath에 postId를 넣을 때 insert시 자동 생성 된 postId를 꺼낼 수 있게 되어 post.getId로 getting하여 꺼내 활용.
+
+느낀 점: Imagepath에서 postId를 꺼낼 쓸 수 없다고 간단하게 Imagepath에서 postId를 지워버렸을 때 세세한 고민을 하지 않고 무작정 쉽게만 넘어가려고 해버렸다.
+imagepath DB를 짰을 때는 postId가 왜 필요한지 생각하면서 테이블을 짜놓고 막상 쉽게 안 되니까 필요한 나무 가지를 잘라버린거였다.
+그래도 imagepath에서 postId를 지우고 나니 처음에 제가 왜 그 컬럼을 넣었는지 다시 상기시키게 되었고, 쉽게 생각을 잘라버린 자신을 반성하고 문제가 생겼을 때 원초적인 문제를 생각할 수 있는 계기가 되어 좋은 트러블 이슈였다.
+
+3. #### 카카오맵 API 구현하
+
+동물병원 리스트 api를 가져왔을 떄 이미 그 안에 x, y 좌표가 있었기 때문에 그걸 가져와 카카오맵에 x, y좌표를 넣었는데 빈 화면만 나왔다.
+
+원인 : 공공포탈과 카카오맵의 좌표계는 서로 달랐기 때문에 공공포탈의 x, y 좌표를 넣어도 소용이 없음.
+
+해결방법 : proj4j라이브러리를 사용해 공공포탈의 좌표를 카카오맵의 좌표로 좌표계 변환하기.
+
+공공포탈은 BESSEL타원체의 좌표계 EPSG:2097을 사용하였고, 카카오맵은 GRS80타원체의 좌표계 EPSG:5181을 사용하였기 때문에 EPSG:2097을 EPSG:5181로 바꾸는 작업을 하여 좌표계를 변경 함.
+
+느낀 점: 타원체와 좌표계의 개념을 모른 채 로직을 구성하였더니 어느 부분이 잘못 된지 모른 채 로직만 계속 바꿨다.
+잘못이 시작 된 원인을 찾아 고민해보니 타원체마다 좌표계가 다르다는 걸 알게 되었다. 
+코드만 쓴다고 되는게 아니라 구성하는 부분의 전체적인 개념을 공부하여 알고 있어야 코드 구성을 완전히 할 수 있다는 걸 느끼게 되는 계기였다.
