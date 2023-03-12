@@ -128,7 +128,7 @@ RestTemplate 객체를 생성하여 header설정을 위해 HttpHeaders 클래스
 UriComponentsBuilder를 통해 url를 동적으로 생성해준 클래스를 build 할 수 있게 해주어exchange() 함수를 이용하여 api를 호출해 map 타입으로 전달 받음<br><br>. 
 
     전달받은 데이터를 Spring으로 파싱하기 위해 writeValueAsString() 함수를 이용해 JsonString으로 받아 <b>반환</b>.<br><br>
-Hospital BO에서는 RestAPI BO에서 내려 받은 JsonString중 필요한 항목만 담아야 하기 때문에  JSONParser, JSONObject, JSONArray를 이용해 필요한 리스트를 열 수 있게 만든 후, <br> JSONArray을 반복문을 통해 필요한 항목들을 <b> hospitalList </b>에 따로 담아 <b>반환</b>.<br><br>
+Hospital BO에서는 RestAPI BO에서 내려 받은 JsonString중 필요한 항목만 담아야 하기 때문에  JSONParser, JSONObject, JSONArray를 이용해 필요한 리스트를 열 수 있게 만든 후, <br> JSONArray을 반복문을 통해 필요한 항목들을 <b>반환</b>에 따로 담아 <b>반환</b>.<br><br>
 Controller에서는 HospitalBO에서 반환받은 리스트를 model로 담음.<br><br>
     View 화면에서는 Model에 있는 리스트를 동물병원 게시판에 forEach로 뽑아 필요 항목에 넣어 보여 줌.<br></br>
 
