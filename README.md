@@ -10,7 +10,7 @@ Eclipse IDE, Visual Studio code, Tomcat, GitHub
 ##### [naver blog](https://blog.naver.com/hello_world0_07)
 
 ## 목차
-+ [제작 계기](#-제작-계기)
++ <span style="color:black">[제작 계기](#제작-계기)</span>
 + 개요
 + 기능 설명
 + 프로젝트 사용 방법
@@ -28,4 +28,4 @@ Eclipse IDE, Visual Studio code, Tomcat, GitHub
 + 여러 사진들과 함께 게시글 올리기
 + 동물병원 위치 확인하기
 
-
+<span style="color:red"> 글씨색 변경 </span>
