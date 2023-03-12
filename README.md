@@ -152,7 +152,7 @@ View에서는 model의 List를 꺼내어 카카오맵 x, y 좌표에 넣어 카�
 > ##### password:123456789a
 
 ## 트러블 이슈 
-1. #### 게시글 작성 화면 View에서 작성완료를 눌러 Controller로 요청할 때 file이 null로 Controller에 넘어옴.
+#### 1. 게시글 작성 화면 View에서 작성완료를 눌러 Controller로 요청할 때 file이 null로 Controller에 넘어옴.
 
 원인 : 작성 완료 버튼을 <button></button> 태그로 만들어 type을 지정 하지 않았더니 자동으로 submit으로 넘어가게 되어 ajax랑 같이 작동해서 안 넘어옴.
 
@@ -160,7 +160,7 @@ View에서는 model의 List를 꺼내어 카카오맵 x, y 좌표에 넣어 카�
 
 느낀 점 : submit과 ajax가 서로 데이터를 주고받는점에서는 같지만 둘을 같이 사용했을 땐 submit으로 작동이 되는걸 알게되어 다음부터는 ajax를 사용할지 submit을 사용할지 먼저 구상 후에 한 개만 넣는 로직을 짜게 되는 계기가 되었음.
 
-2. #### 글쓰기 insert 시 imagepathDB에 있는 postId가 null로 들어감 
+#### 2. 글쓰기 insert 시 imagepathDB에 있는 postId가 null로 들어감 
 
 원인 : imagepathBO 이미지를 DB에 저장하기 위해서는 저장하는 postId가 필요한데, post를 insert할 때 imagepath도 postBO에 가져와 같이 insert를 하고 난 후에야 postId가 DB에 생기기 때문에 postId를 가져올 곳이 없었음.
 
@@ -177,7 +177,7 @@ Post객체에 파라미터로 넘어온 userId의 값을 setUserId로 ajax에서
 imagepath DB를 짰을 때는 postId가 왜 필요한지 생각하면서 테이블을 짜놓고 막상 쉽게 안 되니까 필요한 나무 가지를 잘라버린거였다.
 그래도 imagepath에서 postId를 지우고 나니 처음에 제가 왜 그 컬럼을 넣었는지 다시 상기시키게 되었고, 쉽게 생각을 잘라버린 자신을 반성하고 문제가 생겼을 때 원초적인 문제를 생각할 수 있는 계기가 되어 좋은 트러블 이슈였다.
 
-3. #### 카카오맵 API 구현하기
+#### 3. 카카오맵 API 구현하기
 
 동물병원 리스트 api를 가져왔을 떄 이미 그 안에 x, y 좌표가 있었기 때문에 그걸 가져와 카카오맵에 x, y좌표를 넣었는데 빈 화면만 나왔다.
 
