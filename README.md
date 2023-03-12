@@ -28,6 +28,7 @@
 + 실종 반려 동물 상태 실시간 확인
 + 여러 사진들과 함께 게시글 올리기
 + 동물병원 위치 확인하기
++ (동영상 넣기)
 
 ## DB 설계
 #### [DB설계 링크](https://docs.google.com/spreadsheets/d/1G2XHEZBFKvZEbPCXA1HBjAaZSoXaw1s_i66xens9OvU/edit#gid=980509685)
