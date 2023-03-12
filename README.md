@@ -119,7 +119,7 @@ Controller에서는 BO에서 반환 한 PostViewList를 View에서 꺼내 쓸 �
 View에서는 Model에서 forEach를 통해 꺼내 화면에 보여지도록 함.
 
   </p>
-  <details>
+  </details>
    <details><summary>병원 리스트 api</summary>
   <p>
   RestAPI BO를 만들어 서울특별시 동물병원 api를 가져오는 로직 구성.<br><br>
@@ -128,9 +128,19 @@ RestTemplate 객체를 생성하여 header설정을 위해 HttpHeaders 클래스
 UriComponentsBuilder를 통해 url를 동적으로 생성해준 클래스를 build 할 수 있게 해주어exchange() 함수를 이용하여 api를 호출해 map 타입으로 전달 받음<br><br>. 
 
     전달받은 데이터를 Spring으로 파싱하기 위해 writeValueAsString() 함수를 이용해 JsonString으로 받아 <b>반환</b>.<br><br>
-Hospital BO에서는 RestAPI BO에서 내려 받은 JsonString중 필요한 항목만 담아야 하기 때문에  JSONParser, JSONObject, JSONArray를 이용해 필요한 리스트를 열 수 있게 만든 후, <br> JSONArray을 반복문을 통해 필요한 항목들을 <b>반환</b>에 따로 담아 <b>반환</b>.<br><br>
+Hospital BO에서는 RestAPI BO에서 내려 받은 JsonString중 필요한 항목만 담아야 하기 때문에  JSONParser, JSONObject, JSONArray를 이용해 필요한 리스트를 열 수 있게 만든 후, <br> JSONArray을 반복문을 통해 필요한 항목들을 <b>hospitalList</b>에 따로 담아 <b>반환</b>.<br><br>
 Controller에서는 HospitalBO에서 반환받은 리스트를 model로 담음.<br><br>
-    View 화면에서는 Model에 있는 리스트를 동물병원 게시판에 forEach로 뽑아 필요 항목에 넣어 보여 줌.<br></br>
-
-   </p>
-    </details>
+View 화면에서는 Model에 있는 리스트를 동물병원 게시판에 forEach로 뽑아 필요 항목에 넣어 보여 줌.
+</p>
+</details>
+    
+<details><summary>카카오 api</summary>
+  <p>
+ TransCoord BO에서는 Controller에서 전달 받은 파라미터를 가지고 좌표계 변환.<br><br>
+ 동물병원 api에서 받은 좌표는 epsg:2097이고, 카카오맵에서 좌표 표시가 되는 건 epsg:5181좌표계라 proj4j 라이브러리를 사용하여 카카오맵에서 원하는 좌표 <b>wgs84</b>가 되기 위해 좌표계 변환.<br><br>
+결과 값을 담을 Map과 List를 만든 후에,<br>
+CoordinateReferenceSystem에 변환 전 좌표, 변환 후 좌표를 넣어 각각 만든 후에 BasicCoordinateTransform 를 통해 변경 전 좌표를 변경 후 <br>좌표로 좌표계 변환하여 View화면에서 필요할 x, y, name 내용을 Map에 저장후 <b>List</b>에 담아<b>반환</b>.<br><br>
+Controller에서는 반환 받은 List를 model에 담음.<br><br>
+View에서는 model의 List를 꺼내어 카카오맵 x, y 좌표에 넣어 카카오맵 구현.
+</p>
+ </details>
