@@ -50,7 +50,7 @@
  		`userId` = #{userId}
  		, `postId` = #{postId}
  		, `imagePath` = #{imagePath}
- 		, `updatedAt` = NOW()
+ 		, `createdAt` = NOW()
  	WHERE
  		`userId` = #{userId}
  		AND `postId` = #{postId}
