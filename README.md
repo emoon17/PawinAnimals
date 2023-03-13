@@ -69,8 +69,10 @@ View화면에서 회원가입 시 아이디가 중복 됐을 때 빨간 글씨�
 
  <details><summary>게시판 리스트</summary>
   <p>
-  <img src="https://user-images.githubusercontent.com/120003960/224641397-bc1f1096-58dd-4283-84c9-e6e131646b10.png" width="400" height="400"><br>
-  유저들이 올린 게시글 리스트를 볼 수 있고, 필요한 검색을 할 수 있다.
+  <img src="https://user-images.githubusercontent.com/120003960/224786959-76faf3da-a2d0-457c-8cd2-ea9f0b4d6430.png" width="450" height="400"><br>
+  유저들이 올린 게시글 리스트를 볼 수 있다<br><br>
+  <img src="https://user-images.githubusercontent.com/120003960/224786965-98d6636f-09ce-4015-8772-42ba580d9082.png" width="450" height="400"><br>
+    검색한 화면만 볼 수도 있다.
   </p>
  </details>
 
