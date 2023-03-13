@@ -11,7 +11,6 @@
 			<a href="/post/look_for_family_detail_view?postId=${keyword.post.id}">
 				<img src="${keyword.imagePathView[0].imagePaths.imagePath}"
 					alt="이미지" width="300" height="300" class="list-box">
-				<div>${keyword.post.id}</div>
 				<div class="copy-font ml-3 font-weight-bold">
 					제목 : <span class="ml-3"> ${keyword.post.title}</span>
 				</div>
