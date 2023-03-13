@@ -32,7 +32,8 @@
 
 ## DB 설계
 #### [DB설계 링크](https://docs.google.com/spreadsheets/d/1G2XHEZBFKvZEbPCXA1HBjAaZSoXaw1s_i66xens9OvU/edit#gid=980509685)
-![erd](https://user-images.githubusercontent.com/120003960/224560646-ff51a84a-89d4-4f1d-9f17-a6da4481d168.png)
+![erd](https://user-images.githubusercontent.com/120003960/224653003-91bff5d9-670f-4bc9-899a-ade8be1eac35.png)
+
 
 user는 모든 테이블에 FK로 참조되며, post는 user를 제외한 모든 테이블에 FK로 참조된다.
 
