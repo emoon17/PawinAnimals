@@ -107,13 +107,33 @@
 					</div>
 
 					<%-- <%-- 모달로 댓글 삭제하기 --%>
-					<c:if test="${userId eq postview.user.id}">
+					<c:if test="${userId eq commentView.user.id}">
 						<img src="/static/image/delete.png" id="deleteCommentBtn"
 							class="mt-1 more-btn write-area"
 							data-toggle="modal" data-target="#modal"
 							data-post-id="${postview.post.id}"
 							data-comment-content="${commentView.comment.content}"
 							width="30px" height="33x">
+						<!--댓글 Modal -->
+						<div class="modal fade" id="modal">
+							<%--...을 눌렀을 때 post-data-id를 모달에 심어놓을거다. --%>
+							<%-- modal sm: 작은 모달 창  --%>
+							<%-- modal centered: 모달 창 수직으로 가운데 정렬 --%>
+							<div class="modal-dialog modal-lg modal-dialog-centered">
+								<div class="modal-content text-center">
+									<%-- 삭제하기 --%>
+									<div class="py-3 border-bottom">
+										<a href="#" id="deleteCommentBtn"
+											class="content-area font-weight-bold">삭제하기</a>
+									</div>
+								
+									<%-- data-dismiss="modal"추가하면 모달 창 닫힘 --%>
+									<div class="py-3 " data-dismiss="modal">
+										<a href="#" class="content-area font-weight-bold">취소하기</a>
+									</div>
+								</div>
+							</div>
+						</div>
 					</c:if>
 				</div>
 			</c:forEach>
@@ -141,27 +161,7 @@
 	</div>
 
 
-	<!--댓글 Modal -->
-	<div class="modal fade" id="modal">
-		<%--...을 눌렀을 때 post-data-id를 모달에 심어놓을거다. --%>
-		<%-- modal sm: 작은 모달 창  --%>
-		<%-- modal centered: 모달 창 수직으로 가운데 정렬 --%>
-		<div class="modal-dialog modal-lg modal-dialog-centered">
-			<div class="modal-content text-center">
-			<c:if test="${userId eq postview.user.id}">
-				<%-- 삭제하기 --%>
-				<div class="py-3 border-bottom">
-					<a href="#" id="deleteCommentBtn"
-						class="content-area font-weight-bold">삭제하기</a>
-				</div>
-			</c:if>
-				<%-- data-dismiss="modal"추가하면 모달 창 닫힘 --%>
-				<div class="py-3 " data-dismiss="modal">
-					<a href="#" class="content-area font-weight-bold">취소하기</a>
-				</div>
-			</div>
-		</div>
-	</div>
+
 
 	<!-- like Modal -->
 	<div class="modal fade" id="likeModal">
