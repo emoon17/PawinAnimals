@@ -51,7 +51,7 @@
 						width="300" height="300" class="list-box"
 						data-post-id="${posts.post.id}">
 						<%-- <div>${posts.post.id}</div> --%>
-					${posts.post.userId}
+
 						<div class="copy-font ml-3 font-weight-bold">
 							제목 : <span class="ml-3"> ${posts.post.title}</span>
 						</div>
@@ -77,7 +77,6 @@
 							
 								<c:if test="${userId eq posts.post.userId}">
 									<div class="py-3 border-bottom text-center">
-									${posts.post.userId},${userId}
 										<a href="#" id="deletePostBtn"
 											class="content-area font-weight-bold">삭제하기</a>
 									</div>
