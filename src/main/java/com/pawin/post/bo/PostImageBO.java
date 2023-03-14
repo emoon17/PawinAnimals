@@ -68,8 +68,8 @@ public class PostImageBO {
 						fileManagerService.deleteFile(imagePath.getImagePath());
 					}
 				}
+				postImageDAO.updateImage(imagePaths, userId, postId);
 			}
-			postImageDAO.updateImage(imagePaths, userId, postId);
 
 		}
 	}
