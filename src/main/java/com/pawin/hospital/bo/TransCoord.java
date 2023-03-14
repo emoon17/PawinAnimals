@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @Service	
 public class TransCoord {
 	
-	public List<Map<Object, Object>> transform(String X, String Y, String name) {
+	public List<Map<Object, Object>> transform(String X, String Y, String name, String address) {
 		List<Map<Object, Object>> transCoordList = new ArrayList<>();
 		Map<Object, Object> transCoordMap = new HashMap<>();
 		
@@ -31,6 +31,8 @@ public class TransCoord {
 		transCoordMap.put("name", name);
 		transCoordMap.put("x", dstCoord.x);
 		transCoordMap.put("y", dstCoord.y);
+		transCoordMap.put("address", address);
+		
 		transCoordList.add(transCoordMap);
 		
 		

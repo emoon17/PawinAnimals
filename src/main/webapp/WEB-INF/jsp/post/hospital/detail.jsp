@@ -4,11 +4,12 @@
 
 	<div class="container list-box d-flex justify-content-center">
 	<div >
-		<div class="menu_login_info mt-2">위치를 확인 해 보세요!</div>
+		<div class="menu_login_info mt-2 font-weight-bold">위치를 확인 해 보세요!</div>
 		<div id="map" style="width:500px;height:400px;" class="mt-3"></div>
 		<c:forEach items="${transCoordList}" var="transCoord">
-			<div id="name" class="mt-5 mb-3 menu_login_info" data-hospital-xco="${transCoord.x}" 
+			<div id="name" class="mt-5 mb-2 menu_login_info" data-hospital-xco="${transCoord.x}" 
 			data-hospital-yco="${transCoord.y}" data-trans-name="${transCoord.name}"> 상호 명 : ${transCoord.name}</div>
+			<div class="menu_login_info mb-4">주소 : ${transCoord.address}</div>
 		</c:forEach>
 	</div>
 	</div>
