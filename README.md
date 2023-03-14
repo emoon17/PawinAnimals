@@ -119,11 +119,12 @@ View화면에서 회원가입 시 아이디가 중복 됐을 때 빨간 글씨�
  
  
 ## 프로젝트 사용 방법
+> ### 사이트 주소
+> #### [PawinAnimals](http://43.201.25.10:8080/main/main_view)
 > #### 회원가입 없이 로그인 시 Id/ password
 > ##### Id : cccc
 > ##### password:123456789a
-> ### 사이트 주소
-> #### [PawinAnimals](http://43.201.25.10:8080/main/main_view)
+
 
 ## 트러블 이슈 
 #### 1. 게시글 작성 화면 View에서 작성완료를 눌러 Controller로 요청할 때 file이 null로 Controller에 넘어옴.
