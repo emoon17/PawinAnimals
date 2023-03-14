@@ -84,6 +84,7 @@ public class HospitalBO {
 			String closed = (String) item.get("TRDSTATENM");
 			String X = (String) item.get("X");
 			String Y = (String) item.get("Y");
+			String address = (String) item.get("RDNWHLADDR");
 					
 					if (!closed.contains("휴업") && !closed.contains("폐업")) {
 
@@ -91,7 +92,7 @@ public class HospitalBO {
 							map.put("name", name);
 							map.put("X", X);
 							map.put("Y", Y);
-
+							map.put("address", address);
 							hospitalList.add(map);
 						}
 					}

@@ -29,8 +29,6 @@ public class RestAPI {
 
 	private final String seoulUrl = "http://openapi.seoul.go.kr:8088/";
 
-	private final String kakao_url = "	https://map.kakao.com/link/map/v2/local/search/keyword.json?";
-	private final String kakao_apiKey = "fa9316195f36cf58e533d0df27dfc53b";
 	// 카카오 api key를 헤더에 셋팅
 
 	public String seoulAPI() throws JsonProcessingException {

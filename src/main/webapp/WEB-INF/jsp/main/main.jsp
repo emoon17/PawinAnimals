@@ -24,7 +24,7 @@
 			class="nav-box d-flex align-items-center justify-content-center mb-5">
 			<ui class="nav d-flex align-items-center">
 			<c:forEach items="${hospitalList}" var="hospital" varStatus="status">
-			<li class="copy-font"><a href="/hospital_list_detail_view?name=${hospital.name}&coordinateX=${hospital.X}&coordinateY=${hospital.Y}">${status.count} . ${hospital.name}</a></li>
+			<li class="copy-font"><a href="/hospital_list_detail_view?name=${hospital.name}&coordinateX=${hospital.X}&coordinateY=${hospital.Y}&address=${hospital.address}">${status.count} . ${hospital.name}</a></li>
 			</c:forEach>
 			</ui>
 		</div>
