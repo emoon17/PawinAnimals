@@ -220,13 +220,13 @@ public class PostBO {
 			List<PostView> postViewList = new ArrayList<>();
 
 			// 글 목록 가져오기(post)
-			List<Post> postsList = getAdoptPostList();
+			List<Post> postsList = getPostList();
 
 			// 1)post 리스트를 글 하나하나 뽑는 반복문 만들기
 			for (int i = 0; i < postsList.size(); i++) {
-				// 2) postview세팅
 				PostView postView = new PostView();
 				
+				if (postsList.get(i).getStatus().contains("입양완료")) {
 				// 글
 				postView.setPost(postsList.get(i));
 				// 이미지 파일들 첫장만 꺼내기
@@ -239,6 +239,7 @@ public class PostBO {
 				
 				// 3) postviewList에 넣기
 				postViewList.add(postView);
+				}
 			}
 
 			return postViewList;

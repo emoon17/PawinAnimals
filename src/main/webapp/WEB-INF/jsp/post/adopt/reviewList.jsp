@@ -51,6 +51,7 @@
 						width="300" height="300" class="list-box"
 						data-post-id="${posts.post.id}">
 						<%-- <div>${posts.post.id}</div> --%>
+					${posts.post.userId}
 						<div class="copy-font ml-3 font-weight-bold">
 							제목 : <span class="ml-3"> ${posts.post.title}</span>
 						</div>
@@ -62,42 +63,42 @@
 						</div>
 					</a>
 				</article>
-			</c:forEach>
-				
+					<!-- post Modal -->
+					<div class="modal fade" id="postModal">
+						<div class="modal-dialog modal-lg modal-dialog-centered">
+							<div class="modal-content">
+								
+									<div class="py-3">
+										<img src="${image.imagePaths.imagePath}" class="w-100" alt="본문 이미지" id="imageBox">
+									</div>
+					
+									<div id="contentBox" class="py-3 border-bottom content-area ml-4">
+										${posts.post.content}</div>
 							
+								<c:if test="${userId eq posts.post.userId}">
+									<div class="py-3 border-bottom text-center">
+									${posts.post.userId},${userId}
+										<a href="#" id="deletePostBtn"
+											class="content-area font-weight-bold">삭제하기</a>
+									</div>
+									<div class="py-3 border-bottom text-center">
+										<a href="/post/review_update_view?postId=${posts.post.id}" id="updatePostBtn" class="content-area font-weight-bold">수정하기</a>
+									</div>
+								</c:if>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
 			</c:forEach>
 		</div>
 	</div>
 </div>
 
-<c:forEach var='posts' items='${postList}' varStatus="status">
-			
-<!-- post Modal -->
-<div class="modal fade" id="postModal">
-	<div class="modal-dialog modal-lg modal-dialog-centered">
-		<div class="modal-content">
-			
-				<div class="py-3">
-					<img src="${image.imagePaths.imagePath}" class="w-100" alt="본문 이미지" id="imageBox">
-				</div>
 
-				<div id="contentBox" class="py-3 border-bottom content-area ml-4">
-					${posts.post.content}</div>
-		
-			<c:if test="${userId eq posts.user.id}">
-				<div class="py-3 border-bottom text-center">
-					<a href="#" id="deletePostBtn"
-						class="content-area font-weight-bold">삭제하기</a>
-				</div>
-				<div class="py-3 border-bottom text-center">
-					<a href="/post/review_update_view?postId=${posts.post.id}" id="updatePostBtn" class="content-area font-weight-bold">수정하기</a>
-				</div>
-			</c:if>
-		</div>
-	</div>
-</div>
+			
+
 	
-</c:forEach>
+
 
 <script>
 	$(document).ready(function() {
