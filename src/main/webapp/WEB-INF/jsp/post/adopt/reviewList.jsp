@@ -71,7 +71,6 @@
 									<div class="py-3">
 										<img src="${image.imagePaths.imagePath}" class="w-100" alt="본문 이미지" id="imageBox">
 									</div>
-					
 									<div id="contentBox" class="py-3 border-bottom content-area ml-4">
 										${posts.post.content}</div>
 							
