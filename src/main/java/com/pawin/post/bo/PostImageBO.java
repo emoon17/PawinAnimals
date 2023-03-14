@@ -65,10 +65,10 @@ public class PostImageBO {
 					if (imagePaths != null && imagePath.getImagePath() != null) {
 						// 이미지 제거
 						fileManagerService.deleteFile(imagePath.getImagePath());
-						imagePaths = fileManagerService.saveFile(loginId, file);
-						postImageDAO.updateImage(imagePaths, userId, postId);
 					}
 				}
+				imagePaths = fileManagerService.saveFile(loginId, file);
+				postImageDAO.updateImage(imagePaths, userId, postId);
 			}
 
 		}
