@@ -149,7 +149,7 @@ $(document).ready(function() {
 		let file = $('#file').val();
 	 	let status = $("#status option:selected").val();
 		let animals = $("#animals option:selected").val();
-		alert(postId);
+		//alert(postId);
 		
 		let formData = new FormData($('#fileUploadForm')[0]);  // 폼 객체
 		   
