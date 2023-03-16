@@ -76,7 +76,7 @@ public class HospitalBO {
 		JSONObject item;
 
 		List<Map<String, Object>> hospitalList = new ArrayList<>();
-		for (int i = 0; i < 12; i++) {
+		for (int i = 0; i < row.size(); i++) {
 			item = (JSONObject) row.get(i);
 
 			Map<String, Object> map = new HashMap<String, Object>();
@@ -94,6 +94,9 @@ public class HospitalBO {
 							map.put("Y", Y);
 							map.put("address", address);
 							hospitalList.add(map);
+							if (hospitalList.size() > 9) {
+								break;
+							}
 						}
 					}
 				
