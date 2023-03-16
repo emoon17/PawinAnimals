@@ -162,7 +162,7 @@ $(document).ready(function() {
 	 	let status = $("#status option:selected").val();
 		let animals = $("#animals option:selected").val();
 		let area = $("#area option:selected").val();
-		alert(postId);
+		//alert(postId);
 		
 		let formData = new FormData($('#fileUploadForm')[0]);  // 폼 객체
 		   
