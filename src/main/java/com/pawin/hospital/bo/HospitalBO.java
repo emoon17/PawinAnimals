@@ -101,7 +101,49 @@ public class HospitalBO {
 		return hospitalList;
 	}
 
+	public List<Map<String, Object>> searchParshing(String searchAddress) throws JsonProcessingException, ParseException {
 
+		// json 파싱하기
+		String json = restAPI.seoulAPI();
+
+		JSONParser jsonParser = new JSONParser();
+		JSONObject jsonObject = (JSONObject) jsonParser.parse(json);
+
+		JSONObject LOCALDATA = (JSONObject) jsonObject.get("LOCALDATA_020301");
+
+		JSONArray row = (JSONArray) LOCALDATA.get("row");
+		JSONObject item;
+
+		List<Map<String, Object>> hospitalList = new ArrayList<>();
+		
+		for (int i = 0; i < row.size(); i++) {
+			item = (JSONObject) row.get(i);
+
+			Map<String, Object> map = new HashMap<String, Object>();
+			String closed = (String) item.get("TRDSTATENM");
+			String name = (String) item.get("BPLCNM");
+			String address = (String) item.get("RDNWHLADDR");
+			String X = (String) item.get("X");
+			String Y = (String) item.get("Y");
+
+			if (!closed.contains("휴업") && !closed.contains("폐업")) {
+
+				if (!X.isEmpty() && !Y.isEmpty()) {
+					if (address.contains(searchAddress)) {
+						map.put("name", name);
+						map.put("address", address);
+						hospitalList.add(map);
+					}
+				}
+			}
+
+		}
+		return hospitalList;
+	}
+
+	
+	
+	// 자바스크립트 사용하기 위한 파싱
 	public List<Map<String, String>> nameAddressList(String name, String address) {
 		List<Map<String, String>> nameAddressList = new ArrayList<>();
 		Map<String, String> nameAddressMap = new HashMap<>();

@@ -44,7 +44,7 @@
 			`postId` = #{postId}
  	</select>
  	
- 	<update id="updateImage" parameterType="map">
+<!--  	<update id="updateImage" parameterType="map">
  	UPDATE `imagepath`
  	SET
  		`userId` = #{userId}
@@ -54,7 +54,7 @@
  	WHERE
  		`userId` = #{userId}
  		AND `postId` = #{postId}
- 	</update>
+ 	</update> -->
  	
  	<delete id="deleteImage" parameterType="map">
  	DELETE

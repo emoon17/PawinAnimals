@@ -3,22 +3,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="container list-box">
-	<div class="search-box d-flex align-items-center justify-content-between">
-	<span class="write-area font-weight-bold ml-3">우리 동물병원을 검색해서 찾아보세요!</span>
+	<div
+		class="search-box d-flex align-items-center justify-content-between">
+		<span class="write-area font-weight-bold ml-3">우리 동물병원을 검색해서
+			찾아보세요!</span>
 		<!-- 지역 서치 -->
 		<div class="d-flex">
-		<input type="text" class="titleSearch form-control copy-font mr-3"
-			id="address" placeholder="    지역을 입력하세요"
-			style="height: 50px; width: 200px;">
-		<button type="button" class="header-btn btn mb-2 font-weight-bold copy-font"
-			id="serachBtn" style="height: 50px; width: 70px;">검색</button>
+			<input type="text" class="titleSearch form-control copy-font mr-3"
+				id="searchAddress" placeholder="    지역을 입력하세요"
+				style="height: 50px; width: 200px;">
+			<button type="button"
+				class="header-btn btn mb-2 font-weight-bold copy-font"
+				id="serachBtn" style="height: 50px; width: 70px;">검색</button>
 		</div>
 	</div>
-	
-	
+
+
 	<!-- 글 목록 -->
 	<div id="contentsBox" class="contents-box ">
-		<div class="contents-parent-box d-flex flex-wrap justify-content-between">
+		<div
+			class="contents-parent-box d-flex flex-wrap justify-content-between">
 			<table class="table h-100 w-100 text-center">
 				<thead>
 					<tr>
@@ -28,15 +32,48 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${hospitalList}" var="hospital" varStatus="status">
-					<tr>
-						<td class="table-font font-weight-bold">${status.count}</td>
-						<td class="table-font font-weight-bold"><a href="/hospital_list_detail_view?name=${hospital.name}&coordinateX=${hospital.X}&coordinateY=${hospital.Y}&address=${hospital.address}">${hospital.name}</a></td>
-						<td class="table-font font-weight-bold">${hospital.address}</td>
-					</tr>
+					<c:forEach items="${hospitalList}" var="hospital"
+						varStatus="status">
+						<tr>
+							<td class="table-font font-weight-bold">${status.count}</td>
+							<td class="table-font font-weight-bold"><a
+								href="/hospital_list_detail_view?name=${hospital.name}&coordinateX=${hospital.X}&coordinateY=${hospital.Y}&address=${hospital.address}">${hospital.name}</a></td>
+							<td class="table-font font-weight-bold">${hospital.address}</td>
+						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
 	</div>
 </div>
+
+<script>
+	$(document).ready(function() {
+		$('#serachBtn').on('click', function() {
+			let searchAddress = $('#searchAddress').val();
+			//alert(searchAddress);
+			if (searchAddress == '') {
+				alert("지역을 입력하여주세요");
+				return;
+			}
+
+			$.ajax({
+				type : 'get',
+				url : '/hospital_list_search_view',
+				data : {
+					"searchAddress" : searchAddress
+				},
+			
+				success : function(data) {
+					console.log(data);
+
+					$('#contentsBox').html(data);
+
+				},
+				error : function(e) {
+					alert(e + "오류가 발생했습니다. 다시 시도해주세요.");
+				}
+			});
+		});
+	});
+</script>

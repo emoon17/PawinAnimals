@@ -46,7 +46,15 @@ public class HospitalController {
 		return "template/layout";
 	}
 	
-	
+	/**
+	 * 병원 상세화면 view
+	 * @param model
+	 * @param name
+	 * @param X
+	 * @param Y
+	 * @param address
+	 * @return
+	 */
 	@GetMapping("/hospital_list_detail_view")
 	public String hostpitalListDetailView(Model model, 
 			@RequestParam("name") String name,
@@ -59,6 +67,16 @@ public class HospitalController {
 		model.addAttribute("transCoordList", transCoordList);
 		model.addAttribute("veiwName", "post/hospital/detail");
 		return "template/layout";
+	}
+	
+	@GetMapping("/hospital_list_search_view")
+	public String hospitalListSearchView(@RequestParam("searchAddress") String searchAddress, Model model) throws JsonProcessingException, ParseException {
+		
+		
+		List<Map<String, Object>> hospitalList = hospitalBO.searchParshing(searchAddress);
+		
+		model.addAttribute("hospitalList", hospitalList);
+		return "post/hospital/searchList";
 	}
 
 }
