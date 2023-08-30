@@ -28,7 +28,10 @@
 + 실종 반려 동물 상태 실시간 확인
 + 여러 사진들과 함께 게시글 올리기
 + 동물병원 위치 확인하기
-+ (동영상 넣기)
+
+## 시연 영상 
+> ### 아래 Pawin Animals 시연 영상 클릭 부탁드립니다!
+> #### [클릭! Pawin Animals 시연영상 보러가기](https://youtu.be/9_x5TtqgX6E)
 
 ## DB 설계
 #### [DB설계 링크](https://docs.google.com/spreadsheets/d/1G2XHEZBFKvZEbPCXA1HBjAaZSoXaw1s_i66xens9OvU/edit#gid=980509685)
@@ -116,11 +119,6 @@ View화면에서 회원가입 시 아이디가 중복 됐을 때 빨간 글씨�
  병원 주소 파악을 위한 화면이다.
 </p>
  </details>
- 
- 
-## 시연 영상 
-> ### 아래 Pawin Animals 시연 영상 클릭 부탁드립니다!
-> #### [Pawin Animals 시연영상 보러가기](https://youtu.be/9_x5TtqgX6E)
  
 
 
