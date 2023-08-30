@@ -118,12 +118,10 @@ View화면에서 회원가입 시 아이디가 중복 됐을 때 빨간 글씨�
  </details>
  
  
-## 프로젝트 사용 방법
-> ### 사이트 주소
-> #### [PawinAnimals](http://43.201.25.10:8080/main/main_view)
-> #### 회원가입 없이 로그인 시 Id/ password
-> ##### Id : cccc
-> ##### password:123456789a
+## 시연 영상 
+> ### 유튜브 주소 클릭 부탁드립니다!
+> #### https://youtu.be/9_x5TtqgX6E
+ 
 
 
 ## 트러블 이슈 
