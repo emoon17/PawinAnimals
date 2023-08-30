@@ -134,6 +134,8 @@ public class HospitalBO {
 				if (!X.isEmpty() && !Y.isEmpty()) {
 					if (address.contains(searchAddress)) {
 						map.put("name", name);
+						map.put("X", X);
+						map.put("Y", Y);
 						map.put("address", address);
 						hospitalList.add(map);
 					}

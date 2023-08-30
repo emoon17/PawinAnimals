@@ -150,7 +150,7 @@
 			e.preventDefault();
 			
 			let postId = $('#postModal').data('post-id');
-			alert(postId);
+			//alert(postId);
 			
 			//ajax
 			$.ajax({
