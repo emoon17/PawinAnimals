@@ -55,18 +55,18 @@ public class PostImageBO {
 		List<ImagePath> imagePathList = getImagePathListByPostId(postId);
 
 		// 파일 업로드
-		String imagePaths = null;
+		String imagePath = null;
 		if (files != null) {
 			// 파일메니저 파일 갯수만큼 반복
-			for (ImagePath imagePath : imagePathList) {
-				if (imagePaths != null && imagePath.getImagePath() != null) {
+			for (ImagePath imagePaths : imagePathList) {
+				if (imagePaths.getImagePath() != null) {
 					// 이미지 제거
-					fileManagerService.deleteFile(imagePath.getImagePath());
+					fileManagerService.deleteFile(imagePaths.getImagePath());
 					postImageDAO.deleteImage(userId, postId);
 				}
 				for (MultipartFile file : files) {
-					imagePaths = fileManagerService.saveFile(loginId, file);
-					postImageDAO.insertImagePost(imagePaths, userId, postId);
+					imagePath = fileManagerService.saveFile(loginId, file);
+					postImageDAO.insertImagePost(imagePath, userId, postId);
 					// 이미지 패스도 null, 기존 이미지패스도 null이 아니면
 					
 				}
